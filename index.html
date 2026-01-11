@@ -1,408 +1,586 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EZY — Delivery, simplified.</title>
 
   <style>
     :root{
-      --bg:#f4f8ff;
-      --ink:#0b1220;
-      --muted:rgba(255,255,255,.82);
-      --card:rgba(255,255,255,.10);
-      --stroke:rgba(255,255,255,.18);
-      --shadow: 0 22px 70px rgba(20, 60, 140, .20);
-      --radius:22px;
-      --max:1180px;
+      --bg: #f5f9ff;
+      --panel: rgba(255,255,255,.72);
+      --panel-strong: rgba(255,255,255,.9);
+      --stroke: rgba(20, 40, 90, .10);
+      --text: #0f172a;
+      --muted: #475569;
+      --shadow: 0 30px 80px rgba(15, 23, 42, .10);
+      --shadow-soft: 0 14px 38px rgba(15, 23, 42, .10);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --container: 1180px;
+      --accent: #3b82f6;
     }
 
-    *{box-sizing:border-box}
+    *{ box-sizing: border-box; }
+    html, body{ margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji"; color: var(--text); }
     body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      background: radial-gradient(1200px 800px at 70% 10%, #dbeaff 0%, rgba(219,234,255,0) 60%),
-                  radial-gradient(900px 700px at 20% 20%, #e9f2ff 0%, rgba(233,242,255,0) 65%),
-                  var(--bg);
-      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 70% -10%, rgba(59,130,246,.18), transparent 65%),
+        radial-gradient(900px 520px at 10% 40%, rgba(59,130,246,.10), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 45%, #ffffff 100%);
     }
+    a{ color: inherit; text-decoration: none; }
+    img{ display:block; max-width:100%; }
 
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    .container{ width: min(var(--container), calc(100% - 40px)); margin: 0 auto; }
 
-    /* Top nav */
-    .nav{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter: blur(12px);
-      background: rgba(244,248,255,.75);
-      border-bottom: 1px solid rgba(150,180,240,.25);
+    /* Top Nav */
+    .topbar{
+      position: sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,.72);
+      border-bottom: 1px solid var(--stroke);
     }
-    .nav-inner{
+    .topbar-inner{
+      height: 76px;
       display:flex; align-items:center; justify-content:space-between;
-      height:72px;
+      gap: 18px;
     }
     .brand{
-      display:flex; align-items:center; gap:12px;
-      font-weight:800;
-      letter-spacing:.2px;
+      display:flex; align-items:center; gap: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
     }
-    .brand img{
-      width:40px; height:40px; border-radius:12px; box-shadow:0 10px 24px rgba(30,80,170,.18);
-      object-fit:cover;
+    .brand .logo{
+      width: 44px; height: 44px; border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, .10);
+      border: 1px solid rgba(255,255,255,.7);
+      background: rgba(255,255,255,.7);
     }
-    .menu{
-      display:flex; gap:22px; align-items:center;
-      font-weight:650; color: rgba(11,18,32,.70);
+    .brand .name{ font-size: 18px; }
+
+    .nav{
+      display:flex; align-items:center; gap: 22px;
+      color: rgba(15,23,42,.72);
+      font-weight: 600;
     }
-    .menu a:hover{color: rgba(11,18,32,.95)}
-    .lang{
-      display:flex; gap:8px; padding:6px;
-      background: rgba(255,255,255,.70);
-      border:1px solid rgba(150,180,240,.35);
-      border-radius:999px;
-      box-shadow: 0 14px 35px rgba(30,80,170,.10);
+    .nav a{ padding: 10px 6px; border-radius: 10px; }
+    .nav a:hover{ background: rgba(15,23,42,.04); }
+
+    .lang-toggle{
+      display:flex; align-items:center;
+      background: rgba(15,23,42,.06);
+      padding: 6px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      box-shadow: 0 10px 22px rgba(15,23,42,.06);
     }
-    .lang button{
-      border:0; background:transparent; cursor:pointer;
-      padding:10px 14px; border-radius:999px;
-      font-weight:800;
-      color: rgba(11,18,32,.62);
+    .lang-toggle button{
+      appearance:none; border:0; background: transparent;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor:pointer;
+      color: rgba(15,23,42,.65);
+      transition: all .15s ease;
     }
-    .lang button.active{
-      background: rgba(11,18,32,.92);
-      color:#fff;
+    .lang-toggle button.active{
+      background: rgba(15,23,42,.92);
+      color: white;
+      box-shadow: 0 10px 18px rgba(15,23,42,.14);
     }
 
-    /* HERO: full composition */
-    .hero{
-      padding:26px 0 34px;
-    }
-    .hero-frame{
-      position:relative;
-      border-radius: 28px;
-      overflow:hidden;
+    /* HERO */
+    .hero-wrap{ padding: 56px 0 40px; }
+    .hero-surface{
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.55);
       box-shadow: var(--shadow);
-      border:1px solid rgba(150,180,240,.35);
-      background: #bcd8ff;
-      min-height: 610px;
+      overflow: hidden;
+      position: relative;
     }
-    .hero-bg{
-      position:absolute; inset:0;
-      background:
-        radial-gradient(900px 700px at 20% 20%, rgba(255,255,255,.25), rgba(255,255,255,0) 60%),
-        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.18));
-      z-index:1;
+    .hero-surface::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(900px 420px at 80% 30%, rgba(59,130,246,.18), transparent 60%);
+      pointer-events:none;
     }
-    .hero-img{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      object-fit:cover;
-      z-index:0;
-      filter: saturate(1.05) contrast(1.05);
-      transform: scale(1.02);
+    .hero-inner{
+      position: relative;
+      display:grid;
+      grid-template-columns: 1.05fr 1.25fr;
+      gap: 26px;
+      align-items: center;
+      padding: 34px;
+      min-height: 520px;
     }
 
-    /* Text overlay */
-    .hero-copy{
-      position:relative; z-index:2;
-      width: min(560px, 92%);
-      margin: 46px 0 0 46px;
-      padding: 22px 22px 20px;
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.22);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 22px 55px rgba(10, 35, 90, .22);
+    .hero-card{
+      background: var(--panel-strong);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 26px 26px 24px;
+      max-width: 560px;
     }
+
     .pill{
       display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.16);
-      border:1px solid rgba(255,255,255,.22);
-      color: var(--muted);
-      font-weight:700;
+      padding: 8px 12px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.7);
+      border-radius: 999px;
+      font-weight: 700;
+      color: rgba(15,23,42,.70);
+      margin-bottom: 16px;
       font-size: 13px;
-      margin-bottom: 12px;
     }
     .dot{
-      width:10px; height:10px; border-radius:99px;
-      background:#33d17a; box-shadow:0 0 0 6px rgba(51,209,122,.15);
+      width: 9px; height: 9px; border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,.18);
     }
-
-    h1{
-      margin:0 0 10px;
-      font-size: 54px;
-      line-height:1.02;
-      letter-spacing:-1px;
-      color:#fff;
-    }
-    .subhead{
+    .h1{
+      font-size: 56px;
+      line-height: 1.05;
       margin: 0 0 14px;
-      font-size: 18px;
-      font-weight: 800;
-      color: rgba(255,255,255,.92);
+      letter-spacing: -1px;
+      font-weight: 900;
+    }
+    .h2{
+      font-size: 22px;
+      margin: 0 0 14px;
+      color: rgba(15,23,42,.90);
+      font-weight: 900;
     }
     .lead{
       margin:0;
-      font-size: 14.8px;
-      line-height:1.6;
-      color: rgba(255,255,255,.85);
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
       font-weight: 600;
     }
 
-    /* Sections below hero */
-    .section{
-      padding: 36px 0;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 28px;
+    .hero-image{
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.55);
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+      display:flex;
       align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      min-height: 420px;
     }
-    .card{
-      border-radius: 26px;
-      border: 1px solid rgba(150,180,240,.32);
-      background: rgba(255,255,255,.70);
-      box-shadow: 0 18px 60px rgba(30,80,170,.10);
+    .hero-image img{
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+    }
+
+    /* SECTIONS */
+    .section{ padding: 34px 0; }
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .panel{
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.62);
+      box-shadow: var(--shadow-soft);
+      padding: 28px;
       overflow:hidden;
     }
-    .card .pad{padding: 26px 26px 22px}
-    .card h2{margin:0 0 12px; font-size:38px; letter-spacing:-.5px}
-    .card p{margin:0; color: rgba(11,18,32,.72); font-weight:650; line-height:1.7}
-    .img{
-      width:100%;
-      height:auto;
-      display:block;
+    .title{
+      margin:0 0 10px;
+      font-size: 34px;
+      letter-spacing: -.4px;
+      font-weight: 900;
+    }
+    .text{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .list{
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap: 10px;
+      color: rgba(15,23,42,.78);
+      font-weight: 700;
+    }
+    .list li{
+      display:flex; gap: 10px; align-items:flex-start;
+    }
+    .bullet{
+      width: 9px; height: 9px; border-radius: 999px;
+      margin-top: 8px;
+      background: rgba(59,130,246,.95);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+      flex: 0 0 auto;
+    }
+
+    .img-card{
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.55);
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+      overflow:hidden;
+    }
+    .img-card img{
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
     }
 
     /* Footer */
     .footer{
-      margin-top: 24px;
-      padding: 22px 0 34px;
-      border-top: 1px solid rgba(150,180,240,.25);
-      color: rgba(11,18,32,.65);
+      margin-top: 30px;
+      padding: 22px 0;
+      border-top: 1px solid var(--stroke);
+      background: rgba(255,255,255,.62);
+      backdrop-filter: blur(14px);
     }
     .footer-inner{
       display:flex;
+      gap: 14px;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
+      flex-wrap: wrap;
     }
-    .footer-links{display:flex; gap:16px; font-weight:750}
-    .footer-links a{color: rgba(11,18,32,.70)}
-    .footer-links a:hover{color: rgba(11,18,32,.95)}
-    .footer-meta{font-weight:700}
+    .footer-links{
+      display:flex; gap: 16px;
+      font-weight: 800;
+      color: rgba(15,23,42,.72);
+    }
+    .footer-links a:hover{ text-decoration: underline; }
+    .footer-meta{
+      color: rgba(15,23,42,.62);
+      font-weight: 800;
+    }
+
+    /* RTL support */
+    [dir="rtl"] .topbar-inner{ direction: rtl; }
+    [dir="rtl"] .nav{ direction: rtl; }
+    [dir="rtl"] .hero-inner{ direction: rtl; }
+    [dir="rtl"] .hero-card{ text-align: right; }
+    [dir="rtl"] .grid-2{ direction: rtl; }
+    [dir="rtl"] .panel{ text-align: right; }
+    [dir="rtl"] .list li{ flex-direction: row-reverse; }
+    [dir="rtl"] .footer-inner{ direction: rtl; }
 
     /* Responsive */
     @media (max-width: 980px){
-      .hero-frame{min-height: 560px}
-      .hero-copy{margin: 22px; width: calc(100% - 44px)}
-      h1{font-size: 44px}
-      .grid{grid-template-columns:1fr}
+      .nav{ display:none; }
+      .hero-inner{ grid-template-columns: 1fr; min-height: unset; padding: 22px; }
+      .hero-image{ min-height: unset; padding: 14px; }
+      .h1{ font-size: 44px; }
+      .grid-2{ grid-template-columns: 1fr; }
     }
     @media (max-width: 520px){
-      h1{font-size: 38px}
-      .subhead{font-size: 16px}
-      .lead{font-size: 14.5px}
-    }
-
-    /* Arabic mode */
-    [data-lang="ar"]{direction: rtl}
-    [data-lang="ar"] .menu{flex-direction: row-reverse}
-    [data-lang="ar"] .hero-copy{margin: 46px 46px 0 0}
-    @media (max-width: 980px){
-      [data-lang="ar"] .hero-copy{margin: 22px}
+      .h1{ font-size: 38px; }
+      .title{ font-size: 28px; }
+      .topbar-inner{ height: 70px; }
+      .brand .name{ display:none; }
     }
   </style>
 </head>
 
-<body data-lang="en">
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <div class="brand">
-        <img id="brandLogo" src="assets/brand/ezy-en.png" alt="EZY logo" />
-        <div>EZY</div>
-      </div>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="logo">
+            <!-- EN logo default; will swap when Arabic is selected -->
+            <img id="brandLogo" src="assets/brand/ezy-en.png" alt="EZY logo" />
+          </div>
+          <div class="name" id="brandName">EZY</div>
+        </div>
 
-      <nav class="menu" aria-label="Primary">
-        <a href="#features" id="navFeatures">Features</a>
-        <a href="#how" id="navHow">How It Works</a>
-        <a href="#why" id="navWhy">Why EZY?</a>
-      </nav>
+        <nav class="nav">
+          <a href="#features" id="navFeatures">Features</a>
+          <a href="#how" id="navHow">How It Works</a>
+          <a href="#why" id="navWhy">Why EZY?</a>
+        </nav>
 
-      <div class="lang" role="group" aria-label="Language toggle">
-        <button id="btnEn" class="active" type="button">EN</button>
-        <button id="btnAr" type="button">AR</button>
+        <div class="lang-toggle" role="group" aria-label="Language toggle">
+          <button id="btnEN" class="active" type="button">EN</button>
+          <button id="btnAR" type="button">AR</button>
+        </div>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- HERO: one unified visual like your reference -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="hero-frame">
-          <!-- Replace this file with your full landing page visual -->
-          <img class="hero-img" src="assets/hero/landing-full.jpg" alt="EZY visual" />
-          <div class="hero-bg" aria-hidden="true"></div>
-
-          <div class="hero-copy">
+  <!-- HERO (uses the NEW plain hero image, NOT the 5 sections) -->
+  <main class="hero-wrap">
+    <div class="container">
+      <div class="hero-surface">
+        <div class="hero-inner">
+          <div class="hero-card">
             <div class="pill"><span class="dot"></span><span id="pillText">Delivery requested. Execution handled.</span></div>
-            <h1 id="heroTitle">Delivery, simplified.</h1>
-            <div class="subhead" id="heroSubhead">Delivery requested. Execution handled.</div>
+            <h1 class="h1" id="heroTitle">Delivery, simplified.</h1>
+            <h2 class="h2" id="heroSubtitle">Delivery requested. Execution handled.</h2>
             <p class="lead" id="heroLead">
               EZY streamlines the delivery process for businesses, making logistics and payment management effortless after a sale is completed.
               Whether you sell through your own channels or online platforms, EZY handles delivery execution so you can focus on sales.
             </p>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Below sections: use your 5 images as supporting visuals (not the main composition) -->
-    <section class="section" id="features">
-      <div class="wrap grid">
-        <div class="card">
-          <div class="pad">
-            <h2 id="whatTitle">What is EZY?</h2>
-            <p id="whatBody">
-              EZY is a comprehensive logistics technology platform that connects merchants with a network of approved last-mile delivery partners and payment services.
-              With a single, unified platform, merchants submit delivery requests and trust EZY to coordinate the entire process from start to finish.
-              Once you submit a delivery request, EZY orchestrates every step that follows, ensuring smooth and reliable fulfillment.
-            </p>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="img" src="assets/sections/02.jpg" alt="EZY section visual" />
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="how">
-      <div class="wrap grid">
-        <div class="card">
-          <img class="img" src="assets/sections/03.jpg" alt="EZY section visual" />
-        </div>
-
-        <div class="card">
-          <div class="pad">
-            <h2 id="howTitle">How EZY Works</h2>
-            <p id="howBody">
-              You submit a delivery request. EZY routes it to an approved delivery partner, tracks execution in real time, and supports cash on delivery and digital payments.
-              Settlements and reporting are centralized so operations stay clean and predictable.
-            </p>
+          <div class="hero-image">
+            <!-- IMPORTANT: this is the path you asked for -->
+            <img id="heroImg" src="assets/hero/ezy-hero-plain.png" alt="EZY hero visual" />
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="section" id="why">
-      <div class="wrap grid">
-        <div class="card">
-          <div class="pad">
-            <h2 id="whyTitle">Why EZY?</h2>
-            <p id="whyBody">
-              EZY simplifies delivery and payment logistics into one streamlined platform, adaptable for every business size and commerce model.
-            </p>
-          </div>
-        </div>
-
-        <div class="card">
-          <img class="img" src="assets/sections/01.jpg" alt="EZY section visual" />
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="wrap footer-inner">
-        <div class="footer-links">
-          <a id="privacyLink" href="/privacy.html">Privacy Policy</a>
-          <a id="termsLink" href="/terms.html">Terms &amp; Conditions</a>
-        </div>
-        <div class="footer-meta">© 2026 EZY</div>
-      </div>
-    </footer>
+    </div>
   </main>
 
-  <script>
-    // Minimal bilingual switch (replace texts with your final approved copy)
-    const el = (id) => document.getElementById(id);
+  <!-- SECTION: What is EZY? -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="grid-2">
+        <div class="panel">
+          <h3 class="title" id="whatTitle">What is EZY?</h3>
+          <p class="text" id="whatText">
+            EZY is a comprehensive logistics technology platform that connects merchants with a network of approved last-mile delivery partners and payment services.
+            With a single, unified platform, merchants submit delivery requests and trust EZY to coordinate the entire process from start to finish.
+          </p>
+        </div>
 
-    const content = {
+        <div class="img-card">
+          <!-- keep one nice supporting visual (NOT the 5 separate sections) -->
+          <img id="whatImg" src="assets/sections/05.jpg" alt="EZY platform overview visual" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: How it works -->
+  <section class="section" id="how">
+    <div class="container">
+      <div class="grid-2">
+        <div class="img-card">
+          <img id="howImg" src="assets/sections/03.jpg" alt="Delivery flow visual" />
+        </div>
+
+        <div class="panel">
+          <h3 class="title" id="howTitle">How EZY Works</h3>
+          <ul class="list" id="howList">
+            <li><span class="bullet"></span><span>A sale happens</span></li>
+            <li><span class="bullet"></span><span>A request reaches EZY</span></li>
+            <li><span class="bullet"></span><span>Submit delivery request</span></li>
+            <li><span class="bullet"></span><span>EZY handles execution</span></li>
+            <li><span class="bullet"></span><span>Settlement</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Why -->
+  <section class="section" id="why">
+    <div class="container">
+      <div class="grid-2">
+        <div class="panel">
+          <h3 class="title" id="whyTitle">Why EZY?</h3>
+          <p class="text" id="whyText">
+            EZY simplifies delivery and payment logistics into one streamlined platform, adaptable for every business size.
+          </p>
+
+          <ul class="list" id="whyList" style="margin-top:14px;">
+            <li><span class="bullet"></span><span>Centralized management for all delivery requests</span></li>
+            <li><span class="bullet"></span><span>Access to a variety of delivery vendors</span></li>
+            <li><span class="bullet"></span><span>Real-time tracking and delivery history</span></li>
+            <li><span class="bullet"></span><span>Wallet feature with weekly settlements</span></li>
+          </ul>
+        </div>
+
+        <div class="img-card">
+          <img id="whyImg" src="assets/sections/01.jpg" alt="EZY value visual" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (links switch EN/AR automatically) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a id="privacyLink" href="/privacy.html">Privacy Policy</a>
+          <a id="termsLink" href="/terms.html">Terms & Conditions</a>
+        </div>
+        <div class="footer-meta" id="footerCopy">© 2026 EZY</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ====== Text content (EN/AR) ======
+    const COPY = {
       en: {
         dir: "ltr",
-        logo: "assets/brand/ezy-en.png",
-        nav: { features: "Features", how: "How It Works", why: "Why EZY?" },
-        pill: "Delivery requested. Execution handled.",
+        brandLogo: "assets/brand/ezy-en.png",
+        navFeatures: "Features",
+        navHow: "How It Works",
+        navWhy: "Why EZY?",
+        pillText: "Delivery requested. Execution handled.",
         heroTitle: "Delivery, simplified.",
-        heroSubhead: "Delivery requested. Execution handled.",
-        heroLead: "EZY streamlines the delivery process for businesses, making logistics and payment management effortless after a sale is completed. Whether you sell through your own channels or online platforms, EZY handles delivery execution so you can focus on sales.",
+        heroSubtitle: "Delivery requested. Execution handled.",
+        heroLead:
+          "EZY streamlines the delivery process for businesses, making logistics and payment management effortless after a sale is completed. " +
+          "Whether you sell through your own channels or online platforms, EZY handles delivery execution so you can focus on sales.",
         whatTitle: "What is EZY?",
-        whatBody: "EZY is a comprehensive logistics technology platform that connects merchants with a network of approved last-mile delivery partners and payment services. With a single, unified platform, merchants submit delivery requests and trust EZY to coordinate the entire process from start to finish. Once you submit a delivery request, EZY orchestrates every step that follows, ensuring smooth and reliable fulfillment.",
+        whatText:
+          "EZY is a comprehensive logistics technology platform that connects merchants with a network of approved last-mile delivery partners and payment services. " +
+          "With a single, unified platform, merchants submit delivery requests and trust EZY to coordinate the entire process from start to finish.",
         howTitle: "How EZY Works",
-        howBody: "You submit a delivery request. EZY routes it to an approved delivery partner, tracks execution in real time, and supports cash on delivery and digital payments. Settlements and reporting are centralized so operations stay clean and predictable.",
+        howSteps: [
+          "A sale happens",
+          "A request reaches EZY",
+          "Submit delivery request",
+          "EZY handles execution",
+          "Settlement"
+        ],
         whyTitle: "Why EZY?",
-        whyBody: "EZY simplifies delivery and payment logistics into one streamlined platform, adaptable for every business size and commerce model.",
-        footer: { privacy: "Privacy Policy", terms: "Terms & Conditions", privacyHref: "/privacy.html", termsHref: "/terms.html" }
+        whyText:
+          "EZY simplifies delivery and payment logistics into one streamlined platform, adaptable for every business size.",
+        whyBullets: [
+          "Centralized management for all delivery requests",
+          "Access to a variety of delivery vendors",
+          "Real-time tracking and delivery history",
+          "Wallet feature with weekly settlements"
+        ],
+        privacyLabel: "Privacy Policy",
+        termsLabel: "Terms & Conditions",
+        privacyHref: "/privacy.html",
+        termsHref: "/terms.html"
       },
       ar: {
         dir: "rtl",
-        logo: "assets/brand/ezy-ar.png",
-        nav: { features: "المزايا", how: "كيف تعمل", why: "لماذا إيزي؟" },
-        pill: "تم طلب التوصيل. التنفيذ علينا.",
-        heroTitle: "التوصيل… ببساطة.",
-        heroSubhead: "تم طلب التوصيل. التنفيذ علينا.",
-        heroLead: "تُبسّط EZY عمليات التوصيل للأعمال، وتجعل إدارة الخدمات اللوجستية والمدفوعات سهلة بعد إتمام البيع. سواءً كنت تبيع عبر قنواتك أو عبر منصات إلكترونية، تتولى EZY تنفيذ التوصيل لتتمكن من التركيز على المبيعات.",
-        whatTitle: "ما هي EZY؟",
-        whatBody: "EZY منصة تقنية لوجستية شاملة تربط التجار بشبكة من شركاء التوصيل المعتمدين وخدمات الدفع. عبر منصة موحدة، يرسل التاجر طلب التوصيل وتقوم EZY بتنسيق العملية كاملة من البداية للنهاية لضمان تنفيذ سلس وموثوق.",
-        howTitle: "كيف تعمل EZY",
-        howBody: "ترسل طلب التوصيل. تقوم EZY بتوجيهه إلى شريك توصيل معتمد، وتتابع التنفيذ لحظيًا، وتدعم الدفع عند الاستلام والمدفوعات الرقمية. تتم إدارة التسويات والتقارير مركزيًا لتبقى العمليات واضحة ومنظمة.",
-        whyTitle: "لماذا EZY؟",
-        whyBody: "تجمع EZY بين التوصيل والمدفوعات في منصة واحدة مبسطة تناسب مختلف أحجام الأعمال ونماذج التجارة.",
-        footer: { privacy: "سياسة الخصوصية", terms: "الشروط والأحكام", privacyHref: "/privacy-ar.html", termsHref: "/terms-ar.html" }
+        brandLogo: "assets/brand/ezy-ar.png",
+        navFeatures: "الميزات",
+        navHow: "كيف يعمل",
+        navWhy: "لماذا إيزي؟",
+        pillText: "تم طلب التوصيل. تم تنفيذ العملية.",
+        heroTitle: "التوصيل، ببساطة.",
+        heroSubtitle: "تم طلب التوصيل. تم تنفيذ العملية.",
+        heroLead:
+          "تُبسّط إيزي عمليات التوصيل للشركات وتجعل إدارة اللوجستيات والمدفوعات سهلة بعد إتمام البيع. " +
+          "سواء كنت تبيع عبر قنواتك الخاصة أو عبر المنصات الإلكترونية، تتولى إيزي تنفيذ التوصيل لتتمكن من التركيز على المبيعات.",
+        whatTitle: "ما هي إيزي؟",
+        whatText:
+          "إيزي منصة تقنية لوجستية شاملة تربط التجار بشبكة من شركاء التوصيل المعتمدين لخدمات الميل الأخير وخدمات الدفع. " +
+          "من خلال منصة موحّدة، يمكن للتجار تقديم طلبات التوصيل وتثق إيزي بتنفيذ العملية كاملة من البداية حتى النهاية.",
+        howTitle: "كيف تعمل إيزي",
+        howSteps: [
+          "تتم عملية بيع",
+          "يصل الطلب إلى إيزي",
+          "إرسال طلب التوصيل",
+          "تتولى إيزي التنفيذ",
+          "التسوية"
+        ],
+        whyTitle: "لماذا إيزي؟",
+        whyText:
+          "تجمع إيزي لوجستيات التوصيل والمدفوعات في منصة واحدة سلسة وقابلة للتكيّف مع جميع أحجام الأعمال.",
+        whyBullets: [
+          "إدارة مركزية لجميع طلبات التوصيل",
+          "الوصول إلى مجموعة متنوعة من مزوّدي التوصيل",
+          "تتبّع مباشر وسجل كامل للتوصيلات",
+          "محفظة وتسويات أسبوعية"
+        ],
+        privacyLabel: "سياسة الخصوصية",
+        termsLabel: "الشروط والأحكام",
+        privacyHref: "/privacy-ar.html",
+        termsHref: "/terms-ar.html"
       }
     };
 
-    function setLang(lang){
-      const c = content[lang];
-      document.body.setAttribute("data-lang", lang);
-      document.body.style.direction = c.dir;
+    const els = {
+      btnEN: document.getElementById("btnEN"),
+      btnAR: document.getElementById("btnAR"),
+      brandLogo: document.getElementById("brandLogo"),
+      navFeatures: document.getElementById("navFeatures"),
+      navHow: document.getElementById("navHow"),
+      navWhy: document.getElementById("navWhy"),
+      pillText: document.getElementById("pillText"),
+      heroTitle: document.getElementById("heroTitle"),
+      heroSubtitle: document.getElementById("heroSubtitle"),
+      heroLead: document.getElementById("heroLead"),
+      whatTitle: document.getElementById("whatTitle"),
+      whatText: document.getElementById("whatText"),
+      howTitle: document.getElementById("howTitle"),
+      howList: document.getElementById("howList"),
+      whyTitle: document.getElementById("whyTitle"),
+      whyText: document.getElementById("whyText"),
+      whyList: document.getElementById("whyList"),
+      privacyLink: document.getElementById("privacyLink"),
+      termsLink: document.getElementById("termsLink")
+    };
 
-      el("brandLogo").src = c.logo;
-
-      el("navFeatures").textContent = c.nav.features;
-      el("navHow").textContent = c.nav.how;
-      el("navWhy").textContent = c.nav.why;
-
-      el("pillText").textContent = c.pill;
-      el("heroTitle").textContent = c.heroTitle;
-      el("heroSubhead").textContent = c.heroSubhead;
-      el("heroLead").textContent = c.heroLead;
-
-      el("whatTitle").textContent = c.whatTitle;
-      el("whatBody").textContent = c.whatBody;
-
-      el("howTitle").textContent = c.howTitle;
-      el("howBody").textContent = c.howBody;
-
-      el("whyTitle").textContent = c.whyTitle;
-      el("whyBody").textContent = c.whyBody;
-
-      el("privacyLink").textContent = c.footer.privacy;
-      el("termsLink").textContent = c.footer.terms;
-      el("privacyLink").href = c.footer.privacyHref;
-      el("termsLink").href = c.footer.termsHref;
-
-      el("btnEn").classList.toggle("active", lang === "en");
-      el("btnAr").classList.toggle("active", lang === "ar");
+    function renderList(listEl, items){
+      listEl.innerHTML = "";
+      items.forEach(text => {
+        const li = document.createElement("li");
+        li.innerHTML = '<span class="bullet"></span><span></span>';
+        li.querySelector("span:last-child").textContent = text;
+        listEl.appendChild(li);
+      });
     }
 
-    el("btnEn").addEventListener("click", () => setLang("en"));
-    el("btnAr").addEventListener("click", () => setLang("ar"));
+    function setLanguage(lang){
+      const c = COPY[lang];
+      document.documentElement.lang = lang === "ar" ? "ar" : "en";
+      document.documentElement.dir = c.dir;
+
+      els.brandLogo.src = c.brandLogo;
+      els.navFeatures.textContent = c.navFeatures;
+      els.navHow.textContent = c.navHow;
+      els.navWhy.textContent = c.navWhy;
+
+      els.pillText.textContent = c.pillText;
+      els.heroTitle.textContent = c.heroTitle;
+      els.heroSubtitle.textContent = c.heroSubtitle;
+      els.heroLead.textContent = c.heroLead;
+
+      els.whatTitle.textContent = c.whatTitle;
+      els.whatText.textContent = c.whatText;
+
+      els.howTitle.textContent = c.howTitle;
+      renderList(els.howList, c.howSteps);
+
+      els.whyTitle.textContent = c.whyTitle;
+      els.whyText.textContent = c.whyText;
+      renderList(els.whyList, c.whyBullets);
+
+      els.privacyLink.textContent = c.privacyLabel;
+      els.termsLink.textContent = c.termsLabel;
+      els.privacyLink.href = c.privacyHref;
+      els.termsLink.href = c.termsHref;
+
+      els.btnEN.classList.toggle("active", lang === "en");
+      els.btnAR.classList.toggle("active", lang === "ar");
+    }
+
+    els.btnEN.addEventListener("click", () => setLanguage("en"));
+    els.btnAR.addEventListener("click", () => setLanguage("ar"));
+
+    // Default EN
+    setLanguage("en");
   </script>
 </body>
 </html>
