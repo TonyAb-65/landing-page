@@ -1,312 +1,626 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Delnee — Sell faster on WhatsApp</title>
-    <meta name="description" content="A clean, modern landing page you can deploy on Vercel from GitHub in minutes." />
-    <style>
-      :root { --bg:#ffffff; --text:#0f172a; --muted:#475569; --border:#e2e8f0; }
-      * { box-sizing: border-box; }
-      body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji"; color:var(--text); background:var(--bg); }
-      a { color: inherit; text-decoration: none; }
-      .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
-      .topbar { position: sticky; top: 0; background: rgba(255,255,255,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 50; }
-      .topbar-inner { display:flex; align-items:center; justify-content:space-between; padding: 12px 0; gap: 12px; }
-      .brand { display:flex; align-items:center; gap:10px; font-weight: 700; letter-spacing: -0.02em; }
-      .logo { width:36px; height:36px; border-radius: 12px; display:grid; place-items:center; background:#0f172a; color:#fff; font-weight:800; }
-      nav { display:none; gap:18px; }
-      nav a { font-size: 14px; color: var(--muted); }
-      nav a:hover { color: var(--text); }
-      .btn { display:inline-flex; align-items:center; justify-content:center; padding: 10px 14px; border-radius: 14px; font-weight: 700; font-size: 14px; border: 1px solid var(--border); }
-      .btn.primary { background:#0f172a; color:#fff; border-color:#0f172a; }
-      .btn.primary:hover { opacity: .92; }
-      .btn.ghost:hover { background:#f8fafc; }
-      .hero { padding: 56px 0; background: radial-gradient(ellipse at top, rgba(15,23,42,.08), transparent 55%); border-bottom:1px solid var(--border); }
-      .hero-grid { display:grid; gap:24px; grid-template-columns: 1fr; align-items:center; }
-      .pill { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--border); background:#fff; padding:6px 10px; border-radius:999px; font-size: 12px; color: var(--muted); }
-      .dot { width:8px; height:8px; background:#10b981; border-radius:999px; }
-      h1 { margin: 14px 0 0; font-size: 42px; line-height: 1.05; letter-spacing: -0.03em; }
-      .sub { margin: 14px 0 0; font-size: 18px; color: var(--muted); line-height: 1.5; }
-      .hero-actions { margin-top: 18px; display:flex; gap:10px; flex-wrap: wrap; }
-      .card { border:1px solid var(--border); border-radius: 24px; background:#fff; padding: 18px; box-shadow: 0 1px 2px rgba(15,23,42,.06); }
-      .mini { font-size: 12px; color: var(--muted); }
-      .kpi { display:flex; align-items:center; gap:10px; margin-top: 16px; color: var(--muted); font-size: 14px; }
-      .avatars { display:flex; }
-      .avatar { width: 34px; height:34px; border-radius:999px; background:#f1f5f9; border:2px solid #fff; display:grid; place-items:center; font-weight:800; color:#334155; margin-left:-10px; }
-      .grid { display:grid; gap:14px; }
-      .two { grid-template-columns: 1fr; }
-      .section { padding: 54px 0; }
-      .section.alt { background:#f8fafc; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-      h2 { margin:0; font-size: 28px; letter-spacing: -0.02em; }
-      .lead { margin-top: 10px; color: var(--muted); line-height: 1.6; }
-      .feature-grid { margin-top: 18px; display:grid; gap:12px; grid-template-columns: 1fr; }
-      .icon { width: 40px; height: 40px; border-radius: 16px; background:#0f172a; }
-      .price-grid { margin-top: 18px; display:grid; gap:12px; grid-template-columns: 1fr; }
-      .price { padding: 22px; }
-      .price.dark { background:#0f172a; color:#fff; border-color:#0f172a; }
-      .price .tag { display:inline-flex; padding: 6px 10px; border-radius:999px; font-size:12px; font-weight:800; background: rgba(255,255,255,.12); }
-      .price .amount { font-size: 40px; font-weight: 900; letter-spacing:-0.03em; margin-top: 10px; }
-      .price ul { margin: 16px 0 0; padding: 0 0 0 16px; color: inherit; }
-      .price li { margin: 8px 0; }
-      .faq-grid { margin-top: 18px; display:grid; gap:12px; grid-template-columns: 1fr; }
-      form input { width:100%; padding: 12px 12px; border-radius: 14px; border: 1px solid var(--border); font-size: 14px; outline: none; }
-      form input:focus { border-color: #0f172a; }
-      label { display:block; margin-top: 12px; font-size: 13px; font-weight: 800; }
-      footer { border-top:1px solid var(--border); padding: 26px 0; }
-      .footer-inner { display:flex; flex-direction:column; gap:12px; align-items:flex-start; justify-content:space-between; }
-      .links { display:flex; flex-wrap:wrap; gap:14px; font-size: 14px; color: var(--muted); }
-      .links a:hover { color: var(--text); }
-      @media (min-width: 860px){
-        nav { display:flex; }
-        .hero-grid { grid-template-columns: 1.05fr .95fr; }
-        .two { grid-template-columns: 1fr 1fr; }
-        .feature-grid { grid-template-columns: repeat(4, 1fr); }
-        .price-grid { grid-template-columns: repeat(3, 1fr); }
-        .faq-grid { grid-template-columns: repeat(2, 1fr); }
-        .footer-inner { flex-direction: row; align-items:center; }
-      }
-      html { scroll-behavior: smooth; }
-    </style>
-  </head>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EZY — Delivery, simplified.</title>
+  <meta name="description" content="EZY streamlines delivery execution and payment management for businesses after a sale is completed." />
 
-  <body>
-    <header class="topbar">
-      <div class="container">
-        <div class="topbar-inner">
-          <a class="brand" href="#top">
-            <span class="logo">D</span>
-            <span>Delnee</span>
-          </a>
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --panel: rgba(255,255,255,.55);
+      --panel-strong: rgba(255,255,255,.72);
+      --shadow: 0 18px 40px rgba(15,23,42,.08);
+      --shadow-soft: 0 10px 20px rgba(15,23,42,.06);
+      --radius: 22px;
+      --radius-lg: 28px;
+      --max: 1120px;
+    }
 
-          <nav>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#faq">FAQ</a>
-          </nav>
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.45;
+    }
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; height:auto; display:block; }
 
-          <a class="btn primary" href="#cta">Get started</a>
-        </div>
-      </div>
-    </header>
+    .container{ max-width: var(--max); margin: 0 auto; padding: 0 18px; }
 
-    <main id="top">
-      <section class="hero">
-        <div class="container">
-          <div class="hero-grid">
-            <div>
-              <span class="pill"><span class="dot"></span> Launch-ready landing page for Vercel</span>
-              <h1>Sell faster on WhatsApp with a clean, high-converting page</h1>
-              <p class="sub">
-                A modern landing template you can deploy in minutes. Replace the text, connect your domain,
-                and start collecting leads.
-              </p>
+    /* Top nav */
+    .topbar{
+      position: sticky; top:0; z-index: 100;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0; gap: 10px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,.6);
+      background: #ffffff;
+      object-fit: cover;
+      flex: 0 0 auto;
+    }
+    nav{ display:none; gap: 18px; align-items:center; }
+    nav a{ font-size: 14px; color: var(--muted); }
+    nav a:hover{ color: var(--text); }
 
-              <div class="hero-actions">
-                <a class="btn primary" href="#cta">Request early access</a>
-                <a class="btn ghost" href="#features">See features</a>
-              </div>
+    .right-actions{ display:flex; align-items:center; gap: 10px; }
 
-              <div class="kpi">
-                <div class="avatars">
-                  <div class="avatar" style="margin-left:0">A</div>
-                  <div class="avatar">M</div>
-                  <div class="avatar">S</div>
-                  <div class="avatar">R</div>
-                </div>
-                <div><strong style="color:var(--text)">200+</strong> sellers joined the waitlist</div>
-              </div>
-            </div>
+    .lang{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.85);
+      border-radius: 999px;
+      padding: 6px;
+      display:flex; gap: 6px;
+      box-shadow: var(--shadow-soft);
+    }
+    .lang button{
+      border:0;
+      background: transparent;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 12px;
+      cursor:pointer;
+      color: var(--muted);
+      min-width: 52px;
+    }
+    .lang button.active{
+      background: #0f172a;
+      color:#fff;
+    }
 
-            <div class="card">
-              <div style="display:flex; align-items:center; justify-content:space-between;">
-                <strong>Lead capture</strong>
-                <span class="pill" style="background:#ecfdf5;color:#047857;border-color:#a7f3d0">
-                  Ready
-                </span>
-              </div>
+    /* Sections */
+    .hero{
+      position: relative;
+      padding: 38px 0 26px;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-20px;
+      background: radial-gradient(ellipse at top, rgba(55,115,255,.18), transparent 55%);
+      pointer-events:none;
+      z-index:-2;
+    }
 
-              <div class="grid" style="margin-top:14px;">
-                <div class="card" style="border-radius:18px;padding:14px;">
-                  <div class="mini">Name</div>
-                  <div style="margin-top:6px;font-weight:800;">Your customer</div>
-                </div>
-                <div class="card" style="border-radius:18px;padding:14px;">
-                  <div class="mini">Email</div>
-                  <div style="margin-top:6px;font-weight:800;">name@company.com</div>
-                </div>
-                <div class="card" style="border-radius:18px;padding:14px;">
-                  <div class="mini">Phone / WhatsApp</div>
-                  <div style="margin-top:6px;font-weight:800;">+966 5X XXX XXXX</div>
-                </div>
+    .grid-hero{
+      display:grid; gap: 18px;
+      grid-template-columns: 1fr;
+      align-items:center;
+      padding: 10px 0 0;
+    }
 
-                <a class="btn primary" href="#cta" style="border-radius:18px;padding:12px 14px;">Join waitlist</a>
-                <div class="mini" style="text-align:center;">
-                  Replace this card with screenshots, video, or product mockups.
-                </div>
-              </div>
-            </div>
+    .h-eyebrow{
+      display:inline-flex; align-items:center; gap: 10px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+    .dot{
+      width: 8px; height:8px; border-radius:999px;
+      background: #22c55e;
+    }
+    h1{
+      margin: 14px 0 0;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+    .subtitle{
+      margin: 12px 0 0;
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 52ch;
+    }
+    .tagline{
+      margin: 10px 0 0;
+      font-size: 20px;
+      font-weight: 800;
+      color: #1f2a44;
+    }
 
-          </div>
-        </div>
-      </section>
+    .panel{
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel-inner{ padding: 18px; }
 
-      <section id="features" class="section alt">
-        <div class="container">
-          <h2>Everything you need for a serious first impression</h2>
-          <p class="lead">Clean layout, strong CTA, and easy sections to customize. Keep it simple, ship fast.</p>
+    .section{
+      padding: 34px 0;
+    }
+    .section-title{
+      margin: 0;
+      font-size: 28px;
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 80ch;
+    }
 
-          <div class="feature-grid">
-            <div class="card">
-              <div class="icon"></div>
-              <h3 style="margin:12px 0 0;">Fast setup</h3>
-              <p class="lead" style="margin-top:8px;font-size:14px;">Launch a clean, modern page today. Replace text, deploy instantly.</p>
-            </div>
-            <div class="card">
-              <div class="icon"></div>
-              <h3 style="margin:12px 0 0;">Mobile-first</h3>
-              <p class="lead" style="margin-top:8px;font-size:14px;">Designed for mobile buyers and social traffic (WhatsApp/IG/TikTok).</p>
-            </div>
-            <div class="card">
-              <div class="icon"></div>
-              <h3 style="margin:12px 0 0;">Conversion focused</h3>
-              <p class="lead" style="margin-top:8px;font-size:14px;">Clear CTA, social proof, and pricing blocks to drive signups.</p>
-            </div>
-            <div class="card">
-              <div class="icon"></div>
-              <h3 style="margin:12px 0 0;">SEO ready</h3>
-              <p class="lead" style="margin-top:8px;font-size:14px;">Good defaults and clean structure for search engines.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    /* Visual blocks */
+    .visual{
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow:hidden;
+      border: 1px solid var(--border);
+      background: #f8fbff;
+      box-shadow: var(--shadow);
+      min-height: 220px;
+    }
+    .visual img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-      <section id="pricing" class="section">
-        <div class="container">
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-            <div>
-              <h2>Simple pricing</h2>
-              <p class="lead">Replace these with your real plans. Keep one plan “Most popular”.</p>
-            </div>
-            <div class="mini">All prices are examples.</div>
-          </div>
+    /* Two-column content */
+    .two{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items: start;
+    }
 
-          <div class="price-grid">
-            <div class="card price">
-              <strong>Starter</strong>
-              <div class="amount">SAR 0 <span style="font-size:14px;color:var(--muted);font-weight:700;">/mo</span></div>
-              <p class="lead" style="font-size:14px;">For testing and early setup.</p>
-              <ul>
-                <li>Basic landing</li>
-                <li>One CTA</li>
-                <li>Email capture</li>
-              </ul>
-              <a class="btn ghost" href="#cta" style="margin-top:16px;">Start free</a>
-            </div>
+    /* Cards / lists */
+    .card{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel-strong);
+      box-shadow: var(--shadow-soft);
+      padding: 16px;
+    }
+    .steps{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .step{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .badge{
+      width: 34px; height:34px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      background: rgba(46,107,255,.10);
+      border: 1px solid rgba(46,107,255,.18);
+      color: #2e6bff;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+    .step h3{ margin:0; font-size: 15px; }
+    .step p{ margin: 6px 0 0; color: var(--muted); font-size: 14px; }
 
-            <div class="card price dark">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <strong>Pro</strong>
-                <span class="tag">Most popular</span>
-              </div>
-              <div class="amount">SAR 149 <span style="font-size:14px;color:rgba(255,255,255,.7);font-weight:700;">/mo</span></div>
-              <p class="lead" style="font-size:14px;color:rgba(255,255,255,.75);">For sellers who want to grow.</p>
-              <ul style="color:rgba(255,255,255,.9);">
-                <li>Custom domain</li>
-                <li>WhatsApp CTA + tracking</li>
-                <li>Basic analytics</li>
-              </ul>
-              <a class="btn" href="#cta" style="margin-top:16px;border-color:#fff;background:#fff;color:#0f172a;">Get Pro</a>
-            </div>
+    .bullets{
+      margin: 10px 0 0;
+      padding: 0 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .bullets li{ margin: 8px 0; }
 
-            <div class="card price">
-              <strong>Business</strong>
-              <div class="amount">SAR 299 <span style="font-size:14px;color:var(--muted);font-weight:700;">/mo</span></div>
-              <p class="lead" style="font-size:14px;">For teams and multiple pages.</p>
-              <ul>
-                <li>Multi-landing support</li>
-                <li>Advanced analytics</li>
-                <li>Priority support</li>
-              </ul>
-              <a class="btn ghost" href="#cta" style="margin-top:16px;">Talk to sales</a>
-            </div>
-          </div>
-        </div>
-      </section>
+    /* Footer */
+    footer{
+      border-top: 1px solid var(--border);
+      padding: 26px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      align-items:flex-start;
+      justify-content:space-between;
+    }
 
-      <section id="faq" class="section alt">
-        <div class="container">
-          <h2>FAQ</h2>
-          <p class="lead">Add/remove items here. Keep answers short.</p>
+    /* Responsive */
+    @media (min-width: 920px){
+      nav{ display:flex; }
+      .grid-hero{ grid-template-columns: 1.05fr .95fr; gap: 18px; }
+      .two{ grid-template-columns: 1.1fr .9fr; }
+      .hero{ padding: 54px 0 30px; }
+      h1{ font-size: 54px; }
+      .visual{ min-height: 320px; }
+      .foot{ flex-direction: row; align-items:center; }
+    }
 
-          <div class="faq-grid">
-            <div class="card">
-              <strong>How do I deploy this?</strong>
-              <p class="lead" style="font-size:14px;">Push to GitHub, import the repo in Vercel, then click Deploy.</p>
-            </div>
-            <div class="card">
-              <strong>Can I connect my domain?</strong>
-              <p class="lead" style="font-size:14px;">Yes. Add the domain in Vercel → Domains, then update DNS records at your registrar.</p>
-            </div>
-            <div class="card">
-              <strong>Does the form work?</strong>
-              <p class="lead" style="font-size:14px;">This is front-end only. If you want, connect it to email/Sheets/Airtable/API.</p>
-            </div>
-            <div class="card">
-              <strong>Can I change everything?</strong>
-              <p class="lead" style="font-size:14px;">Yes. It’s just HTML/CSS. Edit text and sections freely.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    /* RTL support */
+    [dir="rtl"] body{ font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Tahoma, Arial; }
+    [dir="rtl"] .topbar-inner{ direction: rtl; }
+    [dir="rtl"] nav a{ letter-spacing: 0; }
+    [dir="rtl"] .bullets{ padding-left: 0; padding-right: 18px; }
+    [dir="rtl"] .step{ flex-direction: row-reverse; }
+    [dir="rtl"] .step > div{ text-align: right; }
+    [dir="rtl"] .subtitle, [dir="rtl"] .lead{ text-align: right; }
+    [dir="rtl"] .brand{ flex-direction: row-reverse; }
+  </style>
+</head>
 
-      <section id="cta" class="section">
-        <div class="container">
-          <div class="card" style="background:#f8fafc;">
-            <div class="two grid" style="gap:18px; align-items:center;">
-              <div>
-                <h2>Collect leads today</h2>
-                <p class="lead">This form is demo-only. Tell me where you want submissions to go and it can be wired up.</p>
-                <ul style="margin:14px 0 0; padding-left:16px; color:var(--muted);">
-                  <li>Works great with Vercel Git deployments</li>
-                  <li>Easy to connect a custom domain</li>
-                  <li>Fast to customize</li>
-                </ul>
-              </div>
-
-              <form class="card" onsubmit="event.preventDefault(); alert('Demo form only. Tell me where you want submissions to go.');">
-                <label>Name</label>
-                <input required placeholder="Your name" />
-                <label>Email</label>
-                <input required type="email" placeholder="name@company.com" />
-                <label>Phone / WhatsApp</label>
-                <input placeholder="+966 5X XXX XXXX" />
-                <button class="btn primary" type="submit" style="margin-top:14px;width:100%;">Join waitlist</button>
-                <p class="mini" style="text-align:center;margin-top:10px;">
-                  Add your Privacy/Terms links below.
-                </p>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container footer-inner">
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
         <a class="brand" href="#top">
-          <span class="logo">D</span>
-          <span>Delnee</span>
+          <img id="brandLogo" class="brand-logo" src="/assets/brand/ezy-en.png" alt="EZY" width="44" height="44" />
+          <div id="brandWord" aria-label="Brand name">EZY</div>
         </a>
-        <div class="links">
-          <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
+
+        <nav aria-label="Primary">
+          <a href="#features" data-i18n="nav_features">Features</a>
+          <a href="#how" data-i18n="nav_how">How It Works</a>
+          <a href="#why" data-i18n="nav_why">Why EZY?</a>
+        </nav>
+
+        <div class="right-actions">
+          <div class="lang" role="group" aria-label="Language switcher">
+            <button id="btn-en" class="active" type="button">EN</button>
+            <button id="btn-ar" type="button">AR</button>
+          </div>
         </div>
       </div>
-    </footer>
-  </body>
-</html>
+    </div>
+  </header>
 
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="grid-hero">
+          <div>
+            <div class="h-eyebrow">
+              <span class="dot"></span>
+              <span data-i18n="hero_eyebrow">Delivery requested. Execution handled.</span>
+            </div>
+
+            <h1 data-i18n="hero_h1">Delivery, simplified.</h1>
+
+            <div class="tagline" data-i18n="hero_tagline">Delivery requested. Execution handled.</div>
+
+            <p class="subtitle" data-i18n="hero_sub">
+              EZY streamlines the delivery process for businesses, making logistics and payment management effortless after a sale is completed.
+              Whether you sell through your own channels or online platforms, EZY takes care of delivery execution so you can focus on sales.
+            </p>
+          </div>
+
+          <div class="visual" aria-label="Hero visual">
+            <img src="/assets/sections/05.jpg" alt="EZY delivery dashboard and courier illustration" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IS EZY + TRUST (01) -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="two">
+          <div>
+            <h2 class="section-title" data-i18n="sec1_title">What is EZY?</h2>
+            <p class="lead" data-i18n="sec1_body">
+              EZY is a comprehensive logistics technology platform that connects merchants with a network of approved last-mile delivery partners and payment services.
+              With a single, unified platform, merchants can submit delivery requests and trust EZY to coordinate the entire process from start to finish.
+              Once you submit a delivery request, EZY orchestrates every step that follows, ensuring smooth and reliable fulfillment.
+            </p>
+          </div>
+
+          <div class="visual" aria-label="Trust and platform pillars">
+            <img src="/assets/sections/01.jpg" alt="Platform pillars icons" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERTICALS (02) -->
+    <section class="section">
+      <div class="container">
+        <div class="visual" aria-label="Supported business verticals">
+          <img src="/assets/sections/02.jpg" alt="Supported verticals: Food Delivery, E-commerce, Logistics, Retail" />
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS (03) -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="two">
+          <div class="card">
+            <h2 class="section-title" data-i18n="how_title">How EZY Works</h2>
+
+            <div class="steps">
+              <div class="step">
+                <div class="badge">1</div>
+                <div>
+                  <h3 data-i18n="how_1_t">A sale occurs</h3>
+                  <p data-i18n="how_1_b">Customers make purchases on your website, social channels, chat, or in your physical store.</p>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="badge">2</div>
+                <div>
+                  <h3 data-i18n="how_2_t">A delivery request is sent to EZY</h3>
+                  <p data-i18n="how_2_b">
+                    If you have an e-commerce website, delivery requests are generated automatically, complete with items and customer address.
+                    If you do not have an e-commerce platform, you can use EZY’s built-in product catalog to select items and quantities for delivery.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="badge">3</div>
+                <div>
+                  <h3 data-i18n="how_3_t">Submit the request</h3>
+                  <p data-i18n="how_3_b">Once your delivery details are submitted, EZY initiates the delivery execution process.</p>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="badge">4</div>
+                <div>
+                  <h3 data-i18n="how_4_t">EZY manages execution</h3>
+                  <p data-i18n="how_4_b">
+                    Assigns the most suitable delivery partner for each request, handles both cash on delivery (COD) and digital payments,
+                    provides real-time tracking, and monitors the delivery until it is completed.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="badge">5</div>
+                <div>
+                  <h3 data-i18n="how_5_t">Settlement</h3>
+                  <p data-i18n="how_5_b">
+                    Your net earnings are credited to your EZY wallet. Settlements are processed weekly, with full transparency into all transactions.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="visual" aria-label="Delivery orchestration visual">
+            <img src="/assets/sections/03.jpg" alt="Order to delivery orchestration illustration" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT EZY PROVIDES (04) -->
+    <section class="section">
+      <div class="container">
+        <div class="two">
+          <div class="visual" aria-label="Delivery requests dashboard">
+            <img src="/assets/sections/04.jpg" alt="Delivery requests UI and tracking map illustration" />
+          </div>
+
+          <div class="card">
+            <h2 class="section-title" data-i18n="provide_title">What EZY Provides</h2>
+            <ul class="bullets" data-i18n-list="provide_list">
+              <li>Centralized management for all delivery requests</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUILT FOR + WHY (05) -->
+    <section class="section" id="why">
+      <div class="container">
+        <div class="two">
+          <div>
+            <h2 class="section-title" data-i18n="built_title">Built for Any Commerce Model</h2>
+            <p class="lead" data-i18n="built_body">
+              EZY is designed to support a wide range of business models, including online stores, custom websites, social commerce, brick-and-mortar retailers,
+              and high-volume operations. If your business generates sales, EZY is equipped to handle your delivery needs with ease.
+            </p>
+
+            <div style="height:12px"></div>
+
+            <h2 class="section-title" data-i18n="why_title">Why EZY?</h2>
+            <p class="lead" data-i18n="why_body">
+              EZY simplifies delivery and payment logistics into one streamlined platform, adaptable for every business size.
+            </p>
+          </div>
+
+          <div class="visual" aria-label="Courier and operations visual">
+            <img src="/assets/sections/05.jpg" alt="Courier and delivery operations illustration" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 10px;">
+      <div class="container">
+        <div class="panel">
+          <div class="panel-inner">
+            <strong data-i18n="closing_strong">EZY: Delivery, simplified.</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>© <span id="yr"></span> EZY</div>
+        <div data-i18n="footer_note">Bilingual landing page (EN/AR). No CTA buttons per requirement.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+
+    const i18n = {
+      en: {
+        dir: "ltr",
+        nav_features: "Features",
+        nav_how: "How It Works",
+        nav_why: "Why EZY?",
+        hero_eyebrow: "Delivery requested. Execution handled.",
+        hero_h1: "Delivery, simplified.",
+        hero_tagline: "Delivery requested. Execution handled.",
+        hero_sub:
+          "EZY streamlines the delivery process for businesses, making logistics and payment management effortless after a sale is completed. Whether you sell through your own channels or online platforms, EZY takes care of delivery execution so you can focus on sales.",
+        sec1_title: "What is EZY?",
+        sec1_body:
+          "EZY is a comprehensive logistics technology platform that connects merchants with a network of approved last-mile delivery partners and payment services. With a single, unified platform, merchants can submit delivery requests and trust EZY to coordinate the entire process from start to finish. Once you submit a delivery request, EZY orchestrates every step that follows, ensuring smooth and reliable fulfillment.",
+        how_title: "How EZY Works",
+        how_1_t: "A sale occurs",
+        how_1_b: "Customers make purchases on your website, social channels, chat, or in your physical store.",
+        how_2_t: "A delivery request is sent to EZY",
+        how_2_b:
+          "If you have an e-commerce website, delivery requests are generated automatically, complete with items and customer address. If you do not have an e-commerce platform, you can use EZY’s built-in product catalog to select items and quantities for delivery.",
+        how_3_t: "Submit the request",
+        how_3_b: "Once your delivery details are submitted, EZY initiates the delivery execution process.",
+        how_4_t: "EZY manages execution",
+        how_4_b:
+          "Assigns the most suitable delivery partner for each request, handles both cash on delivery (COD) and digital payments, provides real-time tracking, and monitors the delivery until it is completed.",
+        how_5_t: "Settlement",
+        how_5_b:
+          "Your net earnings are credited to your EZY wallet. Settlements are processed weekly, with full transparency into all transactions.",
+        provide_title: "What EZY Provides",
+        provide_list: [
+          "Centralized management for all delivery requests",
+          "Access to a variety of delivery vendors",
+          "Website and API integration options",
+          "Built-in product catalog for merchants without e-commerce platforms",
+          "Support for both cash on delivery and digital payments",
+          "Real-time tracking of deliveries",
+          "Automated deductions of applicable fees",
+          "Wallet feature with weekly settlements",
+          "Comprehensive delivery history and detailed reporting",
+        ],
+        built_title: "Built for Any Commerce Model",
+        built_body:
+          "EZY is designed to support a wide range of business models, including online stores, custom websites, social commerce, brick-and-mortar retailers, and high-volume operations. If your business generates sales, EZY is equipped to handle your delivery needs with ease.",
+        why_title: "Why EZY?",
+        why_body:
+          "EZY simplifies delivery and payment logistics into one streamlined platform, adaptable for every business size.",
+        closing_strong: "EZY: Delivery, simplified.",
+        footer_note: "Bilingual landing page (EN/AR). No CTA buttons per requirement.",
+      },
+
+      ar: {
+        dir: "rtl",
+        nav_features: "المميزات",
+        nav_how: "كيف تعمل إيزي",
+        nav_why: "لماذا إيزي؟",
+        hero_eyebrow: "تم الطلب. تولّت إيزي التنفيذ.",
+        hero_h1: "التوصيل ببساطة.",
+        hero_tagline: "تم الطلب. تولّت إيزي التنفيذ.",
+        hero_sub:
+          "إيزي هي منصة تقنية لوجستية متخصصة في مساعدة الشركات على تنفيذ عمليات التوصيل وإدارة المدفوعات بعد إتمام عمليات البيع. تتيح المنصة للتجار بيع منتجاتهم عبر قنواتهم الخاصة، بينما تتولى إيزي جميع إجراءات التوصيل، لتوفر بذلك تجربة متكاملة وفعالة للتاجر والعميل على حد سواء.",
+        sec1_title: "ما هي إيزي؟",
+        sec1_body:
+          "إيزي هي منصة تقنية لوجستية تربط التجار بشبكة واسعة من شركات التوصيل المعتمدة وخدمات الدفع عبر منصة موحّدة. يقوم التاجر بإرسال طلب التوصيل، وتتولى إيزي تنسيق وإدارة العملية بالكامل من البداية حتى اكتمال التوصيل بكل سلاسة وموثوقية.",
+        how_title: "آلية عمل إيزي",
+        how_1_t: "تتم عملية البيع",
+        how_1_b: "سواء من خلال موقع إلكتروني، أو وسائل التواصل الاجتماعي، أو المحادثات، أو داخل المتجر التقليدي.",
+        how_2_t: "يصل طلب التوصيل إلى إيزي",
+        how_2_b:
+          "من المتجر الإلكتروني: يصل الطلب تلقائيًا متضمنًا تفاصيل المنتجات وعنوان العميل. بدون متجر إلكتروني: يمكن للتاجر استخدام كتالوج إيزي لاختيار المنتجات والكميات المطلوبة.",
+        how_3_t: "إرسال الطلب",
+        how_3_b: "بعد إرسال التفاصيل، تبدأ إيزي بتنفيذ عملية التوصيل.",
+        how_4_t: "تتولى إيزي التنفيذ",
+        how_4_b:
+          "تعيين مزود التوصيل الأمثل، وإدارة الدفع عند الاستلام أو الدفع الإلكتروني، وتوفير التتبع اللحظي، ومتابعة الطلب حتى اكتمال التوصيل.",
+        how_5_t: "التسوية المالية",
+        how_5_b:
+          "عند اكتمال التوصيل، يتم إضافة صافي الأرباح إلى محفظة إيزي. تتم التسوية بشكل أسبوعي وبشفافية تامة.",
+        provide_title: "مميزات منصة إيزي",
+        provide_list: [
+          "إدارة مركزية لجميع طلبات التوصيل من مكان واحد",
+          "الوصول إلى شبكة واسعة من شركات التوصيل المعتمدة",
+          "تكامل سهل مع المواقع الإلكترونية وواجهات البرمجة API",
+          "كتالوج مدمج لمن لا يملكون متاجر إلكترونية",
+          "مرونة في خيارات الدفع (الدفع عند الاستلام أو الدفع الإلكتروني)",
+          "خدمة تتبع لحظي للطلبات",
+          "خصم آلي للرسوم",
+          "محفظة إلكترونية وتسوية أسبوعية",
+          "سجل شامل لجميع طلبات التوصيل",
+        ],
+        built_title: "حلول لجميع نماذج التجارة",
+        built_body:
+          "سواء كنت تدير متجرًا إلكترونيًا، أو موقعًا مخصصًا، أو تعتمد على التجارة عبر وسائل التواصل الاجتماعي، أو تملك متجرك التقليدي، تدعم إيزي جميع هذه النماذج بالإضافة إلى العمليات ذات الأحجام الكبيرة. إذا كان لديك مبيعات، إيزي تتولى عنك تنفيذ التوصيل بكل سهولة واحترافية.",
+        why_title: "لماذا إيزي؟",
+        why_body:
+          "إيزي تبسّط التوصيل والمدفوعات في منصة واحدة مرنة تناسب جميع أحجام الأعمال.",
+        closing_strong: "إيزي – التوصيل ببساطة",
+        footer_note: "صفحة ثنائية اللغة (EN/AR). بدون أزرار دعوة لاتخاذ إجراء حسب الطلب.",
+      }
+    };
+
+    function setLang(lang){
+      const dict = i18n[lang];
+      document.documentElement.lang = lang === "ar" ? "ar" : "en";
+      document.documentElement.dir = dict.dir;
+
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      document.getElementById("btn-ar").classList.toggle("active", lang === "ar");
+
+      // swap logo
+      const logo = document.getElementById("brandLogo");
+      const word = document.getElementById("brandWord");
+      if (lang === "ar") {
+        logo.src = "/assets/brand/ezy-ar.png";
+        logo.alt = "إيزي";
+        if (word) word.textContent = "إيزي";
+      } else {
+        logo.src = "/assets/brand/ezy-en.png";
+        logo.alt = "EZY";
+        if (word) word.textContent = "EZY";
+      }
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.textContent = dict[key];
+      });
+
+      document.querySelectorAll("[data-i18n-list]").forEach(ul => {
+        const key = ul.getAttribute("data-i18n-list");
+        const items = dict[key];
+        if (Array.isArray(items)) {
+          ul.innerHTML = items.map(t => `<li>${t}</li>`).join("");
+        }
+      });
+    }
+
+    document.getElementById("btn-en").addEventListener("click", () => setLang("en"));
+    document.getElementById("btn-ar").addEventListener("click", () => setLang("ar"));
+  </script>
+</body>
+</html>
