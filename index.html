@@ -1,1 +1,312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Delnee — Sell faster on WhatsApp</title>
+    <meta name="description" content="A clean, modern landing page you can deploy on Vercel from GitHub in minutes." />
+    <style>
+      :root { --bg:#ffffff; --text:#0f172a; --muted:#475569; --border:#e2e8f0; }
+      * { box-sizing: border-box; }
+      body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji"; color:var(--text); background:var(--bg); }
+      a { color: inherit; text-decoration: none; }
+      .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+      .topbar { position: sticky; top: 0; background: rgba(255,255,255,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 50; }
+      .topbar-inner { display:flex; align-items:center; justify-content:space-between; padding: 12px 0; gap: 12px; }
+      .brand { display:flex; align-items:center; gap:10px; font-weight: 700; letter-spacing: -0.02em; }
+      .logo { width:36px; height:36px; border-radius: 12px; display:grid; place-items:center; background:#0f172a; color:#fff; font-weight:800; }
+      nav { display:none; gap:18px; }
+      nav a { font-size: 14px; color: var(--muted); }
+      nav a:hover { color: var(--text); }
+      .btn { display:inline-flex; align-items:center; justify-content:center; padding: 10px 14px; border-radius: 14px; font-weight: 700; font-size: 14px; border: 1px solid var(--border); }
+      .btn.primary { background:#0f172a; color:#fff; border-color:#0f172a; }
+      .btn.primary:hover { opacity: .92; }
+      .btn.ghost:hover { background:#f8fafc; }
+      .hero { padding: 56px 0; background: radial-gradient(ellipse at top, rgba(15,23,42,.08), transparent 55%); border-bottom:1px solid var(--border); }
+      .hero-grid { display:grid; gap:24px; grid-template-columns: 1fr; align-items:center; }
+      .pill { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--border); background:#fff; padding:6px 10px; border-radius:999px; font-size: 12px; color: var(--muted); }
+      .dot { width:8px; height:8px; background:#10b981; border-radius:999px; }
+      h1 { margin: 14px 0 0; font-size: 42px; line-height: 1.05; letter-spacing: -0.03em; }
+      .sub { margin: 14px 0 0; font-size: 18px; color: var(--muted); line-height: 1.5; }
+      .hero-actions { margin-top: 18px; display:flex; gap:10px; flex-wrap: wrap; }
+      .card { border:1px solid var(--border); border-radius: 24px; background:#fff; padding: 18px; box-shadow: 0 1px 2px rgba(15,23,42,.06); }
+      .mini { font-size: 12px; color: var(--muted); }
+      .kpi { display:flex; align-items:center; gap:10px; margin-top: 16px; color: var(--muted); font-size: 14px; }
+      .avatars { display:flex; }
+      .avatar { width: 34px; height:34px; border-radius:999px; background:#f1f5f9; border:2px solid #fff; display:grid; place-items:center; font-weight:800; color:#334155; margin-left:-10px; }
+      .grid { display:grid; gap:14px; }
+      .two { grid-template-columns: 1fr; }
+      .section { padding: 54px 0; }
+      .section.alt { background:#f8fafc; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+      h2 { margin:0; font-size: 28px; letter-spacing: -0.02em; }
+      .lead { margin-top: 10px; color: var(--muted); line-height: 1.6; }
+      .feature-grid { margin-top: 18px; display:grid; gap:12px; grid-template-columns: 1fr; }
+      .icon { width: 40px; height: 40px; border-radius: 16px; background:#0f172a; }
+      .price-grid { margin-top: 18px; display:grid; gap:12px; grid-template-columns: 1fr; }
+      .price { padding: 22px; }
+      .price.dark { background:#0f172a; color:#fff; border-color:#0f172a; }
+      .price .tag { display:inline-flex; padding: 6px 10px; border-radius:999px; font-size:12px; font-weight:800; background: rgba(255,255,255,.12); }
+      .price .amount { font-size: 40px; font-weight: 900; letter-spacing:-0.03em; margin-top: 10px; }
+      .price ul { margin: 16px 0 0; padding: 0 0 0 16px; color: inherit; }
+      .price li { margin: 8px 0; }
+      .faq-grid { margin-top: 18px; display:grid; gap:12px; grid-template-columns: 1fr; }
+      form input { width:100%; padding: 12px 12px; border-radius: 14px; border: 1px solid var(--border); font-size: 14px; outline: none; }
+      form input:focus { border-color: #0f172a; }
+      label { display:block; margin-top: 12px; font-size: 13px; font-weight: 800; }
+      footer { border-top:1px solid var(--border); padding: 26px 0; }
+      .footer-inner { display:flex; flex-direction:column; gap:12px; align-items:flex-start; justify-content:space-between; }
+      .links { display:flex; flex-wrap:wrap; gap:14px; font-size: 14px; color: var(--muted); }
+      .links a:hover { color: var(--text); }
+      @media (min-width: 860px){
+        nav { display:flex; }
+        .hero-grid { grid-template-columns: 1.05fr .95fr; }
+        .two { grid-template-columns: 1fr 1fr; }
+        .feature-grid { grid-template-columns: repeat(4, 1fr); }
+        .price-grid { grid-template-columns: repeat(3, 1fr); }
+        .faq-grid { grid-template-columns: repeat(2, 1fr); }
+        .footer-inner { flex-direction: row; align-items:center; }
+      }
+      html { scroll-behavior: smooth; }
+    </style>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar-inner">
+          <a class="brand" href="#top">
+            <span class="logo">D</span>
+            <span>Delnee</span>
+          </a>
+
+          <nav>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+
+          <a class="btn primary" href="#cta">Get started</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div>
+              <span class="pill"><span class="dot"></span> Launch-ready landing page for Vercel</span>
+              <h1>Sell faster on WhatsApp with a clean, high-converting page</h1>
+              <p class="sub">
+                A modern landing template you can deploy in minutes. Replace the text, connect your domain,
+                and start collecting leads.
+              </p>
+
+              <div class="hero-actions">
+                <a class="btn primary" href="#cta">Request early access</a>
+                <a class="btn ghost" href="#features">See features</a>
+              </div>
+
+              <div class="kpi">
+                <div class="avatars">
+                  <div class="avatar" style="margin-left:0">A</div>
+                  <div class="avatar">M</div>
+                  <div class="avatar">S</div>
+                  <div class="avatar">R</div>
+                </div>
+                <div><strong style="color:var(--text)">200+</strong> sellers joined the waitlist</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <strong>Lead capture</strong>
+                <span class="pill" style="background:#ecfdf5;color:#047857;border-color:#a7f3d0">
+                  Ready
+                </span>
+              </div>
+
+              <div class="grid" style="margin-top:14px;">
+                <div class="card" style="border-radius:18px;padding:14px;">
+                  <div class="mini">Name</div>
+                  <div style="margin-top:6px;font-weight:800;">Your customer</div>
+                </div>
+                <div class="card" style="border-radius:18px;padding:14px;">
+                  <div class="mini">Email</div>
+                  <div style="margin-top:6px;font-weight:800;">name@company.com</div>
+                </div>
+                <div class="card" style="border-radius:18px;padding:14px;">
+                  <div class="mini">Phone / WhatsApp</div>
+                  <div style="margin-top:6px;font-weight:800;">+966 5X XXX XXXX</div>
+                </div>
+
+                <a class="btn primary" href="#cta" style="border-radius:18px;padding:12px 14px;">Join waitlist</a>
+                <div class="mini" style="text-align:center;">
+                  Replace this card with screenshots, video, or product mockups.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section alt">
+        <div class="container">
+          <h2>Everything you need for a serious first impression</h2>
+          <p class="lead">Clean layout, strong CTA, and easy sections to customize. Keep it simple, ship fast.</p>
+
+          <div class="feature-grid">
+            <div class="card">
+              <div class="icon"></div>
+              <h3 style="margin:12px 0 0;">Fast setup</h3>
+              <p class="lead" style="margin-top:8px;font-size:14px;">Launch a clean, modern page today. Replace text, deploy instantly.</p>
+            </div>
+            <div class="card">
+              <div class="icon"></div>
+              <h3 style="margin:12px 0 0;">Mobile-first</h3>
+              <p class="lead" style="margin-top:8px;font-size:14px;">Designed for mobile buyers and social traffic (WhatsApp/IG/TikTok).</p>
+            </div>
+            <div class="card">
+              <div class="icon"></div>
+              <h3 style="margin:12px 0 0;">Conversion focused</h3>
+              <p class="lead" style="margin-top:8px;font-size:14px;">Clear CTA, social proof, and pricing blocks to drive signups.</p>
+            </div>
+            <div class="card">
+              <div class="icon"></div>
+              <h3 style="margin:12px 0 0;">SEO ready</h3>
+              <p class="lead" style="margin-top:8px;font-size:14px;">Good defaults and clean structure for search engines.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section">
+        <div class="container">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+            <div>
+              <h2>Simple pricing</h2>
+              <p class="lead">Replace these with your real plans. Keep one plan “Most popular”.</p>
+            </div>
+            <div class="mini">All prices are examples.</div>
+          </div>
+
+          <div class="price-grid">
+            <div class="card price">
+              <strong>Starter</strong>
+              <div class="amount">SAR 0 <span style="font-size:14px;color:var(--muted);font-weight:700;">/mo</span></div>
+              <p class="lead" style="font-size:14px;">For testing and early setup.</p>
+              <ul>
+                <li>Basic landing</li>
+                <li>One CTA</li>
+                <li>Email capture</li>
+              </ul>
+              <a class="btn ghost" href="#cta" style="margin-top:16px;">Start free</a>
+            </div>
+
+            <div class="card price dark">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong>Pro</strong>
+                <span class="tag">Most popular</span>
+              </div>
+              <div class="amount">SAR 149 <span style="font-size:14px;color:rgba(255,255,255,.7);font-weight:700;">/mo</span></div>
+              <p class="lead" style="font-size:14px;color:rgba(255,255,255,.75);">For sellers who want to grow.</p>
+              <ul style="color:rgba(255,255,255,.9);">
+                <li>Custom domain</li>
+                <li>WhatsApp CTA + tracking</li>
+                <li>Basic analytics</li>
+              </ul>
+              <a class="btn" href="#cta" style="margin-top:16px;border-color:#fff;background:#fff;color:#0f172a;">Get Pro</a>
+            </div>
+
+            <div class="card price">
+              <strong>Business</strong>
+              <div class="amount">SAR 299 <span style="font-size:14px;color:var(--muted);font-weight:700;">/mo</span></div>
+              <p class="lead" style="font-size:14px;">For teams and multiple pages.</p>
+              <ul>
+                <li>Multi-landing support</li>
+                <li>Advanced analytics</li>
+                <li>Priority support</li>
+              </ul>
+              <a class="btn ghost" href="#cta" style="margin-top:16px;">Talk to sales</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section alt">
+        <div class="container">
+          <h2>FAQ</h2>
+          <p class="lead">Add/remove items here. Keep answers short.</p>
+
+          <div class="faq-grid">
+            <div class="card">
+              <strong>How do I deploy this?</strong>
+              <p class="lead" style="font-size:14px;">Push to GitHub, import the repo in Vercel, then click Deploy.</p>
+            </div>
+            <div class="card">
+              <strong>Can I connect my domain?</strong>
+              <p class="lead" style="font-size:14px;">Yes. Add the domain in Vercel → Domains, then update DNS records at your registrar.</p>
+            </div>
+            <div class="card">
+              <strong>Does the form work?</strong>
+              <p class="lead" style="font-size:14px;">This is front-end only. If you want, connect it to email/Sheets/Airtable/API.</p>
+            </div>
+            <div class="card">
+              <strong>Can I change everything?</strong>
+              <p class="lead" style="font-size:14px;">Yes. It’s just HTML/CSS. Edit text and sections freely.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cta" class="section">
+        <div class="container">
+          <div class="card" style="background:#f8fafc;">
+            <div class="two grid" style="gap:18px; align-items:center;">
+              <div>
+                <h2>Collect leads today</h2>
+                <p class="lead">This form is demo-only. Tell me where you want submissions to go and it can be wired up.</p>
+                <ul style="margin:14px 0 0; padding-left:16px; color:var(--muted);">
+                  <li>Works great with Vercel Git deployments</li>
+                  <li>Easy to connect a custom domain</li>
+                  <li>Fast to customize</li>
+                </ul>
+              </div>
+
+              <form class="card" onsubmit="event.preventDefault(); alert('Demo form only. Tell me where you want submissions to go.');">
+                <label>Name</label>
+                <input required placeholder="Your name" />
+                <label>Email</label>
+                <input required type="email" placeholder="name@company.com" />
+                <label>Phone / WhatsApp</label>
+                <input placeholder="+966 5X XXX XXXX" />
+                <button class="btn primary" type="submit" style="margin-top:14px;width:100%;">Join waitlist</button>
+                <p class="mini" style="text-align:center;margin-top:10px;">
+                  Add your Privacy/Terms links below.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <a class="brand" href="#top">
+          <span class="logo">D</span>
+          <span>Delnee</span>
+        </a>
+        <div class="links">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
 
