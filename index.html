@@ -237,7 +237,9 @@
     }
 
     .rtl{ direction: rtl; }
-    .rtl .hero-inner{ direction: rtl; text-align: right; }
+    .rtl .hero-inner{ direction: ltr; text-align: right; }
+    .rtl .hero-inner > div:first-child{ order: 2; }
+    .rtl .hero-inner > .hero-frame{ order: 1; justify-self: start; }
     .rtl .pill{ flex-direction: row-reverse; }
     .rtl .footer-inner{ direction: rtl; }
   </style>
