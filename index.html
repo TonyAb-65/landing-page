@@ -102,7 +102,7 @@
       inset:0;
       background-image: url("assets/hero/ezy-hero-plain.png");
       background-size: cover;
-      background-position: center;
+      background-position: top center;
       background-repeat: no-repeat;
       transform: scale(1.02);
       z-index:0;
@@ -230,6 +230,9 @@
           rgba(8,15,30,.35) 55%,
           rgba(8,15,30,.10) 100%
         );
+      }
+      .hero::before{
+        background-position: top right;
       }
     }
 
