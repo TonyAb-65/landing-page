@@ -30,7 +30,39 @@
       background: var(--bg);
       overflow-x:hidden;
     }
+/* ================================
+   MOBILE RTL HERO TEXT FIX
+   ================================ */
 
+@media (max-width: 480px) {
+  .rtl #heroBox {
+    padding: 14px;
+  }
+
+  .rtl #heroBox h1 {
+    font-size: 22px;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .rtl #heroBox .subtitle {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .rtl #heroBox .lead {
+    font-size: 13px;
+    line-height: 1.55;
+    max-height: none;
+  }
+
+  .rtl #heroBox .pill {
+    font-size: 12px;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+  }
+}
     /* NAV */
     .nav{
       position: fixed;
