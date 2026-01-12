@@ -237,6 +237,9 @@
     }
 
     .rtl{ direction: rtl; }
+    .rtl .hero-inner{ direction: rtl; text-align: right; }
+    .rtl .pill{ flex-direction: row-reverse; }
+    .rtl .footer-inner{ direction: rtl; }
   </style>
 </head>
 
@@ -278,8 +281,8 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-links">
-        <a id="privacyLink" href="/privacy.html">Privacy Policy</a>
-        <a id="termsLink" href="/terms.html">Terms &amp; Conditions</a>
+        <a id="privacyLink" href="/privacy.html"><span id="privacyText">Privacy Policy</span></a>
+        <a id="termsLink" href="/terms.html"><span id="termsText">Terms &amp; Conditions</span></a>
       </div>
       <div>© 2026 EZY</div>
     </div>
@@ -299,7 +302,9 @@
         sub:'Delivery requested. Execution handled.',
         lead:'EZY streamlines the delivery process for businesses, making logistics and payment management effortless after a sale is completed. Whether you sell through your own channels or online platforms, EZY handles delivery execution so you can focus on sales.',
         privacy:'/privacy.html',
-        terms:'/terms.html'
+        terms:'/terms.html',
+        privacyText:'Privacy Policy',
+        termsText:'Terms & Conditions'
       },
       ar: {
         dir: 'rtl',
@@ -309,7 +314,9 @@
         sub:'تم طلب التوصيل. تم تنفيذ المهمة.',
         lead:'تُبسّط EZY عملية التوصيل للشركات وتجعل إدارة الخدمات اللوجستية والمدفوعات سهلة بعد إتمام البيع. سواء كنت تبيع عبر قنواتك الخاصة أو عبر منصات إلكترونية، تتولى EZY تنفيذ التوصيل لتتمكن من التركيز على المبيعات.',
         privacy:'/privacy-ar.html',
-        terms:'/terms-ar.html'
+        terms:'/terms-ar.html',
+        privacyText:'سياسة الخصوصية',
+        termsText:'الشروط والأحكام'
       }
     };
 
@@ -325,6 +332,8 @@
 
       document.getElementById('privacyLink').href = d.privacy;
       document.getElementById('termsLink').href = d.terms;
+      document.getElementById('privacyText').textContent = d.privacyText;
+      document.getElementById('termsText').textContent = d.termsText;
 
       logoImg.src = d.logo;
 
