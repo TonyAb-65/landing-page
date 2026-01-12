@@ -30,39 +30,7 @@
       background: var(--bg);
       overflow-x:hidden;
     }
-/* ================================
-   MOBILE RTL HERO TEXT FIX
-   ================================ */
 
-@media (max-width: 480px) {
-  .rtl #heroBox {
-    padding: 14px;
-  }
-
-  .rtl #heroBox h1 {
-    font-size: 22px;
-    line-height: 1.25;
-    margin-bottom: 8px;
-  }
-
-  .rtl #heroBox .subtitle {
-    font-size: 14px;
-    line-height: 1.4;
-    margin-bottom: 6px;
-  }
-
-  .rtl #heroBox .lead {
-    font-size: 13px;
-    line-height: 1.55;
-    max-height: none;
-  }
-
-  .rtl #heroBox .pill {
-    font-size: 12px;
-    padding: 6px 10px;
-    margin-bottom: 8px;
-  }
-}
     /* NAV */
     .nav{
       position: fixed;
@@ -427,6 +395,44 @@
       .grid{ grid-template-columns: 1fr; }
       .nav-links{ display:none; }
     }
+
+    /* ================================
+       MOBILE RTL HERO TEXT FIX (iPhone)
+       (Must be at the VERY END of <style>)
+       ================================ */
+    @media (max-width: 480px) {
+      /* allow the RTL hero box to grow vertically (prevents clipping) */
+      .rtl #heroBox{
+        padding: 14px;
+        aspect-ratio: auto;
+        height: auto;
+        align-items: flex-start;
+      }
+
+      .rtl #heroBox .pill{
+        font-size: 12px;
+        padding: 6px 10px;
+        margin-bottom: 8px;
+      }
+
+      .rtl #heroBox h1{
+        font-size: 22px;
+        line-height: 1.25;
+        margin: 0 0 8px;
+      }
+
+      .rtl #heroBox .subtitle{
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 0 0 6px;
+      }
+
+      .rtl #heroBox .lead{
+        font-size: 13px;
+        line-height: 1.55;
+        margin: 0;
+      }
+    }
   </style>
 </head>
 
@@ -466,7 +472,7 @@
               <div class="subtitle" id="heroSubtitle">Delivery requested. Execution handled.</div>
               <p class="lead" id="heroLead">
                 EZY streamlines the delivery process for businesses, making logistics and payment management effortless after a sale is completed.
-                Whether you sell through your own channels or online platforms, EZY handles delivery execution so you can focus on sales.
+                Whether you sell through your own channels or online platforms, EZY takes care of delivery execution so you can focus on sales.
               </p>
 
               <div class="cta-row">
