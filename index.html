@@ -1,331 +1,377 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>EZY — Delivery, simplified.</title>
-<style>
-  :root { --max: 1120px; --navH: 64px; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
-                 "Noto Naskh Arabic", "Noto Kufi Arabic", "Tajawal", sans-serif;
-    background: #0b1220;
-    color: #fff;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EZY — Delivery, simplified.</title>
 
-  /* NAV */
-  .nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-    height: var(--navH);
-    background: rgba(11,18,32,0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .nav-inner {
-    max-width: var(--max); margin: 0 auto;
-    padding: 0 28px; height: 100%;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand-icon {
-    width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
-    background: linear-gradient(135deg, #7EC8F7, #2E7DD1);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 12px; color: #fff;
-  }
-  .brand-icon img { width: 34px; height: 34px; border-radius: 10px; object-fit: cover; }
-  .brand-wordmark { display: flex; flex-direction: column; gap: 2px; }
-  .brand-name { font-weight: 800; font-size: 16px; color: #fff; line-height: 1; letter-spacing: -0.3px; }
-  .brand-tagline { font-size: 9.5px; font-weight: 500; color: rgba(255,255,255,0.38); letter-spacing: 0.4px; line-height: 1; }
-  .nav-links { display: flex; gap: 20px; }
-  .nav-links a { font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.15s; }
-  .nav-links a:hover { color: #7EC8F7; }
-  .lang { display: flex; border: 1px solid rgba(255,255,255,0.15); border-radius: 999px; overflow: hidden; }
-  .lang button {
-    cursor: pointer; border: 0; background: transparent;
-    color: rgba(255,255,255,0.6); padding: 6px 14px;
-    font-weight: 800; font-size: 12px; line-height: 1;
-  }
-  .lang button.active { background: rgba(255,255,255,0.92); color: #0b1220; }
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.82);
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.05);
+      --border: rgba(255,255,255,.12);
+      --border2: rgba(255,255,255,.10);
+      --shadow: 0 18px 40px rgba(0,0,0,.22);
+      --max:1120px;
+      --navH: 64px;
+      --blue1:#7EC8F7;
+      --blue2:#2E7DD1;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+                   "Noto Sans","Noto Naskh Arabic","Noto Kufi Arabic","Tajawal";
+      color: var(--text);
+      background: var(--bg);
+      overflow-x:hidden;
+    }
 
-  /* WRAP */
-  .wrap { padding-top: var(--navH); }
-  .container { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+    /* ── NAV ── */
+    .nav{
+      position:fixed; top:0; left:0; right:0; z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(10,20,40,.55);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      max-width:var(--max); margin:0 auto;
+      padding:0 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      height:var(--navH);
+    }
+    .brand{ display:flex; align-items:center; gap:10px; min-width:160px; }
+    .brand-icon{
+      width:34px; height:34px; border-radius:10px; flex-shrink:0;
+      background:linear-gradient(135deg,var(--blue1),var(--blue2));
+      display:flex; align-items:center; justify-content:center;
+      font-weight:800; font-size:12px; color:#fff; overflow:hidden;
+    }
+    .brand-icon img{ width:34px; height:34px; border-radius:10px; object-fit:cover; }
+    .brand-wordmark{ display:flex; flex-direction:column; gap:2px; }
+    .brand-name{ font-weight:800; font-size:16px; color:#fff; line-height:1; letter-spacing:-.3px; }
+    .brand-tagline{ font-size:9.5px; font-weight:500; color:rgba(255,255,255,.38); letter-spacing:.4px; line-height:1; }
+    .nav-links{
+      display:flex; gap:18px; align-items:center;
+      font-size:14px; flex-wrap:wrap; justify-content:center;
+    }
+    .nav-links a{
+      color:rgba(255,255,255,.92); text-decoration:none;
+      opacity:.9; padding:6px 8px; border-radius:10px; white-space:nowrap;
+    }
+    .nav-links a:hover{ opacity:1; background:rgba(255,255,255,.06); color:var(--blue1); }
+    .lang{
+      display:flex; align-items:center; gap:6px; padding:6px;
+      border-radius:999px; border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06); flex:0 0 auto;
+    }
+    .lang button{
+      cursor:pointer; border:0; background:transparent;
+      color:rgba(255,255,255,.85); padding:8px 12px;
+      border-radius:999px; font-weight:800; font-size:12px; line-height:1;
+    }
+    .lang button.active{ background:rgba(255,255,255,.92); color:#0b1220; }
 
-  /* HERO */
-  .hero {
-    position: relative;
-    min-height: calc(100svh - var(--navH));
-    display: flex; align-items: center;
-    padding: 60px 0; overflow: hidden;
-  }
-  .hero-glow1 {
-    position: absolute; top: -80px; left: -80px;
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(46,125,209,0.16) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-glow2 {
-    position: absolute; top: -40px; right: -40px;
-    width: 360px; height: 360px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(126,200,247,0.1) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-inner {
-    position: relative; z-index: 1; width: 100%;
-    display: grid; grid-template-columns: 1.05fr 0.95fr;
-    gap: 36px; align-items: center;
-  }
-  .pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 14px;
-    border: 1px solid rgba(126,200,247,0.25);
-    background: rgba(126,200,247,0.07);
-    border-radius: 999px; font-size: 12px;
-    color: rgba(255,255,255,0.8); margin-bottom: 18px;
-  }
-  .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: #42d392; box-shadow: 0 0 0 3px rgba(66,211,146,0.2);
-    flex-shrink: 0;
-  }
-  h1 {
-    margin: 0 0 14px;
-    font-size: clamp(32px, 4vw, 54px);
-    line-height: 1.08; letter-spacing: -0.8px;
-  }
-  h1 .grad {
-    background: linear-gradient(100deg, #7EC8F7 0%, #2E7DD1 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .subtitle { margin: 0 0 8px; font-size: clamp(15px,1.5vw,19px); font-weight: 800; color: rgba(255,255,255,0.9); }
-  .lead { margin: 0 0 26px; font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.62); max-width: 50ch; }
-  .cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .btn {
-    appearance: none; text-decoration: none;
-    padding: 11px 22px; border-radius: 10px;
-    font-weight: 700; font-size: 13px;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: transform 0.15s;
-  }
-  .btn:hover { transform: translateY(-1px); }
-  .btn.primary {
-    background: linear-gradient(135deg, #5BB8F5, #2E7DD1);
-    color: #fff; border: none;
-  }
-  .btn.ghost {
-    background: rgba(255,255,255,0.06);
-    color: rgba(255,255,255,0.82);
-    border: 1px solid rgba(255,255,255,0.12);
-  }
+    /* ── LAYOUT ── */
+    .wrap{ padding-top:var(--navH); }
+    .container{ max-width:var(--max); margin:0 auto; padding:0 18px; }
 
-  /* HERO RIGHT CARD */
-  .hero-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(126,200,247,0.18);
-    border-radius: 20px; padding: 22px;
-  }
-  .hero-card-title {
-    font-size: 10.5px; font-weight: 800; color: #7EC8F7;
-    text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 16px;
-  }
-  .flow { display: flex; flex-direction: column; }
-  .flow-item {
-    display: flex; align-items: center; gap: 12px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 10px; padding: 10px 12px;
-  }
-  .flow-icon {
-    width: 30px; height: 30px; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; flex-shrink: 0;
-  }
-  .fi-blue   { background: rgba(46,125,209,0.22); }
-  .fi-teal   { background: rgba(26,210,146,0.18); }
-  .fi-purple { background: rgba(140,100,240,0.2); }
-  .fi-amber  { background: rgba(240,160,40,0.18); }
-  .flow-text { font-size: 12px; color: rgba(255,255,255,0.82); font-weight: 600; line-height: 1.3; }
-  .flow-label { font-size: 10px; color: rgba(255,255,255,0.38); margin-top: 1px; }
-  .flow-arrow { text-align: center; font-size: 12px; color: rgba(126,200,247,0.4); padding: 3px 0; }
+    /* ── HERO ── */
+    .hero{
+      position:relative;
+      min-height:calc(100svh - var(--navH));
+      display:flex; align-items:center;
+      padding:34px 0 54px; overflow:hidden;
+    }
+    .hero-glow1{
+      position:absolute; top:-80px; left:-80px;
+      width:500px; height:500px; border-radius:50%;
+      background:radial-gradient(circle,rgba(46,125,209,.16) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .hero-glow2{
+      position:absolute; top:-40px; right:-40px;
+      width:360px; height:360px; border-radius:50%;
+      background:radial-gradient(circle,rgba(126,200,247,.1) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative; z-index:1; width:100%;
+      display:grid; grid-template-columns:1.05fr .95fr;
+      gap:28px; align-items:center;
+    }
+    .pill{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border:1px solid rgba(126,200,247,.25);
+      background:rgba(126,200,247,.07);
+      border-radius:999px; font-size:13px;
+      color:rgba(255,255,255,.92);
+      box-shadow:0 10px 28px rgba(0,0,0,.18);
+      margin-bottom:14px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background:#42d392; box-shadow:0 0 0 6px rgba(66,211,146,.15);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(34px,4.4vw,58px);
+      line-height:1.05; letter-spacing:-.6px;
+    }
+    h1 .grad{
+      background:linear-gradient(100deg,var(--blue1) 0%,var(--blue2) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .subtitle{ margin:0 0 14px; font-size:clamp(16px,1.6vw,20px); font-weight:800; color:rgba(255,255,255,.92); }
+    .lead{
+      margin:0 0 18px; font-size:15.8px; line-height:1.75;
+      color:var(--muted); max-width:60ch;
+      white-space:normal; word-break:normal; overflow-wrap:anywhere;
+    }
+    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.08);
+      color:rgba(255,255,255,.94);
+      padding:12px 14px; border-radius:14px;
+      font-weight:800; font-size:14px;
+      text-decoration:none;
+      display:inline-flex; align-items:center; gap:10px;
+      box-shadow:0 10px 28px rgba(0,0,0,.18);
+      transition:transform .15s;
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,#5BB8F5,var(--blue2));
+      color:#fff; border-color:transparent;
+    }
+    .btn:hover{ transform:translateY(-1px); }
+    .btn:active{ transform:translateY(0); }
 
-  /* SECTIONS */
-  .section { padding: 72px 0; border-top: 1px solid rgba(255,255,255,0.06); }
-  .section.alt { background: rgba(126,200,247,0.025); }
-  .kicker {
-    font-size: 10.5px; font-weight: 800;
-    text-transform: uppercase; letter-spacing: 1.5px;
-    color: #7EC8F7; margin-bottom: 8px;
-  }
-  .accent {
-    width: 36px; height: 3px;
-    background: linear-gradient(90deg, #7EC8F7, #2E7DD1);
-    border-radius: 2px; margin-bottom: 16px;
-  }
-  h2 { margin: 0 0 12px; font-size: clamp(22px,2.2vw,30px); letter-spacing: -0.3px; line-height: 1.18; }
-  .p { color: rgba(255,255,255,0.58); line-height: 1.8; font-size: 15px; max-width: 70ch; overflow-wrap: anywhere; }
+    /* ── HERO FLOW CARD ── */
+    .hero-card{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(126,200,247,.18);
+      border-radius:20px; padding:22px;
+    }
+    .hero-card-title{
+      font-size:10.5px; font-weight:800; color:var(--blue1);
+      text-transform:uppercase; letter-spacing:1.2px; margin-bottom:16px;
+    }
+    .flow{ display:flex; flex-direction:column; }
+    .flow-item{
+      display:flex; align-items:center; gap:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:10px; padding:10px 12px;
+    }
+    .flow-icon{
+      width:30px; height:30px; border-radius:8px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:14px; flex-shrink:0;
+    }
+    .fi-blue  { background:rgba(46,125,209,.22); }
+    .fi-teal  { background:rgba(26,210,146,.18); }
+    .fi-purple{ background:rgba(140,100,240,.2);  }
+    .fi-amber { background:rgba(240,160,40,.18);  }
+    .flow-text { font-size:12px; color:rgba(255,255,255,.82); font-weight:600; line-height:1.3; }
+    .flow-sub  { font-size:10px; color:rgba(255,255,255,.38); margin-top:1px; }
+    .flow-arrow{ text-align:center; font-size:12px; color:rgba(126,200,247,.4); padding:3px 0; }
 
-  /* STEPS */
-  .steps { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
-  .step {
-    display: flex; gap: 14px; align-items: flex-start;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 13px; padding: 16px;
-  }
-  .step-num {
-    width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
-    background: linear-gradient(135deg, #7EC8F7, #2E7DD1);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 800; color: #fff;
-  }
-  .step .title { font-weight: 700; font-size: 14px; margin: 0 0 4px; }
-  .step .desc { color: rgba(255,255,255,0.52); line-height: 1.65; font-size: 13px; }
+    /* ── SECTIONS ── */
+    .section{
+      padding:70px 0;
+      background:linear-gradient(180deg,rgba(10,20,40,.35),rgba(10,20,40,.18));
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .section.alt{ background:rgba(10,20,40,.28); }
+    .kicker{
+      color:var(--blue1); font-weight:900; letter-spacing:.3px;
+      font-size:11px; text-transform:uppercase; margin:0 0 8px;
+    }
+    .accent{
+      width:36px; height:3px;
+      background:linear-gradient(90deg,var(--blue1),var(--blue2));
+      border-radius:2px; margin-bottom:14px;
+    }
+    h2{ margin:0 0 12px; font-size:clamp(26px,2.4vw,34px); letter-spacing:-.3px; }
+    .p{
+      margin:0; color:var(--muted); line-height:1.8;
+      font-size:15.6px; max-width:78ch; overflow-wrap:anywhere;
+    }
 
-  /* GRID */
-  .grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 11px; margin-top: 22px; }
-  .card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 13px; padding: 16px;
-    transition: border-color 0.2s;
-  }
-  .card:hover { border-color: rgba(126,200,247,0.25); }
-  .card-icon {
-    width: 34px; height: 34px; border-radius: 9px; margin-bottom: 11px;
-    background: linear-gradient(135deg, rgba(126,200,247,0.18), rgba(46,125,209,0.18));
-    display: flex; align-items: center; justify-content: center; font-size: 16px;
-  }
-  .card h3 { margin: 0 0 5px; font-size: 13px; font-weight: 700; }
-  .card p { margin: 0; color: rgba(255,255,255,0.48); line-height: 1.65; font-size: 11.5px; overflow-wrap: anywhere; }
+    /* ── STEPS ── */
+    .steps{ margin-top:18px; display:flex; flex-direction:column; gap:12px; }
+    .step{
+      background:var(--card2); border:1px solid var(--border2);
+      border-radius:18px; padding:16px;
+      display:flex; gap:14px; align-items:flex-start;
+    }
+    .step-num{
+      width:26px; height:26px; border-radius:50%; flex-shrink:0; margin-top:2px;
+      background:linear-gradient(135deg,var(--blue1),var(--blue2));
+      display:flex; align-items:center; justify-content:center;
+      font-size:11px; font-weight:800; color:#fff;
+    }
+    .step .title{ font-weight:900; margin:0 0 6px; }
+    .step .desc { margin:0; color:var(--muted); line-height:1.75; }
 
-  /* PHONES */
-  .phones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; align-items: start; }
-  .phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-  .phone-frame {
-    width: 240px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 38px; padding: 12px;
-    box-shadow: 0 28px 56px rgba(0,0,0,0.45);
-  }
-  .phone-screen {
-    width: 100%; aspect-ratio: 9/19; border-radius: 28px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    overflow: hidden; display: flex; align-items: center; justify-content: center;
-  }
-  .phone-screen img { width: 100%; height: 100%; object-fit: cover; border-radius: 28px; }
-  .phone-placeholder { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px; text-align: center; }
-  .phone-placeholder span:first-child { font-size: 28px; opacity: 0.3; }
-  .phone-placeholder span:last-child { font-size: 11px; color: rgba(255,255,255,0.25); line-height: 1.5; }
-  .phone-lang-label { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
-  .phone-caption { font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; max-width: 200px; line-height: 1.5; }
+    /* ── GRID ── */
+    .grid{
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px; margin-top:22px;
+    }
+    .card{
+      background:var(--card); border:1px solid var(--border);
+      border-radius:18px; padding:16px;
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
+      transition:border-color .2s;
+    }
+    .card:hover{ border-color:rgba(126,200,247,.3); }
+    .card-icon{
+      width:34px; height:34px; border-radius:9px; margin-bottom:11px;
+      background:linear-gradient(135deg,rgba(126,200,247,.18),rgba(46,125,209,.18));
+      display:flex; align-items:center; justify-content:center; font-size:16px;
+    }
+    .card h3{ margin:0 0 8px; font-size:16px; font-weight:900; }
+    .card p{ margin:0; color:var(--muted); line-height:1.7; font-size:14.6px; overflow-wrap:anywhere; }
 
-  /* CTA */
-  .cta-section {
-    padding: 80px 28px; text-align: center;
-    position: relative; overflow: hidden;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  .cta-bg {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(46,125,209,0.1), rgba(126,200,247,0.05));
-    pointer-events: none;
-  }
-  .cta-glow {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    width: 600px; height: 240px;
-    background: radial-gradient(ellipse, rgba(46,125,209,0.14) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cta-section h2 { position: relative; z-index: 1; font-size: clamp(24px,2.5vw,34px); margin-bottom: 12px; }
-  .cta-section .p { position: relative; z-index: 1; margin: 0 auto 28px; }
-  .cta-btn {
-    position: relative; z-index: 1;
-    background: linear-gradient(135deg, #5BB8F5, #2E7DD1);
-    color: #fff; border: none; padding: 14px 36px;
-    border-radius: 13px; font-size: 14px; font-weight: 800;
-    cursor: pointer; letter-spacing: 0.1px;
-  }
-  .cta-note { position: relative; z-index: 1; font-size: 11px; color: rgba(255,255,255,0.28); margin-top: 12px; }
+    /* ── PHONES ── */
+    .phones-grid{
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:40px; margin-top:32px; align-items:start;
+    }
+    .phone-wrap{ display:flex; flex-direction:column; align-items:center; gap:14px; }
+    .phone-frame{
+      width:240px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:38px; padding:12px;
+      box-shadow:0 28px 56px rgba(0,0,0,.45);
+    }
+    .phone-screen{
+      width:100%; aspect-ratio:9/19; border-radius:28px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+      overflow:hidden; display:flex; align-items:center; justify-content:center;
+    }
+    .phone-screen img{ width:100%; height:100%; object-fit:cover; border-radius:28px; }
+    .phone-placeholder{ display:flex; flex-direction:column; align-items:center; gap:8px; padding:20px; text-align:center; }
+    .phone-placeholder .ph-icon{ font-size:28px; opacity:.3; }
+    .phone-placeholder .ph-text{ font-size:11px; color:rgba(255,255,255,.25); line-height:1.5; }
+    .phone-lang{ font-size:12px; font-weight:700; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:1px; }
+    .phone-caption{ font-size:11px; color:rgba(255,255,255,.3); text-align:center; max-width:200px; line-height:1.5; }
 
-  /* FOOTER */
-  footer {
-    background: rgba(7,12,22,0.7);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 18px 0;
-  }
-  .footer-inner {
-    max-width: var(--max); margin: 0 auto; padding: 0 28px;
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 12px; flex-wrap: wrap;
-  }
-  .footer-brand { display: flex; align-items: center; gap: 8px; }
-  .footer-icon {
-    width: 22px; height: 22px; border-radius: 6px;
-    background: linear-gradient(135deg, #7EC8F7, #2E7DD1);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 8px; font-weight: 800; color: #fff;
-  }
-  .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.28); }
-  .footer-links { display: flex; gap: 18px; }
-  .footer-links a { font-size: 11.5px; color: rgba(255,255,255,0.38); text-decoration: none; }
-  .footer-links a:hover { color: rgba(255,255,255,0.65); }
+    /* ── CTA ── */
+    .cta-section{
+      padding:80px 18px; text-align:center;
+      position:relative; overflow:hidden;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .cta-bg{
+      position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(46,125,209,.1),rgba(126,200,247,.05));
+      pointer-events:none;
+    }
+    .cta-glow{
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:600px; height:240px;
+      background:radial-gradient(ellipse,rgba(46,125,209,.14) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .cta-section h2{ position:relative; z-index:1; margin-bottom:12px; }
+    .cta-section .p{ position:relative; z-index:1; margin:0 auto 28px; }
+    .cta-btn{
+      position:relative; z-index:1;
+      background:linear-gradient(135deg,#5BB8F5,var(--blue2));
+      color:#fff; border:none; padding:14px 36px;
+      border-radius:13px; font-size:14px; font-weight:800;
+      cursor:pointer; letter-spacing:.1px;
+    }
+    .cta-note{ position:relative; z-index:1; font-size:11px; color:rgba(255,255,255,.28); margin-top:12px; }
 
-  /* RTL */
-  .rtl .nav-inner { direction: rtl; }
-  .rtl .brand { flex-direction: row-reverse; }
-  .rtl .nav-links { direction: rtl; }
-  .rtl .hero-inner { grid-template-columns: 0.95fr 1.05fr; direction: rtl; }
-  .rtl h1, .rtl h2, .rtl .subtitle, .rtl .lead, .rtl .p,
-  .rtl .card, .rtl .step, .rtl .kicker { text-align: right; }
-  .rtl .pill { flex-direction: row-reverse; }
-  .rtl .cta-row { justify-content: flex-start; }
-  .rtl .footer-inner { direction: rtl; }
-  .rtl .step { flex-direction: row-reverse; }
-  .rtl .flow-item { flex-direction: row-reverse; }
-  .rtl .card-icon { margin-left: auto; margin-right: 0; }
+    /* ── FOOTER ── */
+    footer{
+      background:rgba(10,20,40,.55); color:rgba(255,255,255,.82);
+      padding:20px 18px;
+      border-top:1px solid rgba(255,255,255,.10);
+    }
+    .footer-inner{
+      max-width:var(--max); margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+    }
+    .footer-brand{ display:flex; align-items:center; gap:8px; }
+    .footer-icon{
+      width:22px; height:22px; border-radius:6px;
+      background:linear-gradient(135deg,var(--blue1),var(--blue2));
+      display:flex; align-items:center; justify-content:center;
+      font-size:8px; font-weight:800; color:#fff;
+    }
+    .footer-copy{ font-size:11.5px; color:rgba(255,255,255,.28); }
+    .footer-links{ display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
+    .footer-links a{ color:rgba(255,255,255,.86); text-decoration:none; font-size:13px; }
+    .footer-links a:hover{ text-decoration:underline; }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .hero-inner { grid-template-columns: 1fr; }
-    .grid { grid-template-columns: 1fr 1fr; }
-    .nav-links { display: none; }
-  }
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-    .phones-grid { grid-template-columns: 1fr; }
-    .section { padding: 48px 0; }
-    .hero { padding: 40px 0 52px; }
-  }
-</style>
+    /* ── RTL ── */
+    .rtl .nav-inner{ direction:rtl; }
+    .rtl .brand{ flex-direction:row-reverse; }
+    .rtl .nav-links{ direction:rtl; }
+    .rtl .hero-inner{ grid-template-columns:.95fr 1.05fr; direction:rtl; }
+    .rtl .cta-row{ justify-content:flex-start; }
+    .rtl h1,.rtl h2,.rtl .subtitle,.rtl .lead,.rtl .p,
+    .rtl .card,.rtl .step{ text-align:right; }
+    .rtl .pill{ flex-direction:row-reverse; }
+    .rtl .step{ flex-direction:row-reverse; }
+    .rtl .flow-item{ flex-direction:row-reverse; }
+    .rtl .card-icon{ margin-right:0; }
+    .rtl .footer-inner{ direction:rtl; }
+    .rtl .phones-grid{ direction:rtl; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:980px){
+      .hero-inner{ grid-template-columns:1fr; }
+      .grid{ grid-template-columns:1fr; }
+      .nav-links{ display:none; }
+    }
+    @media(max-width:600px){
+      .phones-grid{ grid-template-columns:1fr; }
+      .phone-frame{ width:200px; }
+    }
+  </style>
 </head>
-<body>
 
+<body>
 <header class="nav">
   <div class="nav-inner">
     <div class="brand">
       <div class="brand-icon">
-        <img id="logoImg" src="/assets/brand/ezy-en.png" alt="EZY logo" onerror="this.style.display='none'" />
+        <img id="logoImg" src="/assets/brand/ezy-en.png" alt="EZY logo"
+             onerror="this.style.display='none'" />
       </div>
       <div class="brand-wordmark">
-        <span class="brand-name" id="brandName">ezy</span>
+        <span class="brand-name"  id="brandName">ezy</span>
         <span class="brand-tagline" id="brandTagline">Delivery Simplified</span>
       </div>
     </div>
+
     <nav class="nav-links" aria-label="Primary">
-      <a href="#about"   id="navAbout">What is EZY?</a>
-      <a href="#how"     id="navHow">How it works</a>
+      <a href="#top"      id="navTop">Top</a>
+      <a href="#about"    id="navAbout">What is EZY?</a>
+      <a href="#how"      id="navHow">How it works</a>
       <a href="#features" id="navFeatures">What it provides</a>
-      <a href="#models"  id="navModels">Commerce models</a>
+      <a href="#models"   id="navModels">Commerce models</a>
     </nav>
+
     <div class="lang" aria-label="Language">
       <button id="btnEN" class="active" type="button">EN</button>
       <button id="btnAR" type="button">AR</button>
@@ -336,43 +382,43 @@
 <main class="wrap">
 
   <!-- HERO -->
-  <section class="hero" id="top">
+  <section class="hero" id="top" role="banner">
     <div class="hero-glow1"></div>
     <div class="hero-glow2"></div>
     <div class="container">
       <div class="hero-inner">
-        <div class="hero-left">
+        <div id="heroLeft">
           <div class="pill"><span class="dot"></span><span id="pillText">Delivery requested. Execution handled.</span></div>
           <h1 id="heroTitle">Delivery, <span class="grad">simplified.</span></h1>
           <div class="subtitle" id="heroSubtitle">Delivery requested. Execution handled.</div>
           <p class="lead" id="heroLead">EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement — automatically. You submit once. EZY does the rest.</p>
           <div class="cta-row">
             <a class="btn primary" href="#how"      id="ctaPrimary">See how it works</a>
-            <a class="btn ghost"   href="#features" id="ctaSecondary">Explore features</a>
+            <a class="btn"         href="#features" id="ctaSecondary">Explore features</a>
           </div>
         </div>
-        <div class="hero-right">
+        <div id="heroRight">
           <div class="hero-card">
             <div class="hero-card-title" id="flowTitle">What happens after you submit</div>
             <div class="flow">
               <div class="flow-item">
                 <div class="flow-icon fi-blue">📋</div>
-                <div><div class="flow-text" id="f1t">Merchant submits order</div><div class="flow-label" id="f1l">via EZY catalogue</div></div>
+                <div><div class="flow-text" id="f1t">Merchant submits order</div><div class="flow-sub" id="f1s">via EZY catalogue</div></div>
               </div>
               <div class="flow-arrow">↓</div>
               <div class="flow-item">
                 <div class="flow-icon fi-teal">💳</div>
-                <div><div class="flow-text" id="f2t">Payment link → customer</div><div class="flow-label" id="f2l">via 3rd party gateway</div></div>
+                <div><div class="flow-text" id="f2t">Payment link → customer</div><div class="flow-sub" id="f2s">via 3rd party gateway</div></div>
               </div>
               <div class="flow-arrow">↓</div>
               <div class="flow-item">
                 <div class="flow-icon fi-purple">📍</div>
-                <div><div class="flow-text" id="f3t">Tracking link → both parties</div><div class="flow-label" id="f3l">live status updates</div></div>
+                <div><div class="flow-text" id="f3t">Tracking link → both parties</div><div class="flow-sub" id="f3s">live status updates</div></div>
               </div>
               <div class="flow-arrow">↓</div>
               <div class="flow-item">
                 <div class="flow-icon fi-amber">💰</div>
-                <div><div class="flow-text" id="f4t">Collection → merchant wallet</div><div class="flow-label" id="f4l">withdraw to bank anytime</div></div>
+                <div><div class="flow-text" id="f4t">Collection → merchant wallet</div><div class="flow-sub" id="f4s">withdraw to bank anytime</div></div>
               </div>
             </div>
           </div>
@@ -384,7 +430,7 @@
   <!-- WHAT IS EZY -->
   <section class="section alt" id="about">
     <div class="container">
-      <div class="kicker" id="aboutKicker">What is EZY?</div>
+      <div class="kicker"  id="aboutKicker">What is EZY?</div>
       <div class="accent"></div>
       <h2 id="aboutTitle">A technology platform — not a delivery company</h2>
       <p class="p" id="aboutText">EZY connects merchants to a network of approved delivery vendors and handles the entire technology layer: payment links, live tracking, reporting, and settlement. The physical delivery is done by our contracted vendor partners — you simply submit the request and EZY coordinates everything.</p>
@@ -396,7 +442,7 @@
     <div class="container">
       <div class="kicker" id="howKicker">How EZY works</div>
       <div class="accent"></div>
-      <h2 id="howTitle">From sale → execution → settlement</h2>
+      <h2 id="howTitle">From sale → delivery execution → settlement</h2>
       <div class="steps" id="howSteps"></div>
     </div>
   </section>
@@ -417,7 +463,7 @@
       <div class="kicker" id="modelsKicker">Built for any commerce model</div>
       <div class="accent"></div>
       <h2 id="modelsTitle">Online, social, retail, and high-volume</h2>
-      <p class="p" id="modelsText">Whether you run an online store, sell through social channels, operate a physical retail location, or manage high-volume operations — EZY is built to handle your delivery needs. If your business generates sales, EZY handles the rest.</p>
+      <p class="p" id="modelsText">EZY is designed to support online stores, custom websites, social commerce, brick-and-mortar retailers, and high-volume operations. If your business generates sales, EZY is equipped to handle your delivery needs with ease.</p>
     </div>
   </section>
 
@@ -433,24 +479,24 @@
           <div class="phone-frame">
             <div class="phone-screen">
               <div class="phone-placeholder">
-                <span>📱</span>
-                <span id="screenshotEN">English screenshot — upload to replace</span>
+                <div class="ph-icon">📱</div>
+                <div class="ph-text" id="screenshotEN">English screenshot — upload to replace</div>
               </div>
             </div>
           </div>
-          <div class="phone-lang-label" id="phoneLabelEN">English</div>
+          <div class="phone-lang"    id="phoneLabelEN">English</div>
           <div class="phone-caption" id="phoneCaptionEN">Clean, fast, effortless delivery requests in English</div>
         </div>
         <div class="phone-wrap">
           <div class="phone-frame">
             <div class="phone-screen">
               <div class="phone-placeholder">
-                <span>📱</span>
-                <span id="screenshotAR">Arabic screenshot — upload to replace</span>
+                <div class="ph-icon">📱</div>
+                <div class="ph-text" id="screenshotAR">Arabic screenshot — upload to replace</div>
               </div>
             </div>
           </div>
-          <div class="phone-lang-label" id="phoneLabelAR">Arabic — العربية</div>
+          <div class="phone-lang"    id="phoneLabelAR">Arabic — العربية</div>
           <div class="phone-caption" id="phoneCaptionAR">واجهة عربية كاملة مع دعم الكتابة من اليمين لليسار</div>
         </div>
       </div>
@@ -483,115 +529,123 @@
 </footer>
 
 <script>
-  const ICONS = ['🔗','📍','📦','🏪','💼','📊','📋','💳','🗂️'];
-
   const t = {
     en: {
-      dir: 'ltr',
-      logo: '/assets/brand/ezy-en.png',
-      brandName: 'ezy',
-      brandTagline: 'Delivery Simplified',
-      nav: { about:'What is EZY?', how:'How it works', features:'What it provides', models:'Commerce models' },
-      pill: 'Delivery requested. Execution handled.',
-      h1Html: 'Delivery, <span class="grad">simplified.</span>',
-      subtitle: 'Delivery requested. Execution handled.',
-      lead: 'EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement — automatically. You submit once. EZY does the rest.',
-      cta1: 'See how it works', cta2: 'Explore features',
-      flowTitle: 'What happens after you submit',
-      flow: [
-        { t:'Merchant submits order',          l:'via EZY catalogue' },
-        { t:'Payment link → customer',         l:'via 3rd party gateway' },
-        { t:'Tracking link → both parties',    l:'live status updates' },
-        { t:'Collection → merchant wallet',    l:'withdraw to bank anytime' },
+      dir:'ltr',
+      logo:'/assets/brand/ezy-en.png',
+      brandName:'ezy',
+      brandTagline:'Delivery Simplified',
+      nav:{ top:'Top', about:'What is EZY?', how:'How it works', features:'What it provides', models:'Commerce models' },
+      pill:'Delivery requested. Execution handled.',
+      h1:'Delivery, <span class="grad">simplified.</span>',
+      subtitle:'Delivery requested. Execution handled.',
+      lead:'EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement — automatically. You submit once. EZY does the rest.',
+      cta1:'See how it works', cta2:'Explore features',
+      flowTitle:'What happens after you submit',
+      flow:[
+        { t:'Merchant submits order',       s:'via EZY catalogue' },
+        { t:'Payment link → customer',      s:'via 3rd party gateway' },
+        { t:'Tracking link → both parties', s:'live status updates' },
+        { t:'Collection → merchant wallet', s:'withdraw to bank anytime' },
       ],
       aboutKicker:'What is EZY?',
       aboutTitle:'A technology platform — not a delivery company',
       aboutText:'EZY connects merchants to a network of approved delivery vendors and handles the entire technology layer: payment links, live tracking, reporting, and settlement. The physical delivery is done by our contracted vendor partners — you simply submit the request and EZY coordinates everything.',
       howKicker:'How EZY works',
-      howTitle:'From sale → execution → settlement',
+      howTitle:'From sale → delivery execution → settlement',
       steps:[
-        { title:'A sale occurs',             desc:'Customer purchases via your website, social channels, WhatsApp, or in-store — however you currently sell.' },
-        { title:'Submit a delivery request', desc:'Use EZY\'s built-in product catalogue to select items and quantities. Weight, price, and total are calculated automatically.' },
-        { title:'EZY handles everything',    desc:'Payment link sent to customer. Tracking link sent to merchant and customer. Delivery request pushed to the assigned vendor — you\'re notified by email which vendor handles it.' },
-        { title:'Settlement to your wallet', desc:'Collection lands in your EZY wallet. Request a withdrawal and EZY instructs the payment partner to deposit directly to your bank account.' },
+        { title:'A sale occurs',             desc:'Customers make purchases on your website, social channels, chat, or in your physical store.' },
+        { title:'A delivery request is sent to EZY', desc:'If you have an e-commerce website, requests are generated automatically with items and customer address. If you do not, use EZY\'s built-in product catalog to select items and quantities.' },
+        { title:'Submit the request',        desc:'Once your delivery details are submitted, EZY initiates the delivery execution process.' },
+        { title:'EZY manages execution',     desc:'EZY assigns the most suitable delivery partner, sends a payment link and tracking link automatically, and monitors deliveries until completion.' },
+        { title:'Settlement',                desc:'Your net earnings are credited to your EZY wallet. Request a withdrawal and EZY instructs deposit to your bank account.' },
       ],
       featKicker:'What EZY provides',
       featTitle:'Everything you need to fulfill confidently',
       features:[
-        { icon:'🔗', title:'Payment links',      desc:'Auto-generated via 3rd party gateway, sent directly to your customer on submission.' },
-        { icon:'📍', title:'Live tracking',      desc:'Tracking link sent to merchant and customer with real-time delivery status updates.' },
-        { icon:'📦', title:'Product catalogue',  desc:'Build your catalogue, select items and quantities. EZY calculates weight and total automatically.' },
-        { icon:'🏪', title:'Vendor network',     desc:'Requests pushed to contracted delivery vendors. You\'re emailed which vendor handles each order.' },
-        { icon:'💼', title:'Merchant wallet',    desc:'Collections land here. Request a withdrawal to your bank account at any time.' },
-        { icon:'📊', title:'Reports & history',  desc:'Track delivery counts and statuses — picked up, out for delivery, delivered.' },
+        { icon:'🔗', title:'Payment links',     desc:'Auto-generated via 3rd party gateway, sent directly to your customer on submission.' },
+        { icon:'📍', title:'Live tracking',     desc:'Tracking link sent to merchant and customer with real-time status updates.' },
+        { icon:'📦', title:'Product catalogue', desc:'Build your catalogue, select items and quantities. EZY calculates weight and total automatically.' },
+        { icon:'🏪', title:'Vendor network',    desc:'Requests pushed to contracted delivery vendors. You\'re emailed which vendor handles each order.' },
+        { icon:'💼', title:'Merchant wallet',   desc:'Collections land here. Request a withdrawal to your bank account at any time.' },
+        { icon:'📊', title:'Reports & history', desc:'Track delivery counts and statuses — picked up, out for delivery, delivered.' },
+        { icon:'🔌', title:'Website & API integration', desc:'Integrate with your website or submit via API.' },
+        { icon:'💳', title:'COD + digital payments',    desc:'Support both cash on delivery and electronic payments.' },
+        { icon:'⚡', title:'Automated fees',            desc:'Applicable fees are deducted automatically.' },
       ],
       modelsKicker:'Built for any commerce model',
       modelsTitle:'Online, social, retail, and high-volume',
-      modelsText:'Whether you run an online store, sell through social channels, operate a physical retail location, or manage high-volume operations — EZY is built to handle your delivery needs. If your business generates sales, EZY handles the rest.',
+      modelsText:'EZY is designed to support online stores, custom websites, social commerce, brick-and-mortar retailers, and high-volume operations. If your business generates sales, EZY is equipped to handle your delivery needs with ease.',
       appKicker:'The App',
       appTitle:'Built for merchants, available in Arabic and English',
       appText:'A clean, intuitive interface designed for busy merchants. Submit a delivery request in seconds — in whichever language you prefer.',
       screenshotEN:'English screenshot — upload to replace',
       screenshotAR:'Arabic screenshot — upload to replace',
-      phoneLabelEN:'English', phoneLabelAR:'Arabic — العربية',
+      phoneLabelEN:'English',
+      phoneLabelAR:'Arabic — العربية',
       phoneCaptionEN:'Clean, fast, effortless delivery requests in English',
       phoneCaptionAR:'واجهة عربية كاملة مع دعم الكتابة من اليمين لليسار',
       ctaTitle:'Ready to simplify your delivery?',
       ctaBody:'Be among the first merchants to experience EZY. Register your interest today.',
       ctaBtn:'سجّل اهتمامك — Register your interest',
       ctaNote:'No commitment required · We\'ll notify you when EZY is ready for you',
-      privacy:'/privacy.html',   privacyLabel:'Privacy Policy',
-      terms:'/terms.html',       termsLabel:'Terms & Conditions',
+      privacy:'/privacy.html',    privacyLabel:'Privacy Policy',
+      terms:'/terms.html',        termsLabel:'Terms & Conditions',
     },
 
     ar: {
-      dir: 'rtl',
-      logo: '/assets/brand/ezy-ar.png',
-      brandName: 'إيزي',
-      brandTagline: 'التوصيل أصبح أبسط',
-      nav: { about:'ما هي إيزي؟', how:'كيف تعمل', features:'ماذا تقدم', models:'نماذج التجارة' },
-      pill: 'تم طلب التوصيل. تم تنفيذ المهمة.',
-      h1Html: 'التوصيل، <span class="grad">ببساطة.</span>',
-      subtitle: 'تم طلب التوصيل. تم تنفيذ المهمة.',
-      lead: 'إيزي منصة تقنية تربط التجار بشركات التوصيل وتتولى روابط الدفع والتتبع والتسوية تلقائياً. أنت تسجّل الطلب مرة واحدة. إيزي تكمل الباقي.',
-      cta1: 'شاهد كيف تعمل', cta2: 'استعرض المميزات',
-      flowTitle: 'ما الذي يحدث بعد إرسال الطلب',
-      flow: [
-        { t:'التاجر يسجّل الطلب',              l:'عبر كتالوج إيزي' },
-        { t:'رابط الدفع ← للعميل',             l:'عبر بوابة دفع خارجية' },
-        { t:'رابط التتبع ← لكلا الطرفين',       l:'تحديثات حية' },
-        { t:'المبلغ ← محفظة التاجر',            l:'السحب للبنك في أي وقت' },
+      dir:'rtl',
+      logo:'/assets/brand/ezy-ar.png',
+      brandName:'إيزي',
+      brandTagline:'التوصيل أصبح أبسط',
+      nav:{ top:'الرئيسية', about:'ما هي إيزي؟', how:'كيف تعمل', features:'ماذا تقدم', models:'نماذج التجارة' },
+      pill:'تم طلب التوصيل. تم تنفيذ المهمة.',
+      h1:'التوصيل، <span class="grad">ببساطة.</span>',
+      subtitle:'تم طلب التوصيل. تم تنفيذ المهمة.',
+      lead:'تُبسّط إيزي عملية التوصيل للشركات وتجعل إدارة الخدمات اللوجستية والمدفوعات سهلة بعد إتمام البيع. سواء كنت تبيع عبر قنواتك الخاصة أو عبر منصات إلكترونية، تتولى إيزي تنفيذ التوصيل لتتمكن من التركيز على المبيعات.',
+      cta1:'شاهد كيف تعمل', cta2:'استعرض المميزات',
+      flowTitle:'ما الذي يحدث بعد إرسال الطلب',
+      flow:[
+        { t:'التاجر يسجّل الطلب',             s:'عبر كتالوج إيزي' },
+        { t:'رابط الدفع ← للعميل',            s:'عبر بوابة دفع خارجية' },
+        { t:'رابط التتبع ← لكلا الطرفين',     s:'تحديثات حية' },
+        { t:'المبلغ ← محفظة التاجر',           s:'السحب للبنك في أي وقت' },
       ],
       aboutKicker:'ما هي إيزي؟',
       aboutTitle:'منصة تقنية — وليست شركة توصيل',
-      aboutText:'إيزي تربط التجار بشبكة من شركات التوصيل المعتمدة وتتولى الطبقة التقنية بالكامل: روابط الدفع، التتبع المباشر، التقارير، والتسوية المالية. التوصيل الفعلي يتم عبر شركائنا المتعاقدين — أنت تسجّل الطلب فقط وإيزي تنسّق كل شيء.',
+      aboutText:'إيزي هي منصة تقنية لوجستية تربط التجار بشبكة من شركاء التوصيل المعتمدين وخدمات الدفع. عبر منصة واحدة موحّدة، يستطيع التاجر إرسال طلبات التوصيل وتتكفل إيزي بتنسيق العملية من البداية حتى النهاية.',
       howKicker:'آلية عمل إيزي',
-      howTitle:'من البيع → التنفيذ → التسوية',
+      howTitle:'من البيع → تنفيذ التوصيل → التسوية',
       steps:[
-        { title:'تتم عملية البيع',              desc:'يشتري العميل عبر موقعك، وسائل التواصل، واتساب، أو من متجرك المادي.' },
-        { title:'إرسال طلب التوصيل',            desc:'استخدم كتالوج إيزي المدمج لاختيار المنتجات والكميات. الوزن والمبلغ والإجمالي يحسبون تلقائياً.' },
-        { title:'إيزي تتولى كل شيء',            desc:'رابط الدفع للعميل. رابط التتبع للتاجر والعميل. الطلب يُرسل لشركة التوصيل المعيّنة — وتصلك بريداً إلكترونياً باسم الشركة.' },
-        { title:'التسوية في محفظتك',            desc:'يصل المبلغ لمحفظتك في إيزي. اطلب السحب وستتولى إيزي التعليمات لإيداعه في حسابك البنكي.' },
+        { title:'تتم عملية البيع',             desc:'يقوم العملاء بالشراء من موقعك، أو قنوات التواصل، أو المحادثات، أو داخل متجرك.' },
+        { title:'إرسال طلب توصيل إلى إيزي',   desc:'إذا لديك متجر إلكتروني، يصل الطلب تلقائيًا متضمنًا المنتجات والعنوان. إذا لا يوجد متجر إلكتروني، استخدم كتالوج إيزي لاختيار المنتجات والكميات.' },
+        { title:'إرسال الطلب',                desc:'بعد إدخال التفاصيل، تبدأ إيزي مباشرة بتنفيذ عملية التوصيل.' },
+        { title:'تتولى إيزي التنفيذ',          desc:'تعيين مزود التوصيل الأنسب، إرسال رابط الدفع ورابط التتبع تلقائياً، ومتابعة الطلب حتى اكتماله.' },
+        { title:'التسوية',                     desc:'يتم إضافة صافي الأرباح إلى محفظة إيزي الخاصة بك. اطلب سحباً وستتولى إيزي التعليمات لإيداع المبلغ في حسابك البنكي.' },
       ],
       featKicker:'مميزات منصة إيزي',
       featTitle:'كل ما تحتاجه لتنفيذ التوصيل بثقة',
       features:[
-        { icon:'🔗', title:'روابط الدفع',        desc:'تُنشأ تلقائياً عبر بوابة خارجية وترسل للعميل فور إرسال الطلب.' },
-        { icon:'📍', title:'تتبع مباشر',         desc:'رابط التتبع يصل للتاجر والعميل مع تحديثات حية لحالة الطلب.' },
-        { icon:'📦', title:'كتالوج المنتجات',    desc:'أنشئ كتالوجك، اختر المنتجات والكميات، وإيزي تحسب الوزن والإجمالي تلقائياً.' },
-        { icon:'🏪', title:'شبكة شركات التوصيل', desc:'الطلبات تُرسل لشركات التوصيل المتعاقدة. تصلك رسالة بريدية باسم الشركة المعيّنة لكل طلب.' },
-        { icon:'💼', title:'محفظة التاجر',       desc:'المبالغ تصل هنا. اطلب السحب لحسابك البنكي في أي وقت.' },
-        { icon:'📊', title:'التقارير والسجل',    desc:'تابع عدد الطلبات وحالاتها: تم الاستلام، في الطريق، تم التسليم.' },
+        { icon:'🔗', title:'روابط الدفع',           desc:'تُنشأ تلقائياً عبر بوابة خارجية وترسل للعميل فور إرسال الطلب.' },
+        { icon:'📍', title:'تتبع مباشر',            desc:'رابط التتبع يصل للتاجر والعميل مع تحديثات حية لحالة الطلب.' },
+        { icon:'📦', title:'كتالوج المنتجات',       desc:'أنشئ كتالوجك، اختر المنتجات والكميات، وإيزي تحسب الوزن والإجمالي تلقائياً.' },
+        { icon:'🏪', title:'شبكة شركات التوصيل',   desc:'الطلبات تُرسل لشركات التوصيل المتعاقدة. تصلك رسالة بريدية باسم الشركة المعيّنة لكل طلب.' },
+        { icon:'💼', title:'محفظة التاجر',          desc:'المبالغ تصل هنا. اطلب السحب لحسابك البنكي في أي وقت.' },
+        { icon:'📊', title:'التقارير والسجل',       desc:'تابع عدد الطلبات وحالاتها: تم الاستلام، في الطريق، تم التسليم.' },
+        { icon:'🔌', title:'تكامل الموقع وواجهات API', desc:'تكامل سهل مع المواقع الإلكترونية وواجهات البرمجة.' },
+        { icon:'💳', title:'خيارات دفع مرنة',       desc:'الدفع عند الاستلام أو الدفع الإلكتروني.' },
+        { icon:'⚡', title:'خصم آلي للرسوم',        desc:'خصم الرسوم تلقائيًا عند تطبيقها.' },
       ],
       modelsKicker:'حلول لجميع نماذج التجارة',
-      modelsTitle:'إلكترونية، اجتماعية، تقليدية، وكميات كبيرة',
-      modelsText:'سواء كنت تدير متجراً إلكترونياً، أو تبيع عبر وسائل التواصل، أو تملك متجراً مادياً، أو تعمل بأحجام كبيرة — إيزي مبنية لتلبية احتياجاتك. إذا كان لديك مبيعات، إيزي تتولى التوصيل.',
+      modelsTitle:'متاجر إلكترونية، تجارة اجتماعية، ومتاجر تقليدية',
+      modelsText:'سواء كنت تدير متجرًا إلكترونيًا، أو موقعًا مخصصًا، أو تعتمد على التجارة عبر وسائل التواصل الاجتماعي، أو تملك متجرك التقليدي، تدعم إيزي جميع هذه النماذج بالإضافة إلى العمليات ذات الأحجام الكبيرة.',
       appKicker:'التطبيق',
       appTitle:'مصمم للتجار، متاح بالعربية والإنجليزية',
       appText:'واجهة نظيفة وسهلة مصممة للتجار المشغولين. سجّل طلب توصيل في ثوانٍ — بأي لغة تفضّل.',
       screenshotEN:'لقطة الشاشة الإنجليزية — ارفع صورة لاستبدالها',
       screenshotAR:'لقطة الشاشة العربية — ارفع صورة لاستبدالها',
-      phoneLabelEN:'English', phoneLabelAR:'العربية',
+      phoneLabelEN:'English',
+      phoneLabelAR:'العربية',
       phoneCaptionEN:'Clean, fast, effortless delivery requests in English',
       phoneCaptionAR:'واجهة عربية كاملة مع دعم الكتابة من اليمين لليسار',
       ctaTitle:'مستعد لتبسيط عمليات التوصيل؟',
@@ -603,44 +657,38 @@
     }
   };
 
-  function renderSteps(data) {
-    const el = document.getElementById('howSteps');
+  function renderList(elId, items, isSteps){
+    const el = document.getElementById(elId);
     el.innerHTML = '';
-    data.forEach((s, i) => {
-      const d = document.createElement('div');
-      d.className = 'step';
-      d.innerHTML = `<div class="step-num">${i+1}</div><div><div class="title">${s.title}</div><p class="desc">${s.desc}</p></div>`;
-      el.appendChild(d);
+    items.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = isSteps ? 'step' : 'card';
+      if(isSteps){
+        div.innerHTML = `<div class="step-num">${i+1}</div><div><div class="title">${item.title}</div><p class="desc">${item.desc}</p></div>`;
+      } else {
+        div.innerHTML = `<div class="card-icon">${item.icon}</div><h3>${item.title}</h3><p>${item.desc}</p>`;
+      }
+      el.appendChild(div);
     });
   }
 
-  function renderFeatures(data) {
-    const el = document.getElementById('featureGrid');
-    el.innerHTML = '';
-    data.forEach(f => {
-      const d = document.createElement('div');
-      d.className = 'card';
-      d.innerHTML = `<div class="card-icon">${f.icon}</div><h3>${f.title}</h3><p>${f.desc}</p>`;
-      el.appendChild(d);
-    });
-  }
-
-  function setLang(lang) {
+  function setLang(lang){
     const d = t[lang];
     document.documentElement.lang = lang;
     document.body.classList.toggle('rtl', d.dir === 'rtl');
 
     document.getElementById('logoImg').src = d.logo;
-    document.getElementById('brandName').textContent = d.brandName;
+    document.getElementById('brandName').textContent    = d.brandName;
     document.getElementById('brandTagline').textContent = d.brandTagline;
 
+    document.getElementById('navTop').textContent      = d.nav.top;
     document.getElementById('navAbout').textContent    = d.nav.about;
     document.getElementById('navHow').textContent      = d.nav.how;
     document.getElementById('navFeatures').textContent = d.nav.features;
     document.getElementById('navModels').textContent   = d.nav.models;
 
     document.getElementById('pillText').textContent    = d.pill;
-    document.getElementById('heroTitle').innerHTML     = d.h1Html;
+    document.getElementById('heroTitle').innerHTML     = d.h1;
     document.getElementById('heroSubtitle').textContent = d.subtitle;
     document.getElementById('heroLead').textContent    = d.lead;
     document.getElementById('ctaPrimary').textContent  = d.cta1;
@@ -648,13 +696,13 @@
 
     document.getElementById('flowTitle').textContent = d.flowTitle;
     document.getElementById('f1t').textContent = d.flow[0].t;
-    document.getElementById('f1l').textContent = d.flow[0].l;
+    document.getElementById('f1s').textContent = d.flow[0].s;
     document.getElementById('f2t').textContent = d.flow[1].t;
-    document.getElementById('f2l').textContent = d.flow[1].l;
+    document.getElementById('f2s').textContent = d.flow[1].s;
     document.getElementById('f3t').textContent = d.flow[2].t;
-    document.getElementById('f3l').textContent = d.flow[2].l;
+    document.getElementById('f3s').textContent = d.flow[2].s;
     document.getElementById('f4t').textContent = d.flow[3].t;
-    document.getElementById('f4l').textContent = d.flow[3].l;
+    document.getElementById('f4s').textContent = d.flow[3].s;
 
     document.getElementById('aboutKicker').textContent = d.aboutKicker;
     document.getElementById('aboutTitle').textContent  = d.aboutTitle;
@@ -662,11 +710,11 @@
 
     document.getElementById('howKicker').textContent = d.howKicker;
     document.getElementById('howTitle').textContent  = d.howTitle;
-    renderSteps(d.steps);
+    renderList('howSteps', d.steps, true);
 
     document.getElementById('featKicker').textContent = d.featKicker;
     document.getElementById('featTitle').textContent  = d.featTitle;
-    renderFeatures(d.features);
+    renderList('featureGrid', d.features, false);
 
     document.getElementById('modelsKicker').textContent = d.modelsKicker;
     document.getElementById('modelsTitle').textContent  = d.modelsTitle;
@@ -700,6 +748,5 @@
   document.getElementById('btnAR').addEventListener('click', () => setLang('ar'));
   setLang('en');
 </script>
-
 </body>
 </html>
