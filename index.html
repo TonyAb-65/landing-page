@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>EZY Landing Page — Redesign Mockup</title>
+<title>EZY — Delivery, simplified.</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Tajawal", sans-serif; background: #060d18; display: flex; justify-content: center; padding: 24px 16px; }
-  .mock { background: #0b1220; color: #fff; border-radius: 16px; overflow: hidden; width: 100%; max-width: 960px; border: 1px solid rgba(255,255,255,0.08); }
+  body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Tajawal", sans-serif; background: #060d18; }
+  .page { background: #0b1220; color: #fff; min-height: 100vh; }
 
   /* NAV */
-  .m-nav { background: rgba(11,18,32,0.95); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 0 28px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .m-nav { background: rgba(11,18,32,0.95); border-bottom: 1px solid rgba(255,255,255,0.08); height: 64px; position: sticky; top: 0; z-index: 50; }
+  .m-nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 28px; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
   .m-logo { display: flex; align-items: center; gap: 10px; }
   .m-logo-icon { width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(135deg, #7EC8F7, #2E7DD1); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; color: #fff; flex-shrink: 0; }
   .m-logo-wordmark { display: flex; flex-direction: column; gap: 2px; }
@@ -24,7 +25,8 @@
   .m-lang span.active { background: rgba(255,255,255,0.9); color: #0b1220; }
 
   /* HERO */
-  .m-hero { position: relative; padding: 60px 28px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; overflow: hidden; }
+  .m-hero { position: relative; padding: 80px 0 80px; overflow: hidden; border-top: none; }
+  .m-hero-inner { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; position: relative; z-index: 1; }
   .m-hero-glow1 { position: absolute; top: -80px; left: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(46,125,209,0.14) 0%, transparent 70%); pointer-events: none; }
   .m-hero-glow2 { position: absolute; top: -40px; right: -40px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(126,200,247,0.09) 0%, transparent 70%); pointer-events: none; }
   .m-hero-left { position: relative; z-index: 1; }
@@ -53,7 +55,8 @@
   .m-arrow { text-align: center; font-size: 12px; color: rgba(126,200,247,0.4); padding: 3px 0; }
 
   /* SECTIONS */
-  .m-section { padding: 52px 28px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .m-section { padding: 72px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+  .m-section-inner { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
   .m-section.alt { background: rgba(126,200,247,0.025); }
   .m-kicker { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #7EC8F7; margin-bottom: 8px; }
   .m-accent { width: 36px; height: 3px; background: linear-gradient(90deg, #7EC8F7, #2E7DD1); border-radius: 2px; margin-bottom: 14px; }
@@ -77,7 +80,8 @@
 
 
   /* MOBILE SCREENSHOTS */
-  .m-phones { padding: 52px 28px; border-top: 1px solid rgba(255,255,255,0.06); background: rgba(126,200,247,0.025); }
+  .m-phones { padding: 72px 0; border-top: 1px solid rgba(255,255,255,0.06); background: rgba(126,200,247,0.025); }
+  .m-phones-inner { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
   .m-phones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; align-items: start; }
   .m-phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
   .m-phone-frame { width: 220px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 36px; padding: 12px; box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
@@ -90,7 +94,7 @@
   .m-phone-caption { font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; max-width: 200px; line-height: 1.5; }
 
   /* CTA SECTION */
-  .m-cta { padding: 60px 28px; text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06); }
+  .m-cta { padding: 80px 28px; text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.06); }
   .m-cta-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(46,125,209,0.1), rgba(126,200,247,0.05)); pointer-events: none; }
   .m-cta-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 200px; background: radial-gradient(ellipse, rgba(46,125,209,0.15) 0%, transparent 70%); pointer-events: none; }
   .m-cta-h2 { font-size: 30px; font-weight: 800; margin-bottom: 10px; position: relative; z-index: 1; letter-spacing: -0.4px; }
@@ -99,7 +103,8 @@
   .m-cta-note { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 12px; position: relative; z-index: 1; }
 
   /* FOOTER */
-  .m-footer { background: rgba(7,12,22,0.7); border-top: 1px solid rgba(255,255,255,0.06); padding: 18px 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .m-footer { background: rgba(7,12,22,0.7); border-top: 1px solid rgba(255,255,255,0.06); padding: 18px 0; }
+  .m-footer-inner { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
   .m-footer-links { display: flex; gap: 18px; }
   .m-footer-links a { font-size: 11.5px; color: rgba(255,255,255,0.38); text-decoration: none; }
   .m-footer-links a:hover { color: rgba(255,255,255,0.65); }
@@ -109,7 +114,7 @@
 
   /* MOBILE */
   @media (max-width: 700px) {
-    .m-hero { grid-template-columns: 1fr; padding: 40px 20px 48px; }
+    .m-hero-inner { grid-template-columns: 1fr; padding: 40px 20px 48px; }
     .m-h1 { font-size: 30px; }
     .m-grid { grid-template-columns: 1fr 1fr; }
     .m-nav-links { display: none; }
@@ -123,10 +128,11 @@
 </style>
 </head>
 <body>
-<div class="mock">
+<div class="page">
 
   <!-- NAV -->
   <div class="m-nav">
+    <div class="m-nav-inner">
     <div class="m-logo">
       <div class="m-logo-icon">ezy</div>
       <div class="m-logo-wordmark"><span class="m-logo-text">ezy</span><span class="m-logo-tagline">Delivery Simplified</span></div>
@@ -141,12 +147,14 @@
       <span class="active">EN</span>
       <span>AR</span>
     </div>
+    </div>
   </div>
 
   <!-- HERO -->
   <section class="m-hero" id="top">
     <div class="m-hero-glow1"></div>
     <div class="m-hero-glow2"></div>
+    <div class="m-hero-inner">
     <div class="m-hero-left">
       <div class="m-pill">
         <div class="m-dot"></div>
@@ -197,10 +205,12 @@
         </div>
       </div>
     </div>
+    </div>
   </section>
 
   <!-- WHAT IS EZY -->
   <section class="m-section alt" id="about">
+    <div class="m-section-inner">
     <div class="m-kicker">What is EZY?</div>
     <div class="m-accent"></div>
     <h2 class="m-h2">A technology platform — not a delivery company</h2>
@@ -209,6 +219,7 @@
 
   <!-- HOW IT WORKS -->
   <section class="m-section" id="how">
+    <div class="m-section-inner">
     <div class="m-kicker">How EZY works</div>
     <div class="m-accent"></div>
     <h2 class="m-h2">From sale → execution → settlement</h2>
@@ -246,6 +257,7 @@
 
   <!-- FEATURES -->
   <section class="m-section alt" id="features">
+    <div class="m-section-inner">
     <div class="m-kicker">What EZY provides</div>
     <div class="m-accent"></div>
     <h2 class="m-h2">Everything you need to fulfill confidently</h2>
@@ -285,6 +297,7 @@
 
   <!-- COMMERCE MODELS -->
   <section class="m-section" id="models">
+    <div class="m-section-inner">
     <div class="m-kicker">Built for any commerce model</div>
     <div class="m-accent"></div>
     <h2 class="m-h2">Online, social, retail, and high-volume</h2>
@@ -294,6 +307,7 @@
 
   <!-- MOBILE SCREENSHOTS -->
   <section class="m-phones" id="app">
+    <div class="m-phones-inner">
     <div class="m-kicker">The App</div>
     <div class="m-accent"></div>
     <h2 class="m-h2">Built for merchants, available in Arabic and English</h2>
@@ -324,6 +338,7 @@
         <div class="m-phone-caption">واجهة عربية كاملة مع دعم اتجاه النص من اليمين لليسار</div>
       </div>
     </div>
+    </div>
   </section>
 
   <!-- CTA -->
@@ -338,6 +353,7 @@
 
   <!-- FOOTER -->
   <footer class="m-footer">
+    <div class="m-footer-inner">
     <div class="m-footer-brand">
       <div class="m-footer-icon">ezy</div>
       <span class="m-footer-copy">© 2026 EZY</span>
@@ -345,6 +361,7 @@
     <div class="m-footer-links">
       <a href="/privacy.html">Privacy Policy</a>
       <a href="/terms.html">Terms &amp; Conditions</a>
+    </div>
     </div>
   </footer>
 
