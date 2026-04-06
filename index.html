@@ -323,21 +323,41 @@
     .footer-links a:hover{ text-decoration:underline; }
 
     /* ── RTL ── */
-    /* Set direction on body so ALL content flows RTL automatically */
     .rtl{ direction:rtl; }
     .rtl .nav-inner{ direction:rtl; }
     .rtl .brand{ flex-direction:row-reverse; }
     .rtl .nav-links{ direction:rtl; }
     .rtl .hero-inner{ grid-template-columns:.95fr 1.05fr; }
     .rtl .cta-row{ justify-content:flex-start; }
-    /* Text alignment — direction:rtl handles this but be explicit for safety */
     .rtl h1,.rtl h2,.rtl h3,
     .rtl .subtitle,.rtl .lead,.rtl .p,.rtl .kicker,
     .rtl .card,.rtl .step,.rtl .brand-wordmark,
     .rtl .hero-card-title{ text-align:right; }
     .rtl .pill{ flex-direction:row-reverse; }
-    .rtl .step{ flex-direction:row-reverse; }
-    .rtl .flow-item{ flex-direction:row-reverse; }
+
+    /* FIX 1: Step number on RIGHT side in Arabic */
+    .rtl .step{
+      flex-direction: row-reverse;
+      text-align: right;
+      align-items: flex-start;
+    }
+    .rtl .step-num{
+      margin-top: 2px;
+      flex-shrink: 0;
+      order: 2;
+    }
+    .rtl .step > div:not(.step-num){
+      order: 1;
+      flex: 1;
+      text-align: right;
+    }
+    .rtl .step .title{ text-align:right; display:block; }
+    .rtl .step .desc{ text-align:right; display:block; }
+
+    /* FIX 2: Flow items icon on RIGHT in Arabic */
+    .rtl .flow-item{ flex-direction:row-reverse; text-align:right; }
+    .rtl .flow-arrow{ direction:ltr; }
+
     .rtl .card-icon{ margin-right:0; margin-left:0; }
     .rtl .footer-inner{ direction:rtl; }
     .rtl .phones-grid{ direction:rtl; }
@@ -616,13 +636,13 @@
         { t:'التاجر يسجّل الطلب',             s:'عبر كتالوج إيزي' },
         { t:'رابط الدفع ← للعميل',            s:'عبر بوابة دفع خارجية' },
         { t:'رابط التتبع ← لكلا الطرفين',     s:'تحديثات حية' },
-        { t:'المبلغ ← محفظة التاجر',           s:'السحب للبنك في أي وقت' },
+        { t:'المبلغ ← محفظة تسوية المبالغ',           s:'السحب للبنك في أي وقت' },
       ],
       aboutKicker:'ما هي إيزي؟',
       aboutTitle:'منصة تقنية — وليست شركة توصيل',
       aboutText:'إيزي هي منصة تقنية لوجستية تربط التجار بشبكة من شركاء التوصيل المعتمدين وخدمات الدفع. عبر منصة واحدة موحّدة، يستطيع التاجر إرسال طلبات التوصيل وتتكفل إيزي بتنسيق العملية من البداية حتى النهاية.',
       howKicker:'آلية عمل إيزي',
-      howTitle:'من البيع → تنفيذ التوصيل → التسوية',
+      howTitle:'من البيع ← تنفيذ التوصيل ← التسوية',
       steps:[
         { title:'تتم عملية البيع',             desc:'يقوم العملاء بالشراء من موقعك، أو قنوات التواصل، أو المحادثات، أو داخل متجرك.' },
         { title:'إرسال طلب توصيل إلى إيزي',   desc:'إذا لديك متجر إلكتروني، يصل الطلب تلقائيًا متضمنًا المنتجات والعنوان. إذا لا يوجد متجر إلكتروني، استخدم كتالوج إيزي لاختيار المنتجات والكميات.' },
@@ -637,7 +657,7 @@
         { icon:'📍', title:'تتبع مباشر',            desc:'رابط التتبع يصل للتاجر والعميل مع تحديثات حية لحالة الطلب.' },
         { icon:'📦', title:'كتالوج المنتجات',       desc:'أنشئ كتالوجك، اختر المنتجات والكميات، وإيزي تحسب الوزن والإجمالي تلقائياً.' },
         { icon:'🏪', title:'شبكة شركات التوصيل',   desc:'الطلبات تُرسل لشركات التوصيل المتعاقدة. تصلك رسالة بريدية باسم الشركة المعيّنة لكل طلب.' },
-        { icon:'💼', title:'محفظة التاجر',          desc:'المبالغ تصل هنا. اطلب السحب لحسابك البنكي في أي وقت.' },
+        { icon:'💼', title:'محفظة تسوية المبالغ',          desc:'المبالغ تصل هنا. اطلب السحب لحسابك البنكي في أي وقت.' },
         { icon:'📊', title:'التقارير والسجل',       desc:'تابع عدد الطلبات وحالاتها: تم الاستلام، في الطريق، تم التسليم.' },
         { icon:'🔌', title:'تكامل الموقع وواجهات API', desc:'تكامل سهل مع المواقع الإلكترونية وواجهات البرمجة.' },
         { icon:'💳', title:'خيارات دفع مرنة',       desc:'الدفع عند الاستلام أو الدفع الإلكتروني.' },
