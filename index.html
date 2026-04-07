@@ -362,29 +362,35 @@
     .footer-links a:hover{ color:#fff; text-decoration:underline; }
 
     /* ── RTL ── */
+    /* direction:rtl on body naturally reverses flex rows right→left.
+       Do NOT add flex-direction:row-reverse — it cancels out direction:rtl */
     .rtl{ direction:rtl; }
     .rtl .nav-inner{ direction:rtl; }
-    .rtl .brand{ flex-direction:row-reverse; }
+    .rtl .brand{ direction:rtl; }
     .rtl .nav-links{ direction:rtl; }
-    .rtl .hero-inner{ grid-template-columns:.95fr 1.05fr; }
+    .rtl .hero-inner{ grid-template-columns:.95fr 1.05fr; direction:rtl; }
     .rtl .cta-row{ justify-content:flex-start; }
     .rtl h1,.rtl h2,.rtl h3,
     .rtl .subtitle,.rtl .lead,.rtl .p,.rtl .kicker,
-    .rtl .card,.rtl .step,.rtl .brand-wordmark,
+    .rtl .card,.rtl .brand-wordmark,
     .rtl .hero-card-title{ text-align:right; }
-    .rtl .pill{ flex-direction:row-reverse; }
-    .rtl .step{ flex-direction:row-reverse; text-align:right; align-items:flex-start; }
-    .rtl .step-num{ margin-top:1px; flex-shrink:0; order:2; }
-    .rtl .step > div:not(.step-num){ order:1; flex:1; text-align:right; }
-    .rtl .step .title{ text-align:right; display:block; }
-    .rtl .step .desc{ text-align:right; display:block; }
-    .rtl .flow-item{ flex-direction:row-reverse; text-align:right; }
-    .rtl .flow-arrow{ direction:ltr; }
+    /* Steps — direction:rtl puts number on right automatically */
+    .rtl .step{ direction:rtl; text-align:right; }
+    .rtl .step .title{ text-align:right; }
+    .rtl .step .desc{ text-align:right; }
+    /* Flow items — direction:rtl puts icon on right automatically */
+    .rtl .flow-item{ direction:rtl; text-align:right; }
+    .rtl .flow-arrow{ direction:ltr; text-align:center; }
+    .rtl .flow{ direction:rtl; }
+    /* Cards */
+    .rtl .card{ direction:rtl; text-align:right; }
     .rtl .card-icon{ margin-right:0; margin-left:0; }
     .rtl .footer-inner{ direction:rtl; }
     .rtl .phones-grid{ direction:rtl; }
     .rtl .accent{ margin-right:0; }
     .rtl .cta-section h2,.rtl .cta-section .p{ text-align:center; }
+    .rtl .pill{ direction:rtl; }
+    .rtl .hero-card{ direction:rtl; }
 
     /* ── SCROLL REVEAL ── */
     .reveal{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
@@ -444,11 +450,15 @@
 
     /* RTL mobile fixes */
     @media(max-width:980px){
-      .rtl .hero-inner{ direction:rtl; }
+      .rtl .hero-inner{ grid-template-columns:1fr; direction:rtl; }
+      .rtl .lead{ max-width:100%; text-align:right; }
+      .rtl h1, .rtl h2{ text-align:right; }
     }
     @media(max-width:600px){
+      .rtl .hero-inner{ grid-template-columns:1fr; direction:rtl; }
       .rtl .cta-row{ flex-direction:column; }
       .rtl .footer-inner{ align-items:flex-end; }
+      .rtl .pill{ direction:rtl; }
     }
   </style>
 </head>
