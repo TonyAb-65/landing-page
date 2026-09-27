@@ -1,0 +1,21 @@
+{
+  "redirects": [
+    {
+      "source": "/:name((?!assets$)[^/]+)/:code([A-Z0-9]{6})",
+      "has": [{ "type": "header", "key": "user-agent", "value": ".*(iPhone|iPad|iPod).*" }],
+      "destination": "https://apps.apple.com/app/id6747339321",
+      "permanent": false
+    },
+    {
+      "source": "/:name((?!assets$)[^/]+)/:code([A-Z0-9]{6})",
+      "has": [{ "type": "header", "key": "user-agent", "value": ".*Android.*" }],
+      "destination": "https://play.google.com/store/apps/details?id=com.mmc.waslii",
+      "permanent": false
+    },
+    {
+      "source": "/:name((?!assets$)[^/]+)/:code([A-Z0-9]{6})",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
+}
