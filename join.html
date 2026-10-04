@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Join EZY</title>
+  <meta name="description" content="Get the EZY app and enter your code when you register." />
+  <!-- Links carry personal referral and sales codes: keep them out of search. -->
+  <meta name="robots" content="noindex" />
+  <!-- WhatsApp / social link preview -->
+  <meta property="og:title" content="Join EZY" />
+  <meta property="og:description" content="Get the EZY app and enter your code when you register." />
+  <meta property="og:image" content="https://ezydelivery.io/assets/brand/ezy-en-200.png" />
+  <link rel="icon" href="/assets/brand/ezy-en-200.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+
+  <!--
+    Build 112 D2 / F4: /join (rewritten to this file in vercel.json).
+    A merchant opens it from a shared link: ?ref=CODE (referral) and/or
+    ?sales=CODE (salesperson). The code cannot travel through the store
+    install, so the page shows it to copy. With a code on the page, a phone
+    goes to its store only after Copy succeeds or a store button is tapped;
+    it never moves on by itself, so the code cannot be skipped. Only with no
+    code does a phone move to its store automatically after 3 seconds.
+    No tracking, no external scripts; the only external request is the font
+    stylesheet the landing page also uses.
+  -->
+  <style>
+    :root{
+      --bg:#ffffff;
+      --bg2:#F4F8FD;
+      --bg3:#EAF3FB;
+      --text:#0D2137;
+      --muted:rgba(13,33,55,.72);
+      --border:rgba(46,125,209,.13);
+      --shadow:0 4px 24px rgba(46,125,209,.09);
+      --blue1:#7EC8F7;
+      --blue2:#2E7DD1;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ min-height:100%; }
+    body{
+      margin:0; min-height:100vh;
+      font-family:"Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:linear-gradient(180deg, var(--bg2) 0%, var(--bg) 60%);
+    }
+    body.rtl{
+      font-family:"Tajawal", ui-sans-serif, system-ui, sans-serif;
+      direction:rtl;
+    }
+
+    .wrap{
+      max-width:440px; margin:0 auto;
+      padding:20px 18px 32px;
+      display:flex; flex-direction:column; gap:18px;
+    }
+
+    .top{ display:flex; justify-content:flex-end; }
+    .lang{
+      display:flex; align-items:center; gap:3px; padding:4px;
+      border-radius:999px; border:1.5px solid var(--border);
+      background:var(--bg2);
+    }
+    .lang button{
+      cursor:pointer; border:0; background:transparent;
+      color:rgba(13,33,55,.6); padding:7px 13px;
+      border-radius:999px; font-weight:700; font-size:12px; line-height:1;
+      font-family:inherit; transition:all .15s;
+    }
+    .lang button.active{
+      background:linear-gradient(135deg,var(--blue1),var(--blue2));
+      color:#fff; box-shadow:0 2px 10px rgba(46,125,209,.3);
+    }
+
+    .hero{ text-align:center; }
+    .hero img{ width:88px; height:88px; border-radius:22px; display:block; margin:0 auto 12px; }
+    h1{ margin:0; font-size:28px; font-weight:800; letter-spacing:-.3px; }
+    .sub{ margin:8px 0 0; color:var(--muted); font-size:15px; line-height:1.5; }
+
+    .cards{ display:flex; flex-direction:column; gap:12px; }
+    .card{
+      background:#fff; border:1.5px solid var(--border); border-radius:18px;
+      box-shadow:var(--shadow); padding:16px;
+    }
+    .card .label{ font-size:13px; font-weight:700; color:var(--muted); margin-bottom:10px; }
+    .card .row{ display:flex; align-items:center; gap:10px; }
+    .code{
+      flex:1 1 auto; min-width:0;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size:26px; font-weight:700; letter-spacing:2px;
+      background:var(--bg3); border-radius:12px; padding:10px 12px;
+      overflow-wrap:anywhere; user-select:all; -webkit-user-select:all;
+      direction:ltr; text-align:center;
+    }
+    .copy{
+      flex:0 0 auto; cursor:pointer; border:0;
+      background:linear-gradient(135deg,var(--blue1),var(--blue2));
+      color:#fff; font-family:inherit; font-weight:800; font-size:15px;
+      padding:14px 18px; border-radius:12px; min-width:92px;
+      box-shadow:0 2px 10px rgba(46,125,209,.3);
+    }
+    .copy.done{ background:#1f9d62; box-shadow:none; }
+    .hint{ margin:0; text-align:center; font-weight:700; font-size:15px; }
+    .status{ margin:0; text-align:center; color:var(--muted); font-size:13px; min-height:18px; }
+
+    .stores{ display:flex; flex-direction:column; gap:10px; }
+    .store{
+      display:flex; align-items:center; justify-content:center; gap:12px;
+      text-decoration:none; color:#fff; background:var(--text);
+      border-radius:14px; padding:12px 18px; min-height:58px;
+    }
+    .store.primary{ background:linear-gradient(135deg,var(--blue1),var(--blue2)); box-shadow:0 4px 18px rgba(46,125,209,.3); }
+    .store svg{ flex:0 0 auto; }
+    .store .small{ display:block; font-size:11px; opacity:.85; line-height:1.1; }
+    .store .big{ display:block; font-size:18px; font-weight:800; line-height:1.2; }
+    .store-text{ text-align:start; }
+
+    @media (min-width:720px){
+      .wrap{ padding-top:48px; }
+      .stores{ flex-direction:row; }
+      .store{ flex:1 1 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top">
+      <div class="lang" aria-label="Language">
+        <button id="btnEN" type="button">EN</button>
+        <button id="btnAR" type="button">AR</button>
+      </div>
+    </div>
+
+    <section class="hero">
+      <img id="logo" src="/assets/brand/ezy-en-200.png" alt="EZY" width="88" height="88" />
+      <h1 id="title">Join EZY</h1>
+      <p class="sub" id="sub"></p>
+    </section>
+
+    <section class="cards" id="cards"></section>
+    <p class="hint" id="hint" hidden></p>
+
+    <nav class="stores" aria-label="Download">
+      <a class="store" id="storeIos" href="https://apps.apple.com/app/id6747339321" rel="noopener">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.86-.76-1.47.02-2.83.86-3.59 2.17-1.53 2.66-.39 6.6 1.1 8.76.73 1.06 1.6 2.24 2.73 2.2 1.1-.04 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.84-1.22 1.18-2.41 1.2-2.47-.03-.01-2.3-.88-2.3-3.51zM14.2 6.16c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.65-1.05 1.69-.92 2.69.97.07 1.96-.49 2.56-1.24z"/>
+        </svg>
+        <span class="store-text"><span class="small" id="iosSmall">Download on the</span><span class="big">App Store</span></span>
+      </a>
+      <a class="store" id="storeAndroid" href="https://play.google.com/store/apps/details?id=com.mmc.waslii" rel="noopener">
+        <svg width="24" height="26" viewBox="0 0 24 26" aria-hidden="true">
+          <path fill="#34A853" d="M1.2.6 13.4 12.8 1.2 25c-.4-.2-.7-.7-.7-1.3V1.9c0-.6.3-1.1.7-1.3z"/>
+          <path fill="#FBBC04" d="m17.5 8.7-4.1 4.1 4.1 4.1 4.7-2.7c1.3-.8 1.3-2.1 0-2.9z"/>
+          <path fill="#EA4335" d="M13.4 12.8 1.2 25c.4.2 1 .2 1.6-.1l14.7-8z"/>
+          <path fill="#4285F4" d="M2.8.7C2.2.4 1.6.4 1.2.6l12.2 12.2 4.1-4.1z"/>
+        </svg>
+        <span class="store-text"><span class="small" id="playSmall">Get it on</span><span class="big">Google Play</span></span>
+      </a>
+    </nav>
+
+    <p class="status" id="status" aria-live="polite"></p>
+  </main>
+
+  <script>
+  (function () {
+    var STORES = {
+      ios: "https://apps.apple.com/app/id6747339321",
+      android: "https://play.google.com/store/apps/details?id=com.mmc.waslii"
+    };
+    var CODE_PATTERN = /^[A-Z0-9]{1,32}$/;
+    var AUTO_REDIRECT_MS = 3000;   // no code on the page: a phone moves on by itself
+    var AFTER_COPY_MS = 1200;      // long enough to see "Copied"
+    var COPIED_MS = 2000;
+
+    // All the page's text, in one place.
+    var STRINGS = {
+      en: {
+        dir: "ltr",
+        logo: "/assets/brand/ezy-en-200.png",
+        title: "Join EZY",
+        subWithCode: "Copy your code, then get the app.",
+        subNoCode: "Get the EZY app to start sending deliveries.",
+        ref: "Your referral code",
+        sales: "Your sales code",
+        hintOne: "Enter this code when you register in the app",
+        hintTwo: "Enter these codes when you register in the app",
+        copy: "Copy",
+        copied: "Copied",
+        selected: "Code selected: copy it, then open the store",
+        iosSmall: "Download on the",
+        playSmall: "Get it on",
+        opening: { ios: "Opening the App Store…", android: "Opening Google Play…" }
+      },
+      ar: {
+        dir: "rtl",
+        logo: "/assets/brand/ezy-ar-200.png",
+        title: "انضم إلى EZY",
+        subWithCode: "انسخ الرمز، ثم حمّل التطبيق.",
+        subNoCode: "حمّل تطبيق EZY لبدء إرسال الطلبات.",
+        ref: "رمز الإحالة الخاص بك",
+        sales: "رمز مندوب المبيعات",
+        hintOne: "أدخل هذا الرمز عند التسجيل في التطبيق",
+        hintTwo: "أدخل هذه الرموز عند التسجيل في التطبيق",
+        copy: "نسخ",
+        copied: "تم النسخ",
+        selected: "تم تحديد الرمز: انسخه ثم افتح المتجر",
+        iosSmall: "حمّله من",
+        playSmall: "احصل عليه من",
+        opening: { ios: "جارٍ فتح App Store…", android: "جارٍ فتح Google Play…" }
+      }
+    };
+
+    // ref and sales from the query string, the same rule as the backend: a code
+    // is letters and digits, at most 32, uppercased; anything else is ignored.
+    function readCode(name) {
+      var raw = new URLSearchParams(window.location.search).get(name);
+      if (typeof raw !== "string") return null;
+      var code = raw.trim().toUpperCase();
+      return CODE_PATTERN.test(code) ? code : null;
+    }
+    var codes = [];
+    var ref = readCode("ref");
+    var sales = readCode("sales");
+    if (ref) codes.push({ kind: "ref", value: ref });
+    if (sales) codes.push({ kind: "sales", value: sales });
+
+    // iPadOS reports a Mac user agent; touch points tell them apart.
+    var ua = navigator.userAgent || "";
+    var platform = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)
+      ? "ios"
+      : /Android/.test(ua) ? "android" : "desktop";
+
+    var lang = /^ar\b/i.test(navigator.language || "") ? "ar" : "en";
+    var timer = null;
+    var redirecting = false;
+
+    function $(id) { return document.getElementById(id); }
+
+    function goToStore(delay) {
+      if (platform === "desktop" || redirecting) return;
+      clearTimeout(timer);
+      redirecting = true;
+      $("status").textContent = STRINGS[lang].opening[platform];
+      timer = setTimeout(function () { window.location.href = STORES[platform]; }, delay);
+    }
+
+    function cancelAutoRedirect() {
+      if (redirecting) return;
+      clearTimeout(timer);
+      timer = null;
+    }
+
+    function selectText(el) {
+      var range = document.createRange();
+      range.selectNodeContents(el);
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    function copyCode(button, codeEl, value) {
+      cancelAutoRedirect();
+      var done = function () {
+        button.textContent = STRINGS[lang].copied;
+        button.classList.add("done");
+        setTimeout(function () {
+          button.textContent = STRINGS[lang].copy;
+          button.classList.remove("done");
+        }, COPIED_MS);
+        goToStore(AFTER_COPY_MS);
+      };
+      var fallback = function () {
+        // Clipboard refused (old browser, no permission): select the code so
+        // the visitor can copy it by hand, and stay on the page.
+        selectText(codeEl);
+        $("status").textContent = STRINGS[lang].selected;
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(value).then(done, fallback);
+      } else {
+        fallback();
+      }
+    }
+
+    function renderCards() {
+      var container = $("cards");
+      container.textContent = "";
+      codes.forEach(function (code) {
+        var card = document.createElement("div");
+        card.className = "card";
+
+        var label = document.createElement("div");
+        label.className = "label";
+        label.textContent = STRINGS[lang][code.kind];
+
+        var row = document.createElement("div");
+        row.className = "row";
+
+        var codeEl = document.createElement("div");
+        codeEl.className = "code";
+        codeEl.dir = "ltr";
+        codeEl.textContent = code.value;
+
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "copy";
+        button.textContent = STRINGS[lang].copy;
+        button.addEventListener("click", function () { copyCode(button, codeEl, code.value); });
+
+        row.appendChild(codeEl);
+        row.appendChild(button);
+        card.appendChild(label);
+        card.appendChild(row);
+        container.appendChild(card);
+      });
+    }
+
+    function setLang(next) {
+      lang = next;
+      var s = STRINGS[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = s.dir;
+      document.body.classList.toggle("rtl", s.dir === "rtl");
+      $("btnEN").classList.toggle("active", lang === "en");
+      $("btnAR").classList.toggle("active", lang === "ar");
+      $("logo").src = s.logo;
+      $("title").textContent = s.title;
+      document.title = s.title;
+      $("sub").textContent = codes.length ? s.subWithCode : s.subNoCode;
+      var hint = $("hint");
+      hint.hidden = codes.length === 0;
+      hint.textContent = codes.length > 1 ? s.hintTwo : s.hintOne;
+      $("iosSmall").textContent = s.iosSmall;
+      $("playSmall").textContent = s.playSmall;
+      if (redirecting) $("status").textContent = s.opening[platform];
+      renderCards();
+    }
+
+    // The visitor's own store first, highlighted; desktop keeps both plain.
+    if (platform === "android") {
+      $("storeAndroid").classList.add("primary");
+      $("storeAndroid").parentNode.insertBefore($("storeAndroid"), $("storeIos"));
+    } else if (platform === "ios") {
+      $("storeIos").classList.add("primary");
+    }
+
+    $("btnEN").addEventListener("click", function () { cancelAutoRedirect(); setLang("en"); });
+    $("btnAR").addEventListener("click", function () { cancelAutoRedirect(); setLang("ar"); });
+
+    setLang(lang);
+
+    // Only with no code to copy does a phone move to its store by itself.
+    // With a code shown, it goes only after Copy succeeds (copyCode) or a
+    // store button is tapped: the page never moves on before the code is
+    // copied or the visitor chooses to leave.
+    if (platform !== "desktop" && codes.length === 0) {
+      timer = setTimeout(function () { goToStore(0); }, AUTO_REDIRECT_MS);
+    }
+  })();
+  </script>
+</body>
+</html>
