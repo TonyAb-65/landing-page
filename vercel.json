@@ -17,5 +17,8 @@
       "destination": "/",
       "permanent": false
     }
+  ],
+  "rewrites": [
+    { "source": "/join", "destination": "/join.html" }
   ]
 }
