@@ -3,866 +3,767 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EZY — Delivery, simplified.</title>
+  <title>EZY · Delivery, simplified.</title>
+  <meta name="description" content="EZY connects merchants to delivery vendors and handles payment links, tracking and settlement. Download the app and send your first delivery." />
+  <meta property="og:title" content="EZY · Delivery, simplified." />
+  <meta property="og:description" content="You submit once. EZY handles the delivery, the payment link, tracking and settlement." />
+  <meta property="og:image" content="https://ezydelivery.io/assets/brand/ezy-en-200.png" />
+  <meta name="theme-color" content="#08BAF6" />
+  <link rel="icon" href="/assets/brand/ezy-en-200.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
 
   <style>
-    /* ── DESIGN: Editorial Light — visual only, zero content change ── */
     :root{
-      --bg:#ffffff;
-      --bg2:#F4F8FD;
-      --bg3:#EAF3FB;
-      --text:#0D2137;
-      --muted:rgba(13,33,55,.72);
-      --card:rgba(255,255,255,1);
-      --card2:rgba(244,248,253,1);
-      --border:rgba(46,125,209,.13);
-      --border2:rgba(46,125,209,.09);
-      --shadow:0 4px 24px rgba(46,125,209,.09);
-      --max:1120px;
-      --navH:64px;
-      --blue1:#7EC8F7;
-      --blue2:#2E7DD1;
+      --sky:#08BAF6;
+      --ocean:#0470E8;
+      --field:linear-gradient(168deg,var(--sky) 0%,#0594EE 48%,var(--ocean) 100%);
+      --ink:#0B1F35;
+      --ink2:#3A536C;
+      --mist:#F1F7FD;
+      --mist2:#E3EFFB;
+      --line:rgba(4,112,232,.14);
+      --line2:rgba(11,31,53,.08);
+      --blue:#0470E8;
+      --white:#fff;
+      --sheet-r:36px;
+      --max:1200px;
+      --navH:68px;
+      --ease:cubic-bezier(.16,1,.3,1);
+      --font:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Tajawal",sans-serif;
+      --font-ar:"Tajawal","Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif;
     }
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    html{ scroll-behavior:smooth; }
+    html{ scroll-behavior:smooth; scroll-padding-top:calc(var(--navH) + 16px); -webkit-text-size-adjust:100%; }
     body{
-      margin:0; min-height:100vh;
-      font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
-                   "Noto Sans","Noto Naskh Arabic","Noto Kufi Arabic","Tajawal";
-      color:var(--text);
-      background:var(--bg);
-      overflow-x:hidden;
+      margin:0; font-family:var(--font); color:var(--ink); background:var(--white);
+      font-size:17px; line-height:1.6; overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
     }
-    body.rtl{
-      font-family:"Tajawal", ui-sans-serif, system-ui, sans-serif;
-    }
+    body.rtl{ font-family:var(--font-ar); }
+    ::selection{ background:rgba(8,186,246,.28); color:var(--ink); }
+    a{ color:inherit; }
+    a:focus-visible,button:focus-visible{ outline:3px solid var(--ink); outline-offset:3px; border-radius:12px; }
+    img{ max-width:100%; display:block; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
+    .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+    h1,h2,h3{ margin:0; letter-spacing:-.025em; line-height:1.08; text-wrap:balance; }
+    .rtl h1,.rtl h2,.rtl h3{ letter-spacing:0; line-height:1.25; }
+    h2{ font-size:clamp(32px,4.4vw,54px); font-weight:800; }
+    .lede{ font-size:clamp(17px,1.5vw,20px); color:var(--ink2); max-width:62ch; margin:18px 0 0; text-wrap:pretty; }
+    .ic{ width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; flex:none; }
 
     /* ── NAV ── */
-    .nav{
-      position:fixed; top:0; left:0; right:0; z-index:50;
-      background:rgba(255,255,255,.94);
-      backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--border);
-      transition:box-shadow .3s;
-    }
-    .nav.scrolled{ box-shadow:0 4px 24px rgba(46,125,209,.09); }
-    .nav-inner{
-      max-width:var(--max); margin:0 auto;
-      padding:0 22px;
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-      height:var(--navH);
-    }
-    .brand{ display:flex; align-items:center; gap:10px; min-width:160px; }
-    .brand-icon{
-      width:34px; height:34px; border-radius:10px; flex-shrink:0;
-      background:linear-gradient(135deg,var(--blue1),var(--blue2));
-      display:flex; align-items:center; justify-content:center;
-      font-weight:800; font-size:12px; color:#fff; overflow:hidden;
-    }
-    .brand-icon img{ width:34px; height:34px; border-radius:10px; object-fit:cover; }
-    .brand-wordmark{ display:flex; flex-direction:column; gap:2px; }
-    .brand-name{ font-weight:800; font-size:16px; color:var(--text); line-height:1; letter-spacing:-.3px; }
-    .brand-tagline{ font-size:9.5px; font-weight:500; color:rgba(13,33,55,.4); letter-spacing:.4px; line-height:1; }
-    .nav-links{
-      display:flex; gap:4px; align-items:center;
-      font-size:13.5px; flex-wrap:wrap; justify-content:center; list-style:none;
-    }
-    .nav-links a{
-      color:rgba(13,33,55,.7); text-decoration:none;
-      font-weight:500; padding:7px 12px; border-radius:10px; white-space:nowrap;
-      transition:all .15s;
-    }
-    .nav-links a:hover{ color:var(--blue2); background:var(--bg3); }
-    .lang{
-      display:flex; align-items:center; gap:3px; padding:4px;
-      border-radius:999px; border:1.5px solid var(--border);
-      background:var(--bg2); flex:0 0 auto;
-    }
-    .lang button{
-      cursor:pointer; border:0; background:transparent;
-      color:rgba(13,33,55,.6); padding:7px 13px;
-      border-radius:999px; font-weight:700; font-size:12px; line-height:1;
-      font-family:inherit; transition:all .15s;
-    }
-    .lang button.active{
-      background:linear-gradient(135deg,var(--blue1),var(--blue2));
-      color:#fff; box-shadow:0 2px 10px rgba(46,125,209,.3);
-    }
+    .nav{ position:fixed; inset:0 0 auto 0; z-index:60; height:var(--navH); transition:background .3s, box-shadow .3s; }
+    .nav.solid{ background:rgba(255,255,255,.97); box-shadow:0 6px 24px rgba(11,31,53,.08); }
+    .nav-in{ height:100%; display:flex; align-items:center; gap:20px; }
+    .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--white); transition:color .3s; }
+    .nav.solid .brand{ color:var(--ink); }
+    .brand img{ width:38px; height:38px; border-radius:11px; box-shadow:0 3px 10px rgba(11,31,53,.18); }
+    .brand b{ font-size:20px; font-weight:800; letter-spacing:-.02em; line-height:1; }
+    .brand small{ display:block; font-size:12px; font-weight:600; opacity:.85; margin-top:3px; }
+    .links{ display:flex; gap:4px; margin-inline-start:auto; }
+    .links a{ text-decoration:none; color:var(--white); font-weight:600; font-size:15px; padding:8px 12px; border-radius:10px; transition:background .2s,color .3s; }
+    .links a:hover{ background:rgba(255,255,255,.18); }
+    .nav.solid .links a{ color:var(--ink); }
+    .nav.solid .links a:hover{ background:var(--mist); }
+    .lang{ display:flex; background:rgba(255,255,255,.2); border-radius:999px; padding:3px; }
+    .nav.solid .lang{ background:var(--mist2); }
+    .lang button{ border:0; background:transparent; font:700 13px/1 var(--font); color:var(--white); padding:9px 12px; border-radius:999px; cursor:pointer; min-width:44px; }
+    .lang button[lang=ar]{ font-family:var(--font-ar); font-size:15px; padding:7px 12px; }
+    .nav.solid .lang button{ color:var(--ink); }
+    .lang button[aria-pressed=true]{ background:var(--white); color:var(--blue); box-shadow:0 2px 8px rgba(11,31,53,.12); }
+    .nav.solid .lang button[aria-pressed=true]{ color:var(--white); background:var(--blue); }
+    .get{ text-decoration:none; font-weight:700; font-size:15px; padding:11px 18px; border-radius:999px; background:var(--white); color:var(--blue); box-shadow:0 4px 14px rgba(11,31,53,.14); white-space:nowrap; transition:transform .2s var(--ease); }
+    .get:hover{ transform:translateY(-1px); }
+    .nav.solid .get{ background:var(--ink); color:var(--white); }
 
-    /* ── LAYOUT ── */
-    .wrap{ padding-top:var(--navH); }
-    .container{ max-width:var(--max); margin:0 auto; padding:0 22px; }
+    /* ── STORE BUTTONS ── */
+    .stores{ display:flex; flex-wrap:wrap; gap:12px; }
+    .store{
+      display:inline-flex; align-items:center; gap:11px; min-height:58px; padding:9px 20px 9px 16px;
+      background:var(--ink); color:var(--white); border-radius:16px; text-decoration:none;
+      box-shadow:0 10px 24px rgba(11,31,53,.22); transition:transform .25s var(--ease), box-shadow .25s;
+    }
+    .rtl .store{ padding:9px 16px 9px 20px; }
+    .store:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(11,31,53,.28); }
+    .store svg{ width:26px; height:26px; flex:none; }
+    .store span{ display:flex; flex-direction:column; line-height:1.15; }
+    .store small{ font-size:12px; opacity:.8; font-weight:500; }
+    .store strong{ font-size:18px; font-weight:700; letter-spacing:-.01em; font-family:var(--font); }
 
     /* ── HERO ── */
-    .hero{
-      position:relative;
-      min-height:calc(100svh - var(--navH));
-      display:flex; align-items:center;
-      padding:20px 0 40px; overflow:hidden;
-      background:linear-gradient(150deg, #EBF4FD 0%, #F5F9FF 50%, #ffffff 100%);
-    }
-    .hero-glow1{
-      position:absolute; top:-100px; right:-80px;
-      width:500px; height:500px; border-radius:50%;
-      background:radial-gradient(circle,rgba(126,200,247,.18) 0%,transparent 70%);
-      pointer-events:none;
-    }
-    .hero-glow2{
-      position:absolute; bottom:-60px; left:-60px;
-      width:360px; height:360px; border-radius:50%;
-      background:radial-gradient(circle,rgba(46,125,209,.08) 0%,transparent 70%);
-      pointer-events:none;
-    }
-    .hero-inner{
-      position:relative; z-index:1; width:100%;
-      display:grid; grid-template-columns:1.05fr .95fr;
-      gap:40px; align-items:center;
-    }
-    .pill{
-      display:inline-flex; gap:10px; align-items:center;
-      padding:9px 16px;
-      border:1.5px solid rgba(46,125,209,.2);
-      background:#fff;
-      border-radius:999px; font-size:13px; font-weight:600;
-      color:var(--blue2);
-      box-shadow:0 4px 16px rgba(46,125,209,.08);
-      margin-bottom:18px;
-    }
-    .dot{
-      width:8px; height:8px; border-radius:50%;
-      background:#42d392; box-shadow:0 0 0 6px rgba(66,211,146,.15);
-      flex-shrink:0;
-    }
-    h1{
-      margin:0 0 10px;
-      font-size:clamp(36px,4.4vw,60px);
-      line-height:1.05; letter-spacing:-.6px;
-      color:var(--text);
-    }
-    h1 .grad{
-      background:linear-gradient(100deg,var(--blue1) 0%,var(--blue2) 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      background-clip:text;
-    }
-    .subtitle{ display:none; }
-    .lead{
-      margin:0 0 28px; font-size:16px; line-height:1.8;
-      color:var(--muted); max-width:56ch;
-    }
-    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; }
-    .btn{
-      appearance:none;
-      border:1.5px solid rgba(46,125,209,.2);
-      background:#fff;
-      color:var(--blue2);
-      padding:12px 22px; border-radius:12px;
-      font-weight:700; font-size:14px;
-      text-decoration:none;
-      display:inline-flex; align-items:center; gap:10px;
-      box-shadow:0 2px 12px rgba(46,125,209,.06);
-      transition:all .18s; font-family:inherit;
-    }
-    .btn.primary{
-      background:linear-gradient(135deg,#5BB8F5,var(--blue2));
-      color:#fff; border-color:transparent;
-      box-shadow:0 6px 20px rgba(46,125,209,.32);
-    }
-    .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 28px rgba(46,125,209,.18); }
-    .btn.primary:hover{ box-shadow:0 10px 28px rgba(46,125,209,.42); }
-    .btn:active{ transform:translateY(0); }
+    .hero{ position:relative; background:var(--field); padding:calc(var(--navH) + 36px) 0 72px; overflow:hidden; }
+    .hero::before{ content:""; position:absolute; inset:auto -10% -40% 30%; height:70%; background:radial-gradient(closest-side,rgba(255,255,255,.18),transparent); pointer-events:none; }
+    .hero-grid{ position:relative; display:grid; grid-template-columns:minmax(0,440px) minmax(0,1fr); gap:40px; align-items:center; }
+    .sheet{ background:var(--white); border-radius:var(--sheet-r); box-shadow:0 30px 60px rgba(3,60,140,.22); }
+    .hero-copy{ padding:44px 40px 40px; }
+    .hero h1{ font-size:clamp(44px,5.6vw,80px); font-weight:800; }
+    .hero h1 em{ font-style:normal; color:var(--blue); }
+    .tag{ display:flex; align-items:flex-start; gap:10px; margin-top:18px; font-weight:700; font-size:18px; line-height:1.4; color:var(--ink); }
+    .tag i{ width:9px; height:9px; margin-top:8px; flex:none; border-radius:50%; background:#16C784; }
+    .hero-copy .lede{ margin-top:12px; font-size:17px; }
+    .hero-copy .stores{ margin-top:28px; }
+    .more{ display:inline-flex; align-items:center; gap:8px; margin-top:20px; font-weight:700; color:var(--blue); text-decoration:none; }
+    .more .ic{ width:18px; height:18px; transition:transform .25s var(--ease); }
+    .more:hover .ic{ transform:translateY(3px); }
 
-    /* ── HERO FLOW CARD ── */
-    .hero-card{
-      background:#fff;
-      border:1.5px solid rgba(46,125,209,.15);
-      border-radius:20px; padding:24px;
-      box-shadow:0 20px 60px rgba(46,125,209,.12), 0 4px 16px rgba(46,125,209,.06);
-    }
-    .hero-card-title{
-      font-size:10.5px; font-weight:800; color:var(--blue2);
-      text-transform:uppercase; letter-spacing:1.2px; margin-bottom:16px;
-    }
-    .flow{ display:flex; flex-direction:column; }
-    .flow-item{
-      display:flex; align-items:center; gap:12px;
-      background:var(--bg2);
-      border:1px solid var(--border2);
-      border-radius:10px; padding:11px 14px;
-    }
-    .flow-icon{
-      width:32px; height:32px; border-radius:9px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:15px; flex-shrink:0;
-    }
-    .fi-blue  { background:rgba(46,125,209,.12); }
-    .fi-teal  { background:rgba(26,210,146,.10); }
-    .fi-purple{ background:rgba(140,100,240,.10); }
-    .fi-amber { background:rgba(240,160,40,.10);  }
-    .flow-text { font-size:12.5px; color:var(--text); font-weight:600; line-height:1.3; }
-    .flow-sub  { font-size:10.5px; color:rgba(13,33,55,.45); margin-top:2px; }
-    .flow-arrow{ text-align:center; font-size:13px; color:rgba(46,125,209,.3); padding:4px 0; }
+    /* board */
+    .board{ position:relative; padding:4px 0 0; color:var(--white); }
+    .board-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:0 4px 14px; }
+    .board-head h2{ font-size:clamp(20px,2vw,24px); font-weight:800; letter-spacing:-.01em; }
+    .board-head small{ font-size:13px; font-weight:600; background:rgba(255,255,255,.2); padding:5px 10px; border-radius:999px; white-space:nowrap; }
+    .lanes{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .lane{ background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); border-radius:22px; padding:10px; min-height:220px; display:flex; flex-direction:column; gap:10px; }
+    .lane-h{ display:flex; align-items:center; gap:7px; background:var(--white); color:var(--ink); border-radius:12px; padding:8px 9px; font-size:12.5px; font-weight:700; line-height:1.2; min-height:48px; }
+    .lane-h .ic{ width:18px; height:18px; color:var(--blue); }
+    .lane-cards{ display:flex; flex-direction:column; gap:10px; flex:1; }
+    .order{ background:var(--white); color:var(--ink); border-radius:14px; padding:11px 11px 12px; box-shadow:0 8px 20px rgba(3,60,140,.2); font-size:12.5px; line-height:1.35; will-change:transform; }
+    .order .ref{ font-weight:800; font-size:13.5px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .order .area i{ font-style:normal; font-weight:700; color:var(--ink); }
+    .order .area{ color:var(--ink2); margin-top:4px; }
+    .rtl .order{ font-size:13.5px; }
+    .order .state{ display:flex; align-items:center; gap:6px; margin-top:9px; font-weight:700; color:var(--blue); }
+    .order .state{ align-items:flex-start; }
+    .order .state::before{ content:""; width:7px; height:7px; border-radius:50%; background:currentColor; flex:none; margin-top:6px; }
+    .order.done .state{ color:#0E9F6E; }
+    .order .amt{ display:block; font-size:15px; font-weight:800; color:var(--ink); margin-top:2px; font-variant-numeric:tabular-nums; }
+    .board-note{ margin:12px 4px 0; font-size:13px; opacity:.9; }
 
-    /* ── SECTIONS ── */
-    .section{
-      padding:80px 0;
-      background:var(--bg);
-      border-top:1px solid var(--border2);
-    }
-    .section.alt{ background:var(--bg2); }
-    .kicker{
-      display:inline-block;
-      color:var(--blue2); font-weight:800; letter-spacing:.4px;
-      font-size:11px; text-transform:uppercase;
-      background:var(--bg3); border:1px solid var(--border);
-      padding:5px 14px; border-radius:999px;
-      margin:0 0 10px;
-    }
-    .accent{
-      width:36px; height:3px;
-      background:linear-gradient(90deg,var(--blue1),var(--blue2));
-      border-radius:2px; margin-bottom:16px;
-    }
-    h2{ margin:0 0 14px; font-size:clamp(26px,2.4vw,36px); letter-spacing:-.3px; color:var(--text); }
-    .p{
-      margin:0; color:var(--muted); line-height:1.85;
-      font-size:15.6px; max-width:76ch; overflow-wrap:anywhere;
-    }
+    /* ── ABOUT ── */
+    .sec{ padding:112px 0; }
+    .about h2{ max-width:16ch; }
+    .chain{ list-style:none; margin:56px 0 0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
+    .chain::before{ content:""; position:absolute; top:31px; inset-inline:12.5%; height:2px; background:linear-gradient(90deg,var(--sky),var(--ocean)); }
+    .rtl .chain::before{ background:linear-gradient(270deg,var(--sky),var(--ocean)); }
+    .chain li{ position:relative; text-align:center; padding:0 12px; }
+    .node{ width:64px; height:64px; margin:0 auto; border-radius:20px; display:grid; place-items:center; background:var(--white); border:1.5px solid var(--line); color:var(--blue); box-shadow:0 8px 20px rgba(4,112,232,.12); }
+    .node.ezy{ background:var(--field); border:0; color:var(--white); }
+    .node.ezy img{ width:64px; height:64px; border-radius:20px; }
+    .chain b{ display:block; margin-top:16px; font-size:18px; font-weight:800; }
+    .chain span{ display:block; margin-top:4px; color:var(--ink2); font-size:15px; }
 
-    /* ── STEPS ── */
-    .steps{ margin-top:24px; display:flex; flex-direction:column; gap:12px; }
-    .step{
-      background:var(--card); border:1px solid var(--border2);
-      border-radius:16px; padding:18px 20px;
-      display:flex; gap:16px; align-items:flex-start;
-      box-shadow:0 2px 10px rgba(46,125,209,.05);
-      transition:all .2s;
-    }
-    .step:hover{
-      border-color:rgba(46,125,209,.25);
-      box-shadow:0 8px 28px rgba(46,125,209,.1);
-      transform:translateY(-2px);
-    }
-    .step-num{
-      width:28px; height:28px; border-radius:50%; flex-shrink:0; margin-top:1px;
-      background:linear-gradient(135deg,var(--blue1),var(--blue2));
-      display:flex; align-items:center; justify-content:center;
-      font-size:11px; font-weight:800; color:#fff;
-      box-shadow:0 3px 10px rgba(46,125,209,.3);
-    }
-    .step .title{ font-weight:700; margin:0 0 5px; color:var(--text); font-size:15px; }
-    .step .desc { margin:0; color:var(--muted); line-height:1.75; font-size:14px; }
+    /* ── HOW (tracking bar) ── */
+    .how{ background:var(--mist); }
+    .track{ position:sticky; top:calc(var(--navH) + 10px); z-index:20; margin-top:40px; background:var(--white); border-radius:22px; box-shadow:0 12px 30px rgba(11,31,53,.08); padding:16px 22px; }
+    .trk{ position:relative; }
+    .track ol{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,1fr); position:relative; }
+    .trk::before,.track .fill{ content:""; position:absolute; top:15px; inset-inline-start:10%; height:4px; border-radius:4px; }
+    .trk::before{ inset-inline-end:10%; background:var(--mist2); }
+    .track .fill{ width:0; background:linear-gradient(90deg,var(--sky),var(--ocean)); transition:width .6s var(--ease); }
+    .rtl .track .fill{ background:linear-gradient(270deg,var(--sky),var(--ocean)); }
+    .track li{ position:relative; }
+    .track button{ all:unset; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:8px; width:100%; text-align:center; font-size:13.5px; font-weight:700; color:var(--ink2); }
+    .track button:focus-visible{ outline:3px solid var(--ink); outline-offset:2px; border-radius:10px; }
+    .dot{ width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background:var(--white); border:2px solid var(--mist2); font-size:14px; font-weight:800; color:var(--ink2); transition:background .4s, border-color .4s, color .4s, transform .4s var(--ease); font-variant-numeric:tabular-nums; }
+    .track li.on .dot{ background:var(--ocean); border-color:var(--ocean); color:var(--white); }
+    .track li.cur .dot{ transform:scale(1.18); }
+    .track li.on button{ color:var(--ink); }
+    .steps{ margin-top:28px; }
+    .step{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:56px; align-items:center; min-height:44vh; padding:40px 0; }
+    .step h3{ font-size:clamp(28px,3vw,40px); font-weight:800; }
+    .step p{ color:var(--ink2); font-size:18px; margin:14px 0 0; max-width:46ch; }
+    .step .no{ display:block; font-size:15px; font-weight:800; color:var(--blue); margin-bottom:12px; font-variant-numeric:tabular-nums; }
+    .art{ background:var(--white); border-radius:28px; padding:26px; box-shadow:0 18px 40px rgba(11,31,53,.08); border:1px solid var(--line2); }
+    .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+    .chip{ display:inline-flex; align-items:center; gap:8px; padding:11px 15px; border-radius:14px; background:var(--mist); font-weight:700; font-size:15px; }
+    .chip .ic{ color:var(--blue); width:20px; height:20px; }
+    .lines{ margin:0; padding:0; list-style:none; }
+    .lines li{ display:flex; justify-content:space-between; gap:12px; padding:12px 0; border-bottom:1px solid var(--line2); font-size:15px; }
+    .lines li:last-child{ border-bottom:0; }
+    .lines li b{ font-variant-numeric:tabular-nums; }
+    .art-cap{ font-size:12.5px; color:var(--ink2); margin-top:14px; }
+    .submit{ margin-top:18px; width:100%; border:0; border-radius:16px; padding:16px; font:800 16px var(--font); color:var(--white); background:var(--field); box-shadow:0 10px 22px rgba(4,112,232,.3); }
+    .rtl .submit{ font-family:var(--font-ar); }
+    .msgs{ display:flex; flex-direction:column; gap:10px; }
+    .msg{ display:flex; align-items:center; gap:12px; padding:13px 15px; border-radius:16px; background:var(--mist); font-weight:600; font-size:15px; }
+    .msg .ic{ color:var(--blue); }
+    .msg small{ display:block; font-weight:500; color:var(--ink2); font-size:13px; }
+    .wallet{ background:var(--field); color:var(--white); border-radius:22px; padding:22px; }
+    .wallet small{ font-weight:600; opacity:.9; }
+    .wallet strong{ display:block; font-size:36px; font-weight:800; letter-spacing:-.02em; margin-top:2px; font-variant-numeric:tabular-nums; }
+    .wallet .row{ display:flex; justify-content:space-between; align-items:center; margin-top:16px; gap:10px; }
+    .wallet .pill{ background:var(--white); color:var(--blue); font-weight:800; font-size:14px; padding:10px 16px; border-radius:999px; }
 
-    /* ── GRID ── */
-    .grid{
-      display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:16px; margin-top:28px;
-    }
-    .card{
-      background:var(--card); border:1px solid var(--border2);
-      border-radius:16px; padding:20px;
-      box-shadow:0 2px 12px rgba(46,125,209,.05);
-      transition:all .2s;
-    }
-    .card:hover{
-      border-color:rgba(46,125,209,.25);
-      box-shadow:0 10px 32px rgba(46,125,209,.1);
-      transform:translateY(-3px);
-    }
-    .card-icon{
-      width:38px; height:38px; border-radius:10px; margin-bottom:13px;
-      background:linear-gradient(135deg,rgba(126,200,247,.15),rgba(46,125,209,.12));
-      display:flex; align-items:center; justify-content:center; font-size:17px;
-    }
-    .card h3{ margin:0 0 8px; font-size:15px; font-weight:700; color:var(--text); }
-    .card p{ margin:0; color:var(--muted); line-height:1.7; font-size:14px; overflow-wrap:anywhere; }
+    /* ── FEATURES ── */
+    .groups{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:48px 40px; margin-top:64px; }
+    .group h3{ font-size:22px; font-weight:800; padding-bottom:16px; border-bottom:2px solid var(--ink); }
+    .feat{ display:flex; gap:14px; padding:20px 0; border-bottom:1px solid var(--line2); }
+    .feat .ic{ color:var(--blue); width:26px; height:26px; margin-top:2px; }
+    .feat b{ display:block; font-size:17px; font-weight:700; }
+    .feat p{ margin:4px 0 0; color:var(--ink2); font-size:15.5px; line-height:1.55; }
 
-    /* ── PHONES ── */
-    .phones-grid{
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:48px; margin-top:40px; align-items:start;
-    }
-    .phone-wrap{ display:flex; flex-direction:column; align-items:center; gap:14px; }
-    .phone-frame{
-      width:230px;
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:40px; padding:11px;
-      box-shadow:0 30px 70px rgba(46,125,209,.14), 0 4px 16px rgba(46,125,209,.06);
-    }
-    .phone-screen{
-      width:100%; aspect-ratio:9/19; border-radius:30px;
-      background:var(--bg3);
-      border:1px solid var(--border2);
-      overflow:hidden; display:flex; align-items:center; justify-content:center;
-    }
-    .phone-screen img{ width:100%; height:100%; object-fit:cover; border-radius:30px; }
-    .phone-placeholder{ display:flex; flex-direction:column; align-items:center; gap:8px; padding:20px; text-align:center; }
-    .phone-placeholder .ph-icon{ font-size:28px; opacity:.2; }
-    .phone-placeholder .ph-text{ font-size:11px; color:rgba(13,33,55,.3); line-height:1.5; }
-    .phone-lang{ font-size:12px; font-weight:700; color:rgba(13,33,55,.4); text-transform:uppercase; letter-spacing:1px; }
-    .phone-caption{ font-size:11px; color:rgba(13,33,55,.35); text-align:center; max-width:200px; line-height:1.5; }
+    /* ── MODELS ── */
+    .models{ background:var(--mist); }
+    .models-grid{ display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr); gap:24px 56px; align-items:start; }
+    .models-grid h2{ grid-column:1/-1; }
+    .models-grid .lede{ margin:0; }
+    .kinds{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:12px; }
+    .kinds li{ display:inline-flex; align-items:center; gap:10px; background:var(--white); border:1px solid var(--line); border-radius:999px; padding:14px 22px; font-size:clamp(17px,1.7vw,22px); font-weight:800; letter-spacing:-.01em; }
+    .kinds .ic{ color:var(--blue); }
+
+    /* ── APP STAGE ── */
+    .app{ background:var(--field); color:var(--white); }
+    .app h2{ max-width:18ch; }
+    .app .lede{ color:rgba(255,255,255,.95); }
+    .stage{ display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:56px; margin-top:56px; }
+    .phone-col{ position:relative; }
+    .phone{ position:sticky; top:calc(var(--navH) + 28px); width:min(330px,100%); margin-inline:auto; background:var(--ink); padding:11px; border-radius:50px; box-shadow:0 40px 80px rgba(3,40,100,.35); }
+    .screen{ position:relative; border-radius:40px; overflow:hidden; aspect-ratio:1290/2796; background:var(--sky); }
+    .screen img{ width:100%; height:100%; object-fit:cover; }
+    .spot{ position:absolute; border-radius:16px; border:3px solid var(--ink); box-shadow:0 0 0 9999px rgba(11,31,53,.42); transition:top .55s var(--ease), left .55s var(--ease), width .55s var(--ease), height .55s var(--ease), opacity .3s; pointer-events:none; }
+    .doors{ list-style:none; margin:0; padding:0 0 26vh; display:flex; flex-direction:column; }
+    .door{ min-height:52vh; display:flex; align-items:center; }
+    .door button{ all:unset; cursor:pointer; display:block; width:100%; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); border-radius:28px; padding:28px; transition:background .35s, color .35s, transform .35s var(--ease); }
+    .door button:focus-visible{ outline:3px solid var(--white); outline-offset:3px; }
+    .door.cur button{ background:var(--white); color:var(--ink); transform:scale(1.02); box-shadow:0 24px 50px rgba(3,40,100,.25); }
+    .door h3{ font-size:clamp(24px,2.4vw,32px); font-weight:800; }
+    .door p{ margin:10px 0 0; font-size:17px; line-height:1.55; opacity:.95; }
+    .door.cur p{ color:var(--ink2); opacity:1; }
+    .door .who{ display:inline-block; font-size:13px; font-weight:800; padding:5px 10px; border-radius:999px; background:rgba(255,255,255,.2); margin-bottom:12px; }
+    .door.cur .who{ background:var(--mist); color:var(--blue); }
 
     /* ── CTA ── */
-    .cta-section{
-      padding:90px 22px; text-align:center;
-      position:relative; overflow:hidden;
-      background:linear-gradient(135deg,#1A5FAF 0%,var(--blue2) 55%,#3A8FE0 100%);
-      border-top:none;
-    }
-    .cta-bg{
-      position:absolute; inset:0;
-      background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events:none;
-    }
-    .cta-glow{
-      position:absolute; top:50%; left:50%;
-      transform:translate(-50%,-50%);
-      width:600px; height:240px;
-      background:radial-gradient(ellipse,rgba(255,255,255,.12) 0%,transparent 70%);
-      pointer-events:none;
-    }
-    .cta-section h2{ position:relative; z-index:1; margin-bottom:14px; color:#fff; }
-    .cta-section .p{ position:relative; z-index:1; margin:0 auto 32px; color:rgba(255,255,255,.82); }
-    .cta-btn{
-      position:relative; z-index:1;
-      background:#fff;
-      color:var(--blue2); border:none; padding:15px 40px;
-      border-radius:13px; font-size:15px; font-weight:800;
-      cursor:pointer; letter-spacing:.1px; font-family:inherit;
-      box-shadow:0 8px 28px rgba(0,0,0,.16);
-      transition:all .2s;
-    }
-    .cta-btn:hover{ transform:translateY(-2px); box-shadow:0 14px 40px rgba(0,0,0,.2); }
-    .cta-note{ position:relative; z-index:1; font-size:11px; color:rgba(255,255,255,.35); margin-top:14px; }
+    .cta{ padding:0 0 112px; background:var(--ocean); }
+    .cta .sheet{ padding:64px 48px; display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:32px; align-items:center; }
+    .cta img{ width:96px; height:96px; border-radius:28px; box-shadow:0 12px 28px rgba(4,112,232,.3); }
+    .cta h2{ font-size:clamp(28px,3.4vw,44px); }
+    .cta p{ margin:10px 0 0; color:var(--ink2); font-size:18px; }
 
-    /* ── FOOTER ── */
-    footer{
-      background:#0D2137; color:rgba(255,255,255,.75);
-      padding:22px 22px;
-      border-top:1px solid rgba(255,255,255,.06);
-    }
-    .footer-inner{
-      max-width:var(--max); margin:0 auto;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap;
-    }
-    .footer-brand{ display:flex; align-items:center; gap:9px; }
-    .footer-icon{
-      width:22px; height:22px; border-radius:6px;
-      background:linear-gradient(135deg,var(--blue1),var(--blue2));
-      display:flex; align-items:center; justify-content:center;
-      font-size:8px; font-weight:800; color:#fff;
-    }
-    .footer-copy{ font-size:11.5px; color:rgba(255,255,255,.28); }
-    .footer-links{ display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
-    .footer-links a{ color:rgba(255,255,255,.75); text-decoration:none; font-size:13px; transition:color .2s; }
-    .footer-links a:hover{ color:#fff; text-decoration:underline; }
-
-    /* ── RTL ── */
-    /* direction:rtl on body naturally reverses flex rows right→left.
-       Do NOT add flex-direction:row-reverse — it cancels out direction:rtl */
-    .rtl{ direction:rtl; }
-    .rtl .nav-inner{ direction:rtl; }
-    .rtl .brand{ direction:rtl; }
-    .rtl .nav-links{ direction:rtl; }
-    .rtl .hero-inner{ grid-template-columns:.95fr 1.05fr; direction:rtl; }
-    .rtl .cta-row{ justify-content:flex-start; }
-    .rtl h1,.rtl h2,.rtl h3,
-    .rtl .subtitle,.rtl .lead,.rtl .p,.rtl .kicker,
-    .rtl .card,.rtl .brand-wordmark,
-    .rtl .hero-card-title{ text-align:right; }
-    /* Steps — direction:rtl puts number on right automatically */
-    .rtl .step{ direction:rtl; text-align:right; }
-    .rtl .step .title{ text-align:right; }
-    .rtl .step .desc{ text-align:right; }
-    /* Flow items — direction:rtl puts icon on right automatically */
-    .rtl .flow-item{ direction:rtl; text-align:right; }
-    .rtl .flow-arrow{ direction:ltr; text-align:center; }
-    .rtl .flow{ direction:rtl; }
-    /* Cards */
-    .rtl .card{ direction:rtl; text-align:right; }
-    .rtl .card-icon{ margin-right:0; margin-left:0; }
-    .rtl .footer-inner{ direction:rtl; }
-    .rtl .phones-grid{ direction:rtl; }
-    .rtl .accent{ margin-right:0; }
-    .rtl .cta-section h2,.rtl .cta-section .p{ text-align:center; }
-    .rtl .pill{ direction:rtl; }
-    .rtl .hero-card{ direction:rtl; }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
-    .reveal.visible{ opacity:1; transform:translateY(0); }
+    footer{ background:var(--ink); color:rgba(255,255,255,.85); font-size:14px; }
+    footer .wrap{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding-top:28px; padding-bottom:28px; flex-wrap:wrap; }
+    footer nav{ display:flex; gap:20px; }
+    footer a{ text-decoration:none; }
+    footer a:hover{ text-decoration:underline; text-underline-offset:3px; }
+    footer .f-brand{ display:flex; align-items:center; gap:10px; }
+    footer img{ width:28px; height:28px; border-radius:8px; }
 
     /* ── RESPONSIVE ── */
-
-    /* Tablet — 980px and below */
-    @media(max-width:980px){
-      .hero-inner{ grid-template-columns:1fr; gap:32px; }
-      .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-      .nav-links{ display:none; }
-      .hero{ padding:32px 0 48px; min-height:auto; }
-      h1{ font-size:clamp(32px,6vw,48px); }
-      h2{ font-size:clamp(22px,4vw,30px); }
-      .lead{ max-width:100%; }
-      .p{ max-width:100%; }
-      .section{ padding:56px 0; }
+    @media (max-width:1080px){
+      .links{ display:none; }
+      .lang{ margin-inline-start:auto; }
+      .hero-grid{ grid-template-columns:1fr; }
+      .lane{ min-height:300px; }
+      .groups{ grid-template-columns:1fr 1fr; }
+      .models-grid{ grid-template-columns:1fr; gap:32px; }
     }
-
-    /* Mobile — 600px and below */
-    @media(max-width:600px){
-      .container{ padding:0 16px; }
-      .nav-inner{ padding:0 16px; }
-      .hero{ padding:24px 0 40px; }
-      h1{ font-size:clamp(28px,8vw,38px); letter-spacing:-.4px; }
-      h2{ font-size:clamp(20px,6vw,26px); }
-      .hero-inner{ gap:24px; }
-      .pill{ font-size:11.5px; padding:7px 12px; }
-      .lead{ font-size:14.5px; }
-      .p{ font-size:14px; }
-      .cta-row{ flex-direction:column; }
-      .btn{ justify-content:center; text-align:center; padding:13px 20px; }
-      .hero-card{ padding:18px; }
-      .flow-text{ font-size:12px; }
-      .flow-sub{ font-size:10px; }
-      .grid{ grid-template-columns:1fr; }
-      .phones-grid{ grid-template-columns:1fr; gap:32px; }
-      .phone-frame{ width:200px; }
-      .section{ padding:44px 0; }
-      .kicker{ font-size:10.5px; }
-      .accent{ margin-bottom:12px; }
-      .card{ padding:16px; }
-      .card h3{ font-size:14px; }
-      .card p{ font-size:13px; }
-      .step{ padding:14px 16px; gap:12px; }
-      .step .title{ font-size:14px; }
-      .step .desc{ font-size:13px; }
-      .cta-section{ padding:60px 16px; }
-      .cta-section h2{ font-size:clamp(20px,6vw,28px); }
-      .cta-lead{ font-size:14px; }
-      .cta-btn{ padding:13px 28px; font-size:14px; width:100%; }
-      .footer-inner{ flex-direction:column; align-items:flex-start; gap:10px; }
-      .footer-links{ gap:12px; }
-      .lang button{ padding:6px 10px; }
+    @media (max-width:760px){
+      body{ font-size:16px; }
+      :root{ --navH:62px; --sheet-r:28px; }
+      .wrap{ padding:0 16px; }
+      .brand small{ display:none; }
+      .get{ padding:10px 14px; font-size:14px; }
+      .hero{ padding:calc(var(--navH) + 18px) 0 48px; }
+      .hero-copy{ padding:30px 22px 26px; }
+      .store{ flex:1 1 200px; justify-content:center; }
+      .lanes{ grid-template-columns:1fr; gap:8px; }
+      .lane{ min-height:0; flex-direction:row; align-items:center; padding:8px; border-radius:18px; }
+      .lane-h{ width:42%; flex:none; min-height:56px; }
+      .lane-cards{ min-height:72px; justify-content:center; }
+      .order{ padding:9px 10px; }
+      .order .state{ margin-top:5px; }
+      .sec{ padding:76px 0; }
+      .chain{ grid-template-columns:1fr; gap:22px; }
+      .chain::before{ top:32px; bottom:32px; inset-inline:31px auto; width:2px; height:auto; background:linear-gradient(180deg,var(--sky),var(--ocean)); }
+      .rtl .chain::before{ background:linear-gradient(180deg,var(--sky),var(--ocean)); }
+      .chain li{ text-align:start; display:grid; grid-template-columns:64px 1fr; gap:4px 16px; padding:0; }
+      .chain .node{ grid-row:span 2; margin:0; }
+      .chain b{ margin-top:6px; }
+      .chain span{ margin-top:0; }
+      .track{ padding:12px 10px; border-radius:18px; top:calc(var(--navH) + 6px); }
+      .track button{ font-size:0; gap:0; }
+      .track .dot{ font-size:13px; }
+      .step{ grid-template-columns:1fr; gap:24px; min-height:0; padding:36px 0; }
+      .groups{ grid-template-columns:1fr; gap:40px; margin-top:44px; }
+      .stage{ grid-template-columns:1fr; gap:28px; margin-top:36px; }
+      .phone{ position:relative; top:0; width:min(260px,72vw); border-radius:42px; }
+      .screen{ border-radius:33px; }
+      .doors{ padding-bottom:0; }
+      .door{ min-height:0; margin-top:10px; }
+      .door button{ padding:14px 18px; border-radius:20px; }
+      .door h3{ font-size:20px; }
+      .door .who{ margin-bottom:6px; }
+      .door p{ display:none; }
+      .door.cur p{ display:block; }
+      .cta{ padding-bottom:72px; }
+      .cta .sheet{ grid-template-columns:1fr; padding:36px 22px; gap:20px; text-align:center; justify-items:center; }
+      .cta .stores{ justify-content:center; width:100%; }
     }
-
-    /* RTL mobile fixes */
-    @media(max-width:980px){
-      .rtl .hero-inner{ grid-template-columns:1fr; direction:rtl; }
-      .rtl .lead{ max-width:100%; text-align:right; }
-      .rtl h1, .rtl h2{ text-align:right; }
-    }
-    @media(max-width:600px){
-      .rtl .hero-inner{ grid-template-columns:1fr; direction:rtl; }
-      .rtl .cta-row{ flex-direction:column; }
-      .rtl .footer-inner{ align-items:flex-end; }
-      .rtl .pill{ direction:rtl; }
+    @media (prefers-reduced-motion:reduce){
+      html{ scroll-behavior:auto; }
+      *,*::before,*::after{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
     }
   </style>
 </head>
-
 <body>
-<header class="nav" id="navbar">
-  <div class="nav-inner">
-    <div class="brand">
-      <div class="brand-icon">
-        <img id="logoImg" src="/assets/brand/ezy-en.png" alt="EZY logo"
-             onerror="this.style.display='none'" />
-      </div>
-      <div class="brand-wordmark">
-        <span class="brand-name"  id="brandName">ezy</span>
-        <span class="brand-tagline" id="brandTagline">Delivery Simplified</span>
-      </div>
-    </div>
 
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#top"      id="navTop">Top</a>
-      <a href="#about"    id="navAbout">What is EZY?</a>
-      <a href="#how"      id="navHow">How it works</a>
-      <a href="#features" id="navFeatures">What it provides</a>
-      <a href="#models"   id="navModels">Commerce models</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.1 1.1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.1-1.1"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 7.5h15a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 19 19.5H5A1.5 1.5 0 0 1 3.5 18V6.5A2 2 0 0 1 5.5 4.5H17"/><path d="M16 13.5h1.5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8.5 8-4 4 4 4M15.5 8l4 4-4 4M13.5 5.5l-3 13"/></symbol>
+    <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9.5v5M18 9.5v5"/></symbol>
+    <symbol id="i-fee" viewBox="0 0 24 24"><path d="M6 3.5h12v17l-3-2-3 2-3-2-3 2z"/><path d="m9.5 13.5 5-5"/><circle cx="9.7" cy="8.7" r=".6"/><circle cx="14.3" cy="13.3" r=".6"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 10.5h10.6L20.5 7H6.6"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 12a8 8 0 0 1-11.9 7L3.5 20.5 5 15.6A8 8 0 1 1 20.5 12z"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 9.5V20h16V9.5"/><path d="M3 9.5 5 4h14l2 5.5a2.6 2.6 0 0 1-4.5 1.7 2.6 2.6 0 0 1-4.5 0 2.6 2.6 0 0 1-4.5 0A2.6 2.6 0 0 1 3 9.5z"/><path d="M10 20v-5h4v5"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.2 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.2-3.5-8.5S9.6 5.9 12 3.5z"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="m12 3.5 8.5 4.5-8.5 4.5L3.5 8z"/><path d="m3.5 12 8.5 4.5 8.5-4.5M3.5 16l8.5 4.5 8.5-4.5"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M20.5 3.5 10 14M20.5 3.5 14 20.5l-4-6.5-6.5-4z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.3 4.6-4.8"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4.5v15M6 13.5l6 6 6-6"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.5 1.3 0 1.7-.8 3.3-.8 1.5 0 1.9.8 3.3.8 1.4 0 2.2-1.2 3-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.4-1-2.4-4zM13.9 5c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.1 1.1.1 2.3-.6 3.1-1.5z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="#00D7FE" stroke="none" d="M4.2 2.4c-.3.3-.4.7-.4 1.3v16.6c0 .6.1 1 .4 1.3l9.3-9.6z"/><path fill="#FFCE00" stroke="none" d="M16.6 15.2 13.5 12l3.1-3.2 3.7 2.1c1.1.6 1.1 1.6 0 2.2z"/><path fill="#FF3A44" stroke="none" d="M16.6 15.2 13.5 12l-9.3 9.6c.4.4.9.4 1.6.1z"/><path fill="#00F076" stroke="none" d="M16.6 8.8 5.8 2.3c-.7-.4-1.2-.3-1.6.1l9.3 9.6z"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="EZY home">
+      <img id="logo" src="/assets/brand/ezy-en-200.png" alt="" width="38" height="38"/>
+      <span><b data-t="brandName">ezy</b><small data-t="brandTagline">Delivery Simplified</small></span>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="#how" data-t="navHow">How it works</a>
+      <a href="#features" data-t="navFeatures">What you get</a>
+      <a href="#models" data-t="navModels">Commerce models</a>
+      <a href="#app" data-t="navApp">The app</a>
     </nav>
-
-    <div class="lang" aria-label="Language">
-      <button id="btnEN" class="active" type="button">EN</button>
-      <button id="btnAR" type="button">AR</button>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="btnEN" lang="en" aria-pressed="true">EN</button>
+      <button type="button" id="btnAR" lang="ar" aria-pressed="false">عربي</button>
     </div>
+    <a class="get" href="#download" data-t="getApp">Get the app</a>
   </div>
 </header>
 
-<main class="wrap">
-
+<main id="top">
   <!-- HERO -->
-  <section class="hero" id="top" role="banner">
-    <div class="hero-glow1"></div>
-    <div class="hero-glow2"></div>
-    <div class="container">
-      <div class="hero-inner">
-        <div id="heroLeft">
-          <div class="pill"><span class="dot"></span><span id="pillText">Delivery requested. Execution handled.</span></div>
-          <h1 id="heroTitle">Delivery, <span class="grad">simplified.</span></h1>
-          <div class="subtitle" id="heroSubtitle">Delivery requested. Execution handled.</div>
-          <p class="lead" id="heroLead">EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement — automatically. You submit once. EZY does the rest.</p>
-          <div class="cta-row">
-            <a class="btn primary" href="#how"      id="ctaPrimary">See how it works</a>
-            <a class="btn"         href="#features" id="ctaSecondary">Explore features</a>
-          </div>
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap hero-grid">
+      <div class="sheet hero-copy">
+        <h1 id="heroTitle" data-th="h1">Delivery, <em>simplified.</em></h1>
+        <div class="tag"><i></i><span data-t="subtitle">Delivery requested. Execution handled.</span></div>
+        <p class="lede" data-t="lead">EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement automatically. You submit once. EZY does the rest.</p>
+        <div class="stores" data-stores></div>
+        <a class="more" href="#how"><span data-t="cta1">See how it works</span><svg class="ic"><use href="#i-down"/></svg></a>
+      </div>
+
+      <div class="board" aria-labelledby="boardTitle">
+        <div class="board-head">
+          <h2 id="boardTitle" data-t="boardTitle">Your deliveries, moving on their own</h2>
+          <small data-t="boardTag">Example orders</small>
         </div>
-        <div id="heroRight">
-          <div class="hero-card">
-            <div class="hero-card-title" id="flowTitle">What happens after you submit</div>
-            <div class="flow">
-              <div class="flow-item">
-                <div class="flow-icon fi-blue">📋</div>
-                <div><div class="flow-text" id="f1t">Merchant submits order</div><div class="flow-sub" id="f1s">via EZY catalogue</div></div>
-              </div>
-              <div class="flow-arrow">↓</div>
-              <div class="flow-item">
-                <div class="flow-icon fi-teal">💳</div>
-                <div><div class="flow-text" id="f2t">Payment link → customer</div><div class="flow-sub" id="f2s">via 3rd party gateway</div></div>
-              </div>
-              <div class="flow-arrow">↓</div>
-              <div class="flow-item">
-                <div class="flow-icon fi-purple">📍</div>
-                <div><div class="flow-text" id="f3t">Tracking link → both parties</div><div class="flow-sub" id="f3s">live status updates</div></div>
-              </div>
-              <div class="flow-arrow">↓</div>
-              <div class="flow-item">
-                <div class="flow-icon fi-amber">💰</div>
-                <div><div class="flow-text" id="f4t">Collection → Settlement Wallet</div><div class="flow-sub" id="f4s">withdraw to bank anytime</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="lanes" id="lanes" aria-hidden="true"></div>
+        <p class="board-note" data-t="boardNote">Each order moves from request to money in your wallet. You only submit the first step.</p>
       </div>
     </div>
   </section>
 
-  <!-- WHAT IS EZY -->
-  <section class="section alt" id="about">
-    <div class="container">
-      <div class="kicker"  id="aboutKicker">What is EZY?</div>
-      <div class="accent"></div>
-      <h2 id="aboutTitle">A technology platform</h2>
-      <p class="p" id="aboutText">EZY connects merchants to a network of approved delivery vendors and handles the entire technology layer: payment links, live tracking, reporting, and settlement. The physical delivery is done by our contracted vendor partners — you simply submit the request and EZY coordinates everything.</p>
+  <!-- ABOUT -->
+  <section class="sec about" id="about" aria-labelledby="aboutTitle">
+    <div class="wrap">
+      <h2 id="aboutTitle" data-t="aboutTitle">A technology platform</h2>
+      <p class="lede" data-t="aboutText"></p>
+      <ol class="chain" id="chain"></ol>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="section" id="how">
-    <div class="container">
-      <div class="kicker" id="howKicker">How EZY works</div>
-      <div class="accent"></div>
-      <h2 id="howTitle">From sale → delivery execution → settlement</h2>
-      <div class="steps" id="howSteps"></div>
+  <!-- HOW -->
+  <section class="sec how" id="how" aria-labelledby="howTitle">
+    <div class="wrap">
+      <h2 id="howTitle" data-t="howTitle">From sale to delivery execution to settlement</h2>
+      <div class="track" id="track">
+        <div class="trk"><span class="fill" id="fill"></span><ol></ol></div>
+      </div>
+      <div class="steps" id="steps"></div>
     </div>
   </section>
 
   <!-- FEATURES -->
-  <section class="section alt" id="features">
-    <div class="container">
-      <div class="kicker" id="featKicker">What EZY provides</div>
-      <div class="accent"></div>
-      <h2 id="featTitle">Everything you need to fulfill confidently</h2>
-      <div class="grid" id="featureGrid"></div>
+  <section class="sec" id="features" aria-labelledby="featTitle">
+    <div class="wrap">
+      <h2 id="featTitle" data-t="featTitle">Everything you need to fulfill confidently</h2>
+      <div class="groups" id="groups"></div>
     </div>
   </section>
 
-  <!-- COMMERCE MODELS -->
-  <section class="section" id="models">
-    <div class="container">
-      <div class="kicker" id="modelsKicker">Built for any commerce model</div>
-      <div class="accent"></div>
-      <h2 id="modelsTitle">Online, social, retail, and high-volume</h2>
-      <p class="p" id="modelsText">EZY is designed to support online stores, custom websites, social commerce, brick-and-mortar retailers, and high-volume operations. If your business generates sales, EZY is equipped to handle your delivery needs with ease.</p>
+  <!-- MODELS -->
+  <section class="sec models" id="models" aria-labelledby="modelsTitle">
+    <div class="wrap models-grid">
+      <h2 id="modelsTitle" data-t="modelsTitle">Online, social, retail, and high-volume</h2>
+      <p class="lede" data-t="modelsText"></p>
+      <ul class="kinds" id="kinds"></ul>
     </div>
   </section>
 
-  <!-- APP SCREENSHOTS -->
-  <section class="section alt" id="app">
-    <div class="container">
-      <div class="kicker" id="appKicker">The App</div>
-      <div class="accent"></div>
-      <h2 id="appTitle">Built for merchants, available in Arabic and English</h2>
-      <p class="p" id="appText">A clean, intuitive interface designed for busy merchants. Submit a delivery request in seconds — in whichever language you prefer.</p>
-      <div class="phones-grid">
-        <div class="phone-wrap">
-          <div class="phone-frame">
-            <div class="phone-screen">
-              <img src="/assets/app/ezy-welcome-en.webp" width="720" height="1561" loading="lazy" decoding="async" alt="EZY app welcome screen in English: Merchant, Driver, Track a parcel, Chat &amp; Order" id="screenEN"/>
+  <!-- APP -->
+  <section class="sec app" id="app" aria-labelledby="appTitle">
+    <div class="wrap">
+      <h2 id="appTitle" data-t="appTitle">Built for merchants, available in Arabic and English</h2>
+      <p class="lede" data-t="appText"></p>
+      <div class="stage">
+        <div class="phone-col">
+          <div class="phone">
+            <div class="screen">
+              <img id="appShot" src="/assets/app/ezy-welcome-en.webp" width="720" height="1561" loading="lazy" decoding="async" alt=""/>
+              <div class="spot" id="spot"></div>
             </div>
           </div>
-          <div class="phone-lang"    id="phoneLabelEN">English</div>
-          <div class="phone-caption" id="phoneCaptionEN">Clean, fast, effortless delivery requests in English</div>
         </div>
-        <div class="phone-wrap">
-          <div class="phone-frame">
-            <div class="phone-screen">
-              <img src="/assets/app/ezy-welcome-ar.webp" width="720" height="1561" loading="lazy" decoding="async" alt="شاشة الترحيب في تطبيق EZY بالعربية: تاجر، سائق، تتبع الطرد، دردش واطلب" lang="ar" id="screenAR"/>
-            </div>
-          </div>
-          <div class="phone-lang"    id="phoneLabelAR">Arabic — العربية</div>
-          <div class="phone-caption" id="phoneCaptionAR">واجهة عربية كاملة مع دعم الكتابة من اليمين لليسار</div>
-        </div>
+        <ul class="doors" id="doors"></ul>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-bg"></div>
-    <div class="cta-glow"></div>
-    <h2 id="ctaTitle">Ready to simplify your delivery?</h2>
-    <p class="p" id="ctaBody">Be among the first merchants to experience EZY. Register your interest today.</p>
-    <button class="cta-btn" id="ctaBtn">سجّل اهتمامك — Register your interest</button>
-    <p class="cta-note" id="ctaNote">No commitment required · We'll notify you when EZY is ready for you</p>
+  <section class="cta" id="download" aria-labelledby="ctaTitle">
+    <div class="wrap">
+      <div class="sheet">
+        <img id="ctaLogo" src="/assets/brand/ezy-en-200.png" alt="" width="96" height="96"/>
+        <div>
+          <h2 id="ctaTitle" data-t="ctaTitle">Ready to simplify your delivery?</h2>
+          <p data-t="ctaBody">Download EZY, register your store and send your first delivery.</p>
+        </div>
+        <div class="stores" data-stores></div>
+      </div>
+    </div>
   </section>
-
 </main>
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-icon">ezy</div>
-      <span class="footer-copy" id="copyright">© 2026 EZY</span>
-    </div>
-    <div class="footer-links">
-      <a id="privacyLink" href="/privacy.html">Privacy Policy</a>
-      <a id="termsLink"   href="/terms.html">Terms &amp; Conditions</a>
-    </div>
+  <div class="wrap">
+    <div class="f-brand"><img src="/assets/brand/ezy-en-200.png" alt="" width="28" height="28"/><span>© <span id="year">2026</span> EZY</span></div>
+    <nav aria-label="Legal">
+      <a id="privacyLink" href="/privacy.html" data-t="privacyLabel">Privacy Policy</a>
+      <a id="termsLink" href="/terms.html" data-t="termsLabel">Terms &amp; Conditions</a>
+    </nav>
   </div>
 </footer>
 
 <script>
+(() => {
+  const IOS = 'https://apps.apple.com/app/id6747339321';
+  const PLAY = 'https://play.google.com/store/apps/details?id=com.mmc.waslii';
+
   const t = {
     en: {
-      dir:'ltr',
-      logo:'/assets/brand/ezy-en.png',
-      brandName:'ezy',
-      brandTagline:'Delivery Simplified',
-      nav:{ top:'Top', about:'What is EZY?', how:'How it works', features:'What it provides', models:'Commerce models' },
-      pill:'Delivery requested. Execution handled.',
-      h1:'Delivery, <span class="grad">simplified.</span>',
+      dir:'ltr', logo:'/assets/brand/ezy-en-200.png', shot:'/assets/app/ezy-welcome-en.webp',
+      shotAlt:'EZY app welcome screen in English: Merchant, Driver, Track a parcel, Chat & Order',
+      brandName:'ezy', brandTagline:'Delivery Simplified',
+      navHow:'How it works', navFeatures:'What you get', navModels:'Commerce models', navApp:'The app', getApp:'Get the app',
+      h1:'Delivery, <em>simplified.</em>',
       subtitle:'Delivery requested. Execution handled.',
-      lead:'EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement — automatically. You submit once. EZY does the rest.',
-      cta1:'See how it works', cta2:'Explore features',
-      flowTitle:'What happens after you submit',
-      flow:[
-        { t:'Merchant submits order',       s:'via EZY catalogue' },
-        { t:'Payment link → customer',      s:'via 3rd party gateway' },
-        { t:'Tracking link → both parties', s:'live status updates' },
-        { t:'Collection → Settlement Wallet', s:'withdraw to bank anytime' },
-      ],
-      aboutKicker:'What is EZY?',
+      lead:'EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement automatically. You submit once. EZY does the rest.',
+      cta1:'See how it works',
+      iosSmall:'Download on the', iosBig:'App Store', playSmall:'Get it on', playBig:'Google Play',
+      boardTitle:'Your deliveries, moving on their own', boardTag:'Example orders',
+      boardNote:'Each order moves from request to money in your wallet. You only submit the first step.',
+      lanes:['Requested','Driver assigned','Picked up','Delivered','Paid to wallet'],
+      stateCod:'Cash on delivery', statePaid:'Payment link sent',
+      states:[null,'Driver on the way','Pickup code confirmed','Delivery code confirmed','Credited'],
+      cod:'COD', online:'Paid', sar:'SAR',
+      areas:['Al Rawdah','Al Salamah','Al Naeem','Al Zahra','Obhur','Al Shati','Al Marwah','Al Basateen'],
       aboutTitle:'A technology platform',
-      aboutText:'EZY connects merchants to a network of approved delivery vendors and handles the entire technology layer: payment links, live tracking, reporting, and settlement. The physical delivery is done by our contracted vendor partners — you simply submit the request and EZY coordinates everything.',
-      howKicker:'How EZY works',
-      howTitle:'From sale → delivery execution → settlement',
+      aboutText:'EZY connects merchants to a network of approved delivery vendors and handles the entire technology layer: payment links, live tracking, reporting, and settlement. The physical delivery is done by our contracted vendor partners. You simply submit the request and EZY coordinates everything.',
+      chain:[
+        { icon:'i-store', b:'You', s:'Submit the delivery once' },
+        { ezy:true, b:'EZY', s:'Payment link, tracking, settlement' },
+        { icon:'i-truck', b:'Delivery partners', s:'Do the physical delivery' },
+        { icon:'i-user', b:'Your customer', s:'Pays and receives the order' },
+      ],
+      howTitle:'From sale to delivery execution to settlement',
+      stepWord:'Step',
       steps:[
-        { title:'A sale occurs',             desc:'Customers make purchases on your website, social channels, chat, or in your physical store.' },
-        { title:'A delivery request is sent to EZY', desc:'If you have an e-commerce website, requests are generated automatically with items and customer address. If you do not, use EZY\'s built-in product catalog to select items and quantities.' },
-        { title:'Submit the request',        desc:'Once your delivery details are submitted, EZY initiates the delivery execution process.' },
-        { title:'EZY manages execution',     desc:'EZY assigns the most suitable delivery partner, sends a payment link and tracking link automatically, and monitors deliveries until completion.' },
-        { title:'Settlement',                desc:'Your net earnings are credited to your EZY wallet. Request a withdrawal and EZY instructs deposit to your bank account.' },
+        { short:'Sale', title:'A sale occurs', desc:'Customers make purchases on your website, social channels, chat, or in your physical store.' },
+        { short:'Request', title:'A delivery request is sent to EZY', desc:'If you have an e-commerce website, requests are generated automatically with items and customer address. If you do not, use EZY\'s built-in product catalog to select items and quantities.' },
+        { short:'Submit', title:'Submit the request', desc:'Once your delivery details are submitted, EZY initiates the delivery execution process.' },
+        { short:'EZY runs it', title:'EZY manages execution', desc:'EZY assigns the most suitable delivery partner, sends a payment link and tracking link automatically, and monitors deliveries until completion.' },
+        { short:'Settlement', title:'Settlement', desc:'Your net earnings are credited to your EZY wallet. Request a withdrawal and EZY instructs deposit to your bank account.' },
       ],
-      featKicker:'What EZY provides',
+      a1:['Website','Instagram','WhatsApp','Your store'],
+      a2:{ cap:'Example order', rows:[['Items','3'],['Customer','Al Rawdah, Jeddah'],['Payment','Cash on delivery']] },
+      a3:{ btn:'Submit delivery request', cap:'One tap. Nothing else to arrange.' },
+      a4:[['Delivery partner assigned','Best available vendor'],['Payment link sent','To your customer'],['Tracking link sent','To you and your customer']],
+      a5:{ label:'EZY wallet', amount:'SAR 1,240', btn:'Withdraw to bank', cap:'Example balance' },
       featTitle:'Everything you need to fulfill confidently',
-      features:[
-        { icon:'🔗', title:'Payment links',     desc:'Auto-generated via 3rd party gateway, sent directly to your customer on submission.' },
-        { icon:'📍', title:'Live tracking',     desc:'Tracking link sent to merchant and customer with real-time status updates.' },
-        { icon:'📦', title:'Product catalogue', desc:'Build your catalogue, select items and quantities. EZY calculates weight and total automatically.' },
-        { icon:'🏪', title:'Vendor network',    desc:'Requests pushed to contracted delivery vendors. You\'re emailed which vendor handles each order.' },
-        { icon:'💼', title:'Settlement Wallet',   desc:'Collections land here. Request a withdrawal to your bank account at any time.' },
-        { icon:'📊', title:'Reports & history', desc:'Track delivery counts and statuses — picked up, out for delivery, delivered.' },
-        { icon:'🔌', title:'Website & API integration', desc:'Integrate with your website or submit via API.' },
-        { icon:'💳', title:'COD + digital payments',    desc:'Support both cash on delivery and electronic payments.' },
-        { icon:'⚡', title:'Automated fees',            desc:'Applicable fees are deducted automatically.' },
+      groups:[
+        { title:'Get paid', items:[
+          { icon:'i-link', title:'Payment links', desc:'Auto-generated via 3rd party gateway, sent directly to your customer on submission.' },
+          { icon:'i-cash', title:'COD + digital payments', desc:'Support both cash on delivery and electronic payments.' },
+          { icon:'i-wallet', title:'Settlement Wallet', desc:'Collections land here. Request a withdrawal to your bank account at any time.' },
+          { icon:'i-fee', title:'Automated fees', desc:'Applicable fees are deducted automatically.' },
+        ]},
+        { title:'Follow every order', items:[
+          { icon:'i-pin', title:'Live tracking', desc:'Tracking link sent to merchant and customer with real-time status updates.' },
+          { icon:'i-chart', title:'Reports & history', desc:'Track delivery counts and statuses: picked up, out for delivery, delivered.' },
+          { icon:'i-truck', title:'Vendor network', desc:'Requests pushed to contracted delivery vendors. You\'re emailed which vendor handles each order.' },
+        ]},
+        { title:'Plug in your store', items:[
+          { icon:'i-box', title:'Product catalogue', desc:'Build your catalogue, select items and quantities. EZY calculates weight and total automatically.' },
+          { icon:'i-code', title:'Website & API integration', desc:'Integrate with your website or submit via API.' },
+        ]},
       ],
-      modelsKicker:'Built for any commerce model',
       modelsTitle:'Online, social, retail, and high-volume',
       modelsText:'EZY is designed to support online stores, custom websites, social commerce, brick-and-mortar retailers, and high-volume operations. If your business generates sales, EZY is equipped to handle your delivery needs with ease.',
-      appKicker:'The App',
+      kinds:[['i-cart','Online stores'],['i-globe','Custom websites'],['i-chat','Social commerce'],['i-store','Brick-and-mortar'],['i-stack','High volume']],
       appTitle:'Built for merchants, available in Arabic and English',
-      appText:'A clean, intuitive interface designed for busy merchants. Submit a delivery request in seconds — in whichever language you prefer.',
-      screenshotEN:'English screenshot — upload to replace',
-      screenshotAR:'Arabic screenshot — upload to replace',
-      phoneLabelEN:'English',
-      phoneLabelAR:'Arabic — العربية',
-      phoneCaptionEN:'Clean, fast, effortless delivery requests in English',
-      phoneCaptionAR:'واجهة عربية كاملة مع دعم الكتابة من اليمين لليسار',
+      appText:'A clean, intuitive interface designed for busy merchants. Submit a delivery request in seconds, in whichever language you prefer.',
+      doors:[
+        { who:'You', title:'Merchant', desc:'Send deliveries to your customers. Register once, then send orders from your catalogue, your website or your chats.' },
+        { who:'Delivery partners', title:'Driver', desc:'Drivers from EZY\'s contracted delivery partners use the same app to pick up your orders and deliver them.' },
+        { who:'Your customer', title:'Track a parcel', desc:'Your customer follows the order with the tracking link EZY sends. No account needed.' },
+        { who:'Your customer', title:'Chat & Order', desc:'Your customers chat and order straight from you through your own link. They only ever see your store.' },
+      ],
       ctaTitle:'Ready to simplify your delivery?',
-      ctaBody:'Be among the first merchants to experience EZY. Register your interest today.',
-      ctaBtn:'سجّل اهتمامك — Register your interest',
-      ctaNote:'No commitment required · We\'ll notify you when EZY is ready for you',
-      privacy:'/privacy.html',    privacyLabel:'Privacy Policy',
-      terms:'/terms.html',        termsLabel:'Terms & Conditions',
+      ctaBody:'Download EZY, register your store and send your first delivery.',
+      privacy:'/privacy.html', privacyLabel:'Privacy Policy',
+      terms:'/terms.html', termsLabel:'Terms & Conditions',
     },
-
     ar: {
-      dir:'rtl',
-      logo:'/assets/brand/ezy-ar.png',
-      brandName:'إيزي',
-      brandTagline:'التوصيل أصبح أبسط',
-      nav:{ top:'الرئيسية', about:'ما هي إيزي؟', how:'كيف تعمل', features:'ماذا تقدم', models:'نماذج التجارة' },
-      pill:'تم طلب التوصيل. تم تنفيذ المهمة.',
-      h1:'التوصيل، <span class="grad">ببساطة.</span>',
+      dir:'rtl', logo:'/assets/brand/ezy-ar-200.png', shot:'/assets/app/ezy-welcome-ar.webp',
+      shotAlt:'شاشة الترحيب في تطبيق إيزي بالعربية: تاجر، سائق، تتبع الطرد، دردش واطلب',
+      brandName:'إيزي', brandTagline:'التوصيل أصبح أبسط',
+      navHow:'كيف تعمل', navFeatures:'ماذا تقدم', navModels:'نماذج التجارة', navApp:'التطبيق', getApp:'حمّل التطبيق',
+      h1:'التوصيل، <em>ببساطة.</em>',
       subtitle:'تم طلب التوصيل. تم تنفيذ المهمة.',
       lead:'تُبسّط إيزي عملية التوصيل للشركات وتجعل إدارة الخدمات اللوجستية والمدفوعات سهلة بعد إتمام البيع. سواء كنت تبيع عبر قنواتك الخاصة أو عبر منصات إلكترونية، تتولى إيزي تنفيذ التوصيل لتتمكن من التركيز على المبيعات.',
-      cta1:'شاهد كيف تعمل', cta2:'استعرض المميزات',
-      flowTitle:'ما الذي يحدث بعد إرسال الطلب',
-      flow:[
-        { t:'التاجر يسجّل الطلب',             s:'عبر كتالوج إيزي' },
-        { t:'رابط الدفع ← للعميل',            s:'عبر بوابة دفع خارجية' },
-        { t:'رابط التتبع ← لكلا الطرفين',     s:'تحديثات حية' },
-        { t:'المبلغ ← محفظة تسوية المبالغ',   s:'السحب للبنك في أي وقت' },
-      ],
-      aboutKicker:'ما هي إيزي؟',
+      cta1:'شاهد كيف تعمل',
+      iosSmall:'حمّله من', iosBig:'App Store', playSmall:'احصل عليه من', playBig:'Google Play',
+      boardTitle:'توصيلاتك تتحرك تلقائياً', boardTag:'طلبات توضيحية',
+      boardNote:'ينتقل كل طلب من الإرسال حتى وصول المبلغ إلى محفظتك. أنت ترسل الخطوة الأولى فقط.',
+      lanes:['طلب جديد','تم تعيين السائق','تم الاستلام','تم التسليم','في المحفظة'],
+      stateCod:'الدفع عند الاستلام', statePaid:'تم إرسال رابط الدفع',
+      states:[null,'السائق في الطريق','تم تأكيد رمز الاستلام','تم تأكيد رمز التسليم','أُضيف للمحفظة'],
+      cod:'نقدي', online:'مدفوع', sar:'ر.س',
+      areas:['الروضة','السلامة','النعيم','الزهراء','أبحر','الشاطئ','المروة','البساتين'],
       aboutTitle:'منصة تقنية',
       aboutText:'إيزي هي منصة تقنية لوجستية تربط التجار بشبكة من شركاء التوصيل المعتمدين وخدمات الدفع. عبر منصة واحدة موحّدة، يستطيع التاجر إرسال طلبات التوصيل وتتكفل إيزي بتنسيق العملية من البداية حتى النهاية.',
-      howKicker:'آلية عمل إيزي',
+      chain:[
+        { icon:'i-store', b:'أنت', s:'ترسل طلب التوصيل مرة واحدة' },
+        { ezy:true, b:'إيزي', s:'رابط الدفع والتتبع والتسوية' },
+        { icon:'i-truck', b:'شركاء التوصيل', s:'ينفذون التوصيل فعلياً' },
+        { icon:'i-user', b:'عميلك', s:'يدفع ويستلم طلبه' },
+      ],
       howTitle:'من البيع ← تنفيذ التوصيل ← التسوية',
+      stepWord:'الخطوة',
       steps:[
-        { title:'تتم عملية البيع',             desc:'يقوم العملاء بالشراء من موقعك، أو قنوات التواصل، أو المحادثات، أو داخل متجرك.' },
-        { title:'إرسال طلب توصيل إلى إيزي',   desc:'إذا لديك متجر إلكتروني، يصل الطلب تلقائيًا متضمنًا المنتجات والعنوان. إذا لا يوجد متجر إلكتروني، استخدم كتالوج إيزي لاختيار المنتجات والكميات.' },
-        { title:'إرسال الطلب',                desc:'بعد إدخال التفاصيل، تبدأ إيزي مباشرة بتنفيذ عملية التوصيل.' },
-        { title:'تتولى إيزي التنفيذ',          desc:'تعيين مزود التوصيل الأنسب، إرسال رابط الدفع ورابط التتبع تلقائياً، ومتابعة الطلب حتى اكتماله.' },
-        { title:'التسوية',                     desc:'يتم إضافة صافي الأرباح إلى محفظة إيزي الخاصة بك. اطلب سحباً وستتولى إيزي التعليمات لإيداع المبلغ في حسابك البنكي.' },
+        { short:'البيع', title:'تتم عملية البيع', desc:'يقوم العملاء بالشراء من موقعك، أو قنوات التواصل، أو المحادثات، أو داخل متجرك.' },
+        { short:'الطلب', title:'إرسال طلب توصيل إلى إيزي', desc:'إذا لديك متجر إلكتروني، يصل الطلب تلقائيًا متضمنًا المنتجات والعنوان. إذا لا يوجد متجر إلكتروني، استخدم كتالوج إيزي لاختيار المنتجات والكميات.' },
+        { short:'الإرسال', title:'إرسال الطلب', desc:'بعد إدخال التفاصيل، تبدأ إيزي مباشرة بتنفيذ عملية التوصيل.' },
+        { short:'التنفيذ', title:'تتولى إيزي التنفيذ', desc:'تعيين مزود التوصيل الأنسب، إرسال رابط الدفع ورابط التتبع تلقائياً، ومتابعة الطلب حتى اكتماله.' },
+        { short:'التسوية', title:'التسوية', desc:'يتم إضافة صافي الأرباح إلى محفظة إيزي الخاصة بك. اطلب سحباً وستتولى إيزي التعليمات لإيداع المبلغ في حسابك البنكي.' },
       ],
-      featKicker:'مميزات منصة إيزي',
+      a1:['موقعك','إنستغرام','واتساب','متجرك'],
+      a2:{ cap:'طلب توضيحي', rows:[['المنتجات','3'],['العميل','الروضة، جدة'],['الدفع','الدفع عند الاستلام']] },
+      a3:{ btn:'إرسال طلب التوصيل', cap:'ضغطة واحدة، ولا شيء آخر لترتيبه.' },
+      a4:[['تم تعيين شريك التوصيل','أنسب مزود متاح'],['تم إرسال رابط الدفع','إلى عميلك'],['تم إرسال رابط التتبع','لك ولعميلك']],
+      a5:{ label:'محفظة إيزي', amount:'1,240 ر.س', btn:'السحب إلى البنك', cap:'رصيد توضيحي' },
       featTitle:'كل ما تحتاجه لتنفيذ التوصيل بثقة',
-      features:[
-        { icon:'🔗', title:'روابط الدفع',           desc:'تُنشأ تلقائياً عبر بوابة خارجية وترسل للعميل فور إرسال الطلب.' },
-        { icon:'📍', title:'تتبع مباشر',            desc:'رابط التتبع يصل للتاجر والعميل مع تحديثات حية لحالة الطلب.' },
-        { icon:'📦', title:'كتالوج المنتجات',       desc:'أنشئ كتالوجك، اختر المنتجات والكميات، وإيزي تحسب الوزن والإجمالي تلقائياً.' },
-        { icon:'🏪', title:'شبكة شركات التوصيل',   desc:'الطلبات تُرسل لشركات التوصيل المتعاقدة. تصلك رسالة بريدية باسم الشركة المعيّنة لكل طلب.' },
-        { icon:'💼', title:'محفظة تسوية المبالغ',   desc:'المبالغ تصل هنا. اطلب السحب لحسابك البنكي في أي وقت.' },
-        { icon:'📊', title:'التقارير والسجل',       desc:'تابع عدد الطلبات وحالاتها: تم الاستلام، في الطريق، تم التسليم.' },
-        { icon:'🔌', title:'تكامل الموقع وواجهات API', desc:'تكامل سهل مع المواقع الإلكترونية وواجهات البرمجة.' },
-        { icon:'💳', title:'خيارات دفع مرنة',       desc:'الدفع عند الاستلام أو الدفع الإلكتروني.' },
-        { icon:'⚡', title:'خصم آلي للرسوم',        desc:'خصم الرسوم تلقائيًا عند تطبيقها.' },
+      groups:[
+        { title:'استلم أموالك', items:[
+          { icon:'i-link', title:'روابط الدفع', desc:'تُنشأ تلقائياً عبر بوابة خارجية وترسل للعميل فور إرسال الطلب.' },
+          { icon:'i-cash', title:'خيارات دفع مرنة', desc:'الدفع عند الاستلام أو الدفع الإلكتروني.' },
+          { icon:'i-wallet', title:'محفظة تسوية المبالغ', desc:'المبالغ تصل هنا. اطلب السحب لحسابك البنكي في أي وقت.' },
+          { icon:'i-fee', title:'خصم آلي للرسوم', desc:'خصم الرسوم تلقائيًا عند تطبيقها.' },
+        ]},
+        { title:'تابع كل طلب', items:[
+          { icon:'i-pin', title:'تتبع مباشر', desc:'رابط التتبع يصل للتاجر والعميل مع تحديثات حية لحالة الطلب.' },
+          { icon:'i-chart', title:'التقارير والسجل', desc:'تابع عدد الطلبات وحالاتها: تم الاستلام، في الطريق، تم التسليم.' },
+          { icon:'i-truck', title:'شبكة شركات التوصيل', desc:'الطلبات تُرسل لشركات التوصيل المتعاقدة. تصلك رسالة بريدية باسم الشركة المعيّنة لكل طلب.' },
+        ]},
+        { title:'اربط متجرك', items:[
+          { icon:'i-box', title:'كتالوج المنتجات', desc:'أنشئ كتالوجك، اختر المنتجات والكميات، وإيزي تحسب الوزن والإجمالي تلقائياً.' },
+          { icon:'i-code', title:'تكامل الموقع وواجهات API', desc:'تكامل سهل مع المواقع الإلكترونية وواجهات البرمجة.' },
+        ]},
       ],
-      modelsKicker:'حلول لجميع نماذج التجارة',
       modelsTitle:'متاجر إلكترونية، تجارة اجتماعية، ومتاجر تقليدية',
       modelsText:'سواء كنت تدير متجرًا إلكترونيًا، أو موقعًا مخصصًا، أو تعتمد على التجارة عبر وسائل التواصل الاجتماعي، أو تملك متجرك التقليدي، تدعم إيزي جميع هذه النماذج بالإضافة إلى العمليات ذات الأحجام الكبيرة.',
-      appKicker:'التطبيق',
+      kinds:[['i-cart','متاجر إلكترونية'],['i-globe','مواقع مخصصة'],['i-chat','تجارة اجتماعية'],['i-store','متاجر تقليدية'],['i-stack','أحجام كبيرة']],
       appTitle:'مصمم للتجار، متاح بالعربية والإنجليزية',
-      appText:'واجهة نظيفة وسهلة مصممة للتجار المشغولين. سجّل طلب توصيل في ثوانٍ — بأي لغة تفضّل.',
-      screenshotEN:'لقطة الشاشة الإنجليزية — ارفع صورة لاستبدالها',
-      screenshotAR:'لقطة الشاشة العربية — ارفع صورة لاستبدالها',
-      phoneLabelEN:'English',
-      phoneLabelAR:'العربية',
-      phoneCaptionEN:'Clean, fast, effortless delivery requests in English',
-      phoneCaptionAR:'واجهة عربية كاملة مع دعم الكتابة من اليمين لليسار',
+      appText:'واجهة نظيفة وسهلة مصممة للتجار المشغولين. سجّل طلب توصيل في ثوانٍ، بأي لغة تفضّل.',
+      doors:[
+        { who:'أنت', title:'تاجر', desc:'أرسل طلباتك إلى عملائك. سجّل مرة واحدة، ثم أرسل الطلبات من الكتالوج أو موقعك أو محادثاتك.' },
+        { who:'شركاء التوصيل', title:'سائق', desc:'سائقو شركاء التوصيل المتعاقدين مع إيزي يستخدمون نفس التطبيق لاستلام طلباتك وتوصيلها.' },
+        { who:'عميلك', title:'تتبع الطرد', desc:'يتابع عميلك الطلب عبر رابط التتبع الذي ترسله إيزي، بدون حساب.' },
+        { who:'عميلك', title:'دردش واطلب', desc:'يتواصل عملاؤك معك ويطلبون منك مباشرة عبر رابطك الخاص، ولا يرون إلا متجرك.' },
+      ],
       ctaTitle:'مستعد لتبسيط عمليات التوصيل؟',
-      ctaBody:'كن من أوائل التجار الذين يجرّبون إيزي. سجّل اهتمامك اليوم.',
-      ctaBtn:'سجّل اهتمامك',
-      ctaNote:'بدون أي التزام · سنبلّغك عندما تكون إيزي جاهزة',
+      ctaBody:'حمّل إيزي، سجّل متجرك، وأرسل أول طلب توصيل.',
       privacy:'/privacy-ar.html', privacyLabel:'سياسة الخصوصية',
-      terms:'/terms-ar.html',     termsLabel:'الشروط والأحكام',
+      terms:'/terms-ar.html', termsLabel:'الشروط والأحكام',
     }
   };
 
-  function renderList(elId, items, isSteps){
-    const el = document.getElementById(elId);
-    el.innerHTML = '';
-    items.forEach((item, i) => {
-      const div = document.createElement('div');
-      div.className = isSteps ? 'step' : 'card';
-      if(isSteps){
-        div.innerHTML = `<div class="step-num">${i+1}</div><div><div class="title">${item.title}</div><p class="desc">${item.desc}</p></div>`;
-      } else {
-        div.innerHTML = `<div class="card-icon">${item.icon}</div><h3>${item.title}</h3><p>${item.desc}</p>`;
-      }
-      el.appendChild(div);
+  const $ = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const icon = id => `<svg class="ic" aria-hidden="true"><use href="#${id}"/></svg>`;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const narrow = matchMedia('(max-width:760px)');
+  let L = t.en, lang = 'en';
+
+  /* ── Delivery board ── */
+  const LANE_ICONS = ['i-send','i-truck','i-box','i-check','i-wallet'];
+  const AMOUNTS = [185, 240, 96, 312, 150, 74, 205, 128];
+  let seq = 2041, orders = [];
+  const lanesEl = $('#lanes');
+
+  function makeOrder(stage){
+    const n = seq++;
+    return { ref:'EZ-' + n, area:(n * 3) % 8, amt:AMOUNTS[n % 8], cod:n % 3 !== 0, stage };
+  }
+  function orderHTML(o){
+    const pay = o.cod ? L.cod : L.online;
+    let state = o.stage === 0 ? (o.cod ? L.stateCod : L.statePaid) : L.states[o.stage];
+    if (o.stage === 4) state = `${L.states[4]}<span class="amt">+${o.amt} ${L.sar}</span>`;
+    return `<div class="ref">${o.ref}</div><div class="area">${esc(L.areas[o.area])} · <i>${esc(pay)}</i></div><div class="state"><span>${state}</span></div>`;
+  }
+  function buildLanes(){
+    lanesEl.innerHTML = L.lanes.map((name, i) =>
+      `<div class="lane"><div class="lane-h">${icon(LANE_ICONS[i])}<span>${esc(name)}</span></div><div class="lane-cards" data-lane="${i}"></div></div>`).join('');
+    orders.forEach(o => placeOrder(o));
+  }
+  function placeOrder(o){
+    if (!o.el){ o.el = document.createElement('div'); o.el.className = 'order'; }
+    o.el.classList.toggle('done', o.stage === 4);
+    o.el.innerHTML = orderHTML(o);
+    $(`[data-lane="${o.stage}"]`, lanesEl).appendChild(o.el);
+  }
+  function tick(){
+    const first = new Map(orders.map(o => [o, o.el.getBoundingClientRect()]));
+    const leaving = orders.find(o => o.stage === 4);
+    orders.forEach(o => { if (o !== leaving) o.stage++; });
+    if (leaving){
+      const el = leaving.el;
+      el.animate([{opacity:1, transform:'scale(1)'},{opacity:0, transform:'scale(.92)'}], {duration:380, easing:'ease-in'}).onfinish = () => el.remove();
+      orders = orders.filter(o => o !== leaving);
+    }
+    orders.forEach(o => {
+      placeOrder(o);
+      const a = first.get(o), b = o.el.getBoundingClientRect();
+      o.el.animate([{ transform:`translate(${a.left-b.left}px,${a.top-b.top}px)` },{ transform:'none' }], { duration:820, easing:'cubic-bezier(.16,1,.3,1)' });
     });
+    const fresh = makeOrder(0);
+    orders.unshift(fresh);
+    placeOrder(fresh);
+    fresh.el.animate([{opacity:0, transform:'translateY(-10px)'},{opacity:1, transform:'none'}], {duration:520, delay:250, easing:'cubic-bezier(.16,1,.3,1)', fill:'backwards'});
+  }
+  orders = [4,3,2,1,0].map(s => makeOrder(s));
+  let timer = null, boardVisible = true;
+  function runBoard(){
+    clearInterval(timer); timer = null;
+    if (!reduce.matches && boardVisible && !document.hidden) timer = setInterval(tick, 2400);
+  }
+  new IntersectionObserver(es => { boardVisible = es[0].isIntersecting; runBoard(); }, {threshold:.15}).observe(lanesEl);
+  document.addEventListener('visibilitychange', runBoard);
+  reduce.addEventListener?.('change', runBoard);
+
+  /* ── Tracking bar ── */
+  let curStep = 0;
+  function setStep(i){
+    curStep = i;
+    $$('#track li').forEach((li, k) => { li.classList.toggle('on', k <= i); li.classList.toggle('cur', k === i); });
+    $$('#track button').forEach((b, k) => b.setAttribute('aria-current', k === i ? 'step' : 'false'));
+    $('#fill').style.width = (i / 4 * 80) + '%';
+  }
+  function buildHow(){
+    const ol = $('#track ol');
+    $$('li', ol).forEach(li => li.remove());
+    L.steps.forEach((s, i) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<button type="button" aria-label="${esc(L.stepWord)} ${i+1}: ${esc(s.title)}"><span class="dot">${i+1}</span><span>${esc(s.short)}</span></button>`;
+      li.querySelector('button').addEventListener('click', () => $('#step' + i).scrollIntoView({behavior: reduce.matches ? 'auto' : 'smooth', block:'center'}));
+      ol.appendChild(li);
+    });
+    const arts = [
+      `<div class="chips">${L.a1.map((c, k) => `<span class="chip">${icon(['i-globe','i-chat','i-chat','i-store'][k])}${esc(c)}</span>`).join('')}</div>`,
+      `<ul class="lines">${L.a2.rows.map(r => `<li><span>${esc(r[0])}</span><b>${esc(r[1])}</b></li>`).join('')}</ul><div class="art-cap">${esc(L.a2.cap)}</div>`,
+      `<div class="art-cap" style="margin:0">${esc(L.a2.rows[1][1])} · ${esc(L.a2.rows[2][1])}</div><div class="submit">${esc(L.a3.btn)}</div><div class="art-cap">${esc(L.a3.cap)}</div>`,
+      `<div class="msgs">${L.a4.map((m, k) => `<div class="msg">${icon(['i-truck','i-link','i-pin'][k])}<span>${esc(m[0])}<small>${esc(m[1])}</small></span></div>`).join('')}</div>`,
+      `<div class="wallet"><small>${esc(L.a5.label)}</small><strong>${esc(L.a5.amount)}</strong><div class="row"><span class="pill">${esc(L.a5.btn)}</span></div></div><div class="art-cap">${esc(L.a5.cap)}</div>`,
+    ];
+    $('#steps').innerHTML = L.steps.map((s, i) =>
+      `<article class="step" id="step${i}" data-step="${i}"><div><span class="no">${esc(L.stepWord)} ${i+1}</span><h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p></div><div class="art" aria-hidden="true">${arts[i]}</div></article>`).join('');
+    $$('.step').forEach(el => stepIO.observe(el));
+    setStep(curStep);
+  }
+  const stepIO = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) setStep(+e.target.dataset.step); });
+  }, { rootMargin:'-45% 0px -45% 0px' });
+
+  /* ── Phone stage ── */
+  const SPOTS = [
+    { top:25.4, left:6.4, width:87.3, height:11.6 },
+    { top:37.2, left:6.4, width:87.3, height:11.6 },
+    { top:53.6, left:6.4, width:43.6, height:12.4 },
+    { top:53.6, left:50.4, width:43.3, height:12.4 },
+  ];
+  let curDoor = 0;
+  function setDoor(i){
+    curDoor = i;
+    const s = SPOTS[i], spot = $('#spot');
+    Object.assign(spot.style, { top:s.top+'%', left:s.left+'%', width:s.width+'%', height:s.height+'%' });
+    $$('.door').forEach((d, k) => { d.classList.toggle('cur', k === i); d.querySelector('button').setAttribute('aria-pressed', k === i); });
+  }
+  const doorIO = new IntersectionObserver(es => {
+    if (narrow.matches) return;
+    es.forEach(e => { if (e.isIntersecting) setDoor(+e.target.dataset.door); });
+  }, { rootMargin:'-45% 0px -45% 0px' });
+  function buildDoors(){
+    $('#doors').innerHTML = L.doors.map((d, i) =>
+      `<li class="door" data-door="${i}"><button type="button" aria-pressed="false"><span class="who">${esc(d.who)}</span><h3>${esc(d.title)}</h3><p>${esc(d.desc)}</p></button></li>`).join('');
+    $$('.door').forEach((d, i) => { doorIO.observe(d); d.querySelector('button').addEventListener('click', () => setDoor(i)); });
+    setDoor(curDoor);
   }
 
-  function setLang(lang){
-    const d = t[lang];
-    document.documentElement.lang = lang;
-    document.body.classList.toggle('rtl', d.dir === 'rtl');
-
-    document.getElementById('logoImg').src = d.logo;
-    document.getElementById('brandName').textContent    = d.brandName;
-    document.getElementById('brandTagline').textContent = d.brandTagline;
-
-    document.getElementById('navTop').textContent      = d.nav.top;
-    document.getElementById('navAbout').textContent    = d.nav.about;
-    document.getElementById('navHow').textContent      = d.nav.how;
-    document.getElementById('navFeatures').textContent = d.nav.features;
-    document.getElementById('navModels').textContent   = d.nav.models;
-
-    document.getElementById('pillText').textContent    = d.pill;
-    document.getElementById('heroTitle').innerHTML     = d.h1;
-    document.getElementById('heroSubtitle').textContent = d.subtitle;
-    document.getElementById('heroLead').textContent    = d.lead;
-    document.getElementById('ctaPrimary').textContent  = d.cta1;
-    document.getElementById('ctaSecondary').textContent = d.cta2;
-
-    document.getElementById('flowTitle').textContent = d.flowTitle;
-    document.getElementById('f1t').textContent = d.flow[0].t;
-    document.getElementById('f1s').textContent = d.flow[0].s;
-    document.getElementById('f2t').textContent = d.flow[1].t;
-    document.getElementById('f2s').textContent = d.flow[1].s;
-    document.getElementById('f3t').textContent = d.flow[2].t;
-    document.getElementById('f3s').textContent = d.flow[2].s;
-    document.getElementById('f4t').textContent = d.flow[3].t;
-    document.getElementById('f4s').textContent = d.flow[3].s;
-
-    document.getElementById('aboutKicker').textContent = d.aboutKicker;
-    document.getElementById('aboutTitle').textContent  = d.aboutTitle;
-    document.getElementById('aboutText').textContent   = d.aboutText;
-
-    document.getElementById('howKicker').textContent = d.howKicker;
-    document.getElementById('howTitle').textContent  = d.howTitle;
-    renderList('howSteps', d.steps, true);
-
-    document.getElementById('featKicker').textContent = d.featKicker;
-    document.getElementById('featTitle').textContent  = d.featTitle;
-    renderList('featureGrid', d.features, false);
-
-    document.getElementById('modelsKicker').textContent = d.modelsKicker;
-    document.getElementById('modelsTitle').textContent  = d.modelsTitle;
-    document.getElementById('modelsText').textContent   = d.modelsText;
-
-    document.getElementById('appKicker').textContent      = d.appKicker;
-    document.getElementById('appTitle').textContent       = d.appTitle;
-    document.getElementById('appText').textContent        = d.appText;
-    document.getElementById('phoneLabelEN').textContent   = d.phoneLabelEN;
-    document.getElementById('phoneLabelAR').textContent   = d.phoneLabelAR;
-    document.getElementById('phoneCaptionEN').textContent = d.phoneCaptionEN;
-    document.getElementById('phoneCaptionAR').textContent = d.phoneCaptionAR;
-
-    document.getElementById('ctaTitle').textContent = d.ctaTitle;
-    document.getElementById('ctaBody').textContent  = d.ctaBody;
-    document.getElementById('ctaBtn').textContent   = d.ctaBtn;
-    document.getElementById('ctaNote').textContent  = d.ctaNote;
-
-    document.getElementById('privacyLink').href        = d.privacy;
-    document.getElementById('privacyLink').textContent = d.privacyLabel;
-    document.getElementById('termsLink').href          = d.terms;
-    document.getElementById('termsLink').textContent   = d.termsLabel;
-
-    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
-    document.getElementById('btnAR').classList.toggle('active', lang === 'ar');
+  /* ── Static lists ── */
+  function storesHTML(){
+    return `<a class="store" href="${IOS}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-apple"/></svg><span><small>${esc(L.iosSmall)}</small><strong>${L.iosBig}</strong></span></a>`
+         + `<a class="store" href="${PLAY}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-play"/></svg><span><small>${esc(L.playSmall)}</small><strong>${L.playBig}</strong></span></a>`;
+  }
+  function buildStatic(){
+    $$('[data-stores]').forEach(el => el.innerHTML = storesHTML());
+    $('#chain').innerHTML = L.chain.map(c =>
+      `<li><div class="node${c.ezy ? ' ezy' : ''}">${c.ezy ? `<img src="${L.logo}" alt="" width="64" height="64"/>` : icon(c.icon)}</div><b>${esc(c.b)}</b><span>${esc(c.s)}</span></li>`).join('');
+    $('#groups').innerHTML = L.groups.map(g =>
+      `<div class="group"><h3>${esc(g.title)}</h3>${g.items.map(f => `<div class="feat">${icon(f.icon)}<div><b>${esc(f.title)}</b><p>${esc(f.desc)}</p></div></div>`).join('')}</div>`).join('');
+    $('#kinds').innerHTML = L.kinds.map(k => `<li>${icon(k[0])}${esc(k[1])}</li>`).join('');
   }
 
-  document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
-  document.getElementById('btnAR').addEventListener('click', () => setLang('ar'));
-  setLang('en');
+  function setLang(code){
+    lang = code; L = t[code];
+    document.documentElement.lang = code;
+    document.documentElement.dir = L.dir;
+    document.body.classList.toggle('rtl', L.dir === 'rtl');
+    $$('[data-t]').forEach(el => { const v = L[el.dataset.t]; if (v != null) el.textContent = v; });
+    $$('[data-th]').forEach(el => { el.innerHTML = L[el.dataset.th]; });
+    $('#logo').src = L.logo; $('#ctaLogo').src = L.logo;
+    const shot = $('#appShot'); shot.src = L.shot; shot.alt = L.shotAlt;
+    $('#privacyLink').href = L.privacy; $('#termsLink').href = L.terms;
+    $('#btnEN').setAttribute('aria-pressed', code === 'en');
+    $('#btnAR').setAttribute('aria-pressed', code === 'ar');
+    buildStatic(); buildLanes(); buildHow(); buildDoors();
+    try { localStorage.setItem('ezy-lang', code); } catch(e){}
+  }
+  $('#btnEN').addEventListener('click', () => setLang('en'));
+  $('#btnAR').addEventListener('click', () => setLang('ar'));
+  let saved = null;
+  try { saved = localStorage.getItem('ezy-lang'); } catch(e){}
+  const q = new URLSearchParams(location.search).get('lang');
+  setLang(q === 'ar' || q === 'en' ? q : (saved || ((navigator.language || '').startsWith('ar') ? 'ar' : 'en')));
+  $('#year').textContent = new Date().getFullYear();
 
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Nav shadow on scroll
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
-  });
+  const nav = $('#nav');
+  const onScroll = () => nav.classList.toggle('solid', scrollY > 30);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+})();
 </script>
 </body>
 </html>
