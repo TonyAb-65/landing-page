@@ -94,9 +94,10 @@
     .store strong{ font-size:18px; font-weight:700; letter-spacing:-.01em; font-family:var(--font); }
 
     /* ── HERO ── */
-    .hero{ position:relative; background:var(--field); padding:calc(var(--navH) + 36px) 0 72px; overflow:hidden; }
-    .hero::before{ content:""; position:absolute; inset:auto -10% -40% 30%; height:70%; background:radial-gradient(closest-side,rgba(255,255,255,.18),transparent); pointer-events:none; }
-    .hero-grid{ position:relative; display:grid; grid-template-columns:minmax(0,440px) minmax(0,1fr); gap:36px; align-items:center; }
+    .hero{ position:relative; background:var(--field); overflow-x:clip; }
+    .hero::before{ content:""; position:absolute; inset:auto -10% 0 30%; height:60%; background:radial-gradient(closest-side,rgba(255,255,255,.16),transparent); pointer-events:none; }
+    .hero-stick{ position:relative; padding:calc(var(--navH) + 28px) 0 56px; }
+    .hero-grid{ position:relative; display:grid; grid-template-columns:minmax(0,440px) minmax(0,1fr); gap:44px; align-items:center; }
     .sheet{ background:var(--white); border-radius:var(--sheet-r); box-shadow:0 30px 60px rgba(3,60,140,.22); }
     .hero-copy{ padding:44px 40px 40px; }
     .hero h1{ font-size:clamp(44px,5.2vw,74px); font-weight:800; }
@@ -109,6 +110,44 @@
     .more .ic{ width:18px; height:18px; transition:transform .25s var(--ease); }
     .more:hover .ic{ transform:translateY(3px); }
 
+    /* real order flow */
+    .flow{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:32px; align-items:center; color:var(--white); }
+    .fphone-col{ display:flex; flex-direction:column; align-items:center; gap:14px; }
+    .fphone{ width:min(300px, calc((100svh - var(--navH) - 110px) / 2.27)); min-width:230px; background:var(--ink); padding:10px; border-radius:48px; box-shadow:0 40px 80px rgba(3,40,100,.38); }
+    .fscreen{ position:relative; border-radius:38px; overflow:hidden; aspect-ratio:1290/2796; background:var(--sky); isolation:isolate; }
+    .fscreen .shot{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transform:translateY(3%) scale(.985); transition:opacity .55s var(--ease), transform .7s var(--ease); }
+    .fscreen .shot.on{ opacity:1; transform:none; }
+    .fscreen .shot.past{ transform:translateY(-3%) scale(.985); }
+    .fspot{ opacity:0; z-index:2; }
+    .fspot.on{ opacity:1; }
+    .notif{ position:absolute; z-index:3; top:2.4%; inset-inline:3%; display:flex; gap:9px; align-items:center; padding:10px 11px; border-radius:18px; background:rgba(235,246,255,.94); color:var(--ink); box-shadow:0 10px 26px rgba(3,40,100,.28); font-size:11.5px; line-height:1.3; transform:translateY(-130%); opacity:0; transition:transform .6s var(--ease), opacity .4s; }
+    .notif.on{ transform:none; opacity:1; transition-delay:.35s; }
+    .notif img{ width:34px; height:34px; border-radius:9px; flex:none; }
+    .notif b{ display:flex; justify-content:space-between; gap:8px; font-size:12.5px; margin-bottom:2px; }
+    .notif small{ font-weight:500; color:var(--ink2); }
+    .real{ margin:0; font-size:13px; font-weight:700; background:rgba(11,31,53,.24); padding:6px 12px; border-radius:999px; }
+    .fsteps{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; counter-reset:f; }
+    .fsteps li button{ all:unset; box-sizing:border-box; cursor:pointer; display:grid; grid-template-columns:34px 1fr; gap:4px 14px; width:100%; padding:16px 18px; border-radius:22px; background:rgba(11,31,53,.22); border:1px solid rgba(255,255,255,.18); transition:background .35s, color .35s, transform .35s var(--ease), box-shadow .35s; }
+    .fsteps li button:focus-visible{ outline:3px solid var(--white); outline-offset:3px; }
+    .fsteps .n{ grid-row:span 2; width:34px; height:34px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:14px; background:rgba(255,255,255,.2); font-variant-numeric:tabular-nums; }
+    .fsteps b{ font-size:17px; font-weight:800; line-height:1.3; }
+    .fsteps p{ margin:0; font-size:14.5px; line-height:1.5; max-height:0; overflow:hidden; opacity:0; transition:max-height .5s var(--ease), opacity .4s; }
+    .fsteps li.on button{ background:var(--white); color:var(--ink); transform:translateX(-6px); box-shadow:0 18px 40px rgba(3,40,100,.25); }
+    .rtl .fsteps li.on button{ transform:translateX(6px); }
+    .fsteps li.on .n{ background:var(--blue); color:var(--white); }
+    .fsteps li.on p{ max-height:7em; opacity:1; color:var(--ink2); }
+    .rtl .fsteps b{ line-height:1.45; }
+    .fcap{ display:none; }
+
+    /* desktop: the hero scrolls through the flow */
+    @media (min-width:1081px) and (min-height:640px){
+      .hero{ height:calc(100svh + 3 * 62svh); }
+      .hero-stick{ position:sticky; top:0; min-height:100svh; display:flex; align-items:center; }
+      .hero-stick > .wrap{ width:100%; }
+    }
+
+    /* live board band */
+    .band{ background:var(--ocean); padding:56px 0 64px; }
     /* board */
     .board{ position:relative; padding:18px; color:var(--white); background:rgba(11,31,53,.24); border-radius:30px; }
     .board-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:0 4px 14px; }
@@ -245,7 +284,8 @@
       .links{ display:none; }
       .lang{ margin-inline-start:auto; }
       .hero-grid{ grid-template-columns:1fr; }
-      .lane{ min-height:300px; }
+      .lane{ min-height:220px; }
+      .fphone{ width:min(280px,38vw); }
       .groups{ grid-template-columns:1fr 1fr; }
       .models-grid{ grid-template-columns:1fr; gap:32px; }
     }
@@ -255,7 +295,19 @@
       .wrap{ padding:0 16px; }
       .brand small{ display:none; }
       .get{ padding:10px 14px; font-size:14px; }
-      .hero{ padding:calc(var(--navH) + 18px) 0 48px; }
+      .hero-stick{ padding:calc(var(--navH) + 18px) 0 40px; }
+      .flow{ display:flex; flex-direction:column; gap:12px; }
+      .fsteps{ order:-2; display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+      .fsteps b,.fsteps p{ display:none; }
+      .fsteps li button{ display:flex; justify-content:center; padding:8px; }
+      .fsteps .n{ grid-row:auto; }
+      .fcap{ order:-1; display:block; margin:2px 0 4px; min-height:4.6em; font-size:15px; line-height:1.5; }
+      .fcap b{ display:block; font-size:18px; font-weight:800; }
+      .fphone{ width:min(240px,62vw); min-width:0; border-radius:40px; }
+      .fscreen{ border-radius:33px; }
+      .fsteps li button{ padding:12px 14px; border-radius:18px; }
+      .fsteps li.on button,.rtl .fsteps li.on button{ transform:none; }
+      .band{ padding:40px 0 48px; }
       .hero-copy{ padding:30px 22px 26px; }
       .store{ flex:1 1 200px; justify-content:center; }
       .lanes{ grid-template-columns:1fr; gap:8px; }
@@ -352,23 +404,51 @@
 
 <main id="top">
   <!-- HERO -->
-  <section class="hero" aria-labelledby="heroTitle">
-    <div class="wrap hero-grid">
-      <div class="sheet hero-copy">
-        <h1 id="heroTitle" data-th="h1">Delivery, <em>simplified.</em></h1>
-        <div class="tag"><i></i><span data-t="subtitle">Delivery requested. Execution handled.</span></div>
-        <p class="lede" data-t="lead">EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement automatically. You submit once. EZY does the rest.</p>
-        <div class="stores" data-stores></div>
-        <a class="more" href="#how"><span data-t="cta1">See how it works</span><svg class="ic"><use href="#i-down"/></svg></a>
-      </div>
+  <section class="hero" id="hero" aria-labelledby="heroTitle">
+    <div class="hero-stick">
+      <div class="wrap hero-grid">
+        <div class="sheet hero-copy">
+          <h1 id="heroTitle" data-th="h1">Delivery, <em>simplified.</em></h1>
+          <div class="tag"><i></i><span data-t="subtitle">Delivery requested. Execution handled.</span></div>
+          <p class="lede" data-t="lead"></p>
+          <div class="stores" data-stores></div>
+          <a class="more" href="#how"><span data-t="cta1">See how it works</span><svg class="ic"><use href="#i-down"/></svg></a>
+        </div>
 
-      <div class="board" aria-labelledby="boardTitle">
+        <div class="flow" aria-label="EZY app, one order from start to payout">
+          <div class="fphone-col">
+            <div class="fphone">
+              <div class="fscreen" id="fscreen">
+                <img class="shot" src="/assets/app/flow-1-create.webp" width="720" height="1561" alt="" decoding="async"/>
+                <img class="shot" src="/assets/app/flow-2-order.webp" width="720" height="1561" alt="" decoding="async" loading="lazy"/>
+                <img class="shot" src="/assets/app/flow-3-track.webp" width="720" height="1561" alt="" decoding="async" loading="lazy"/>
+                <img class="shot" src="/assets/app/flow-4-wallet.webp" width="720" height="1561" alt="" decoding="async" loading="lazy"/>
+                <div class="spot fspot" id="fspot"></div>
+                <div class="notif" id="notif" aria-hidden="true">
+                  <img src="/assets/brand/ezy-en-200.png" alt="" width="40" height="40"/>
+                  <div><b><span data-t="notifTitle">Driver Assigned</span><small data-t="notifTime">now</small></b><span data-t="notifBody"></span></div>
+                </div>
+              </div>
+            </div>
+            <p class="real" data-t="realNote">Real screens from the EZY app</p>
+          </div>
+          <ol class="fsteps" id="fsteps"></ol>
+          <p class="fcap" id="fcap" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE BOARD -->
+  <section class="band" aria-labelledby="boardTitle">
+    <div class="wrap">
+      <div class="board">
         <div class="board-head">
           <h2 id="boardTitle" data-t="boardTitle">Your deliveries, moving on their own</h2>
           <small data-t="boardTag">Example orders</small>
         </div>
         <div class="lanes" id="lanes" aria-hidden="true"></div>
-        <p class="board-note" data-t="boardNote">Each order moves from request to money in your wallet. You only submit the first step.</p>
+        <p class="board-note" data-t="boardNote"></p>
       </div>
     </div>
   </section>
@@ -472,6 +552,14 @@
       lead:'EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement automatically. You submit once. EZY does the rest.',
       cta1:'See how it works',
       iosSmall:'Download on the', iosBig:'App Store', playSmall:'Get it on', playBig:'Google Play',
+      realNote:'Real screens from the EZY app',
+      notifTitle:'Driver Assigned', notifTime:'now', notifBody:'Order #ORD-1793127663410-7852 has been assigned to your driver.',
+      flow:[
+        { title:'Add the order', desc:'Pick products from your catalogue. EZY fills in the weight and the total.' },
+        { title:'See every fee before you confirm', desc:'Subtotal, delivery fee and COD charges on one screen, with a barcode for the parcel.' },
+        { title:'A driver is assigned. Follow it live.', desc:'You get a notification the moment a driver takes the order, then watch it on the map.' },
+        { title:'Cash lands in your wallet', desc:'Collected COD is credited to your EZY wallet, with each fee shown line by line. Withdraw to your bank.' },
+      ],
       boardTitle:'Your deliveries, moving on their own', boardTag:'Example orders',
       boardNote:'Each order moves from request to money in your wallet. You only submit the first step.',
       lanes:['Requested','Driver assigned','Picked up','Delivered','Paid to wallet'],
@@ -545,6 +633,14 @@
       lead:'تُبسّط إيزي عملية التوصيل للشركات وتجعل إدارة الخدمات اللوجستية والمدفوعات سهلة بعد إتمام البيع. سواء كنت تبيع عبر قنواتك الخاصة أو عبر منصات إلكترونية، تتولى إيزي تنفيذ التوصيل لتتمكن من التركيز على المبيعات.',
       cta1:'شاهد كيف تعمل',
       iosSmall:'حمّله من', iosBig:'App Store', playSmall:'احصل عليه من', playBig:'Google Play',
+      realNote:'لقطات حقيقية من تطبيق إيزي',
+      notifTitle:'تم تعيين السائق', notifTime:'الآن', notifBody:'تم تعيين سائق للطلب #ORD-1793127663410-7852.',
+      flow:[
+        { title:'أضف الطلب', desc:'اختر المنتجات من الكتالوج، وإيزي تحسب الوزن والإجمالي.' },
+        { title:'شاهد كل الرسوم قبل التأكيد', desc:'المجموع ورسوم التوصيل ورسوم الدفع عند الاستلام في شاشة واحدة، مع باركود للطرد.' },
+        { title:'يتم تعيين سائق، وتابع الطلب مباشرة', desc:'يصلك إشعار لحظة تعيين السائق، ثم تتابع الطلب على الخريطة.' },
+        { title:'المبلغ يصل إلى محفظتك', desc:'يُضاف مبلغ الدفع عند الاستلام إلى محفظة إيزي مع توضيح كل رسوم، واسحبه إلى حسابك البنكي.' },
+      ],
       boardTitle:'توصيلاتك تتحرك تلقائياً', boardTag:'طلبات توضيحية',
       boardNote:'ينتقل كل طلب من الإرسال حتى وصول المبلغ إلى محفظتك. أنت ترسل الخطوة الأولى فقط.',
       lanes:['طلب جديد','تم تعيين السائق','تم الاستلام','تم التسليم','في المحفظة'],
@@ -733,6 +829,58 @@
     setDoor(curDoor);
   }
 
+  /* ── Real order flow (hero) ── */
+  const FSPOTS = [
+    { top:40.6, left:3.6, width:92.8, height:6.3 },
+    { top:54.4, left:2.4, width:95.2, height:20.0 },
+    null,
+    { top:58.6, left:2.4, width:95.2, height:28.0 },
+  ];
+  const hero = $('#hero'), shots = $$('#fscreen .shot');
+  const scrollDriven = matchMedia('(min-width:1081px) and (min-height:640px)');
+  let curFlow = -1, flowTimer = null, flowVisible = true, flowPausedUntil = 0;
+  function setFlow(i){
+    if (i === curFlow) return;
+    curFlow = i;
+    shots.forEach((im, k) => { im.classList.toggle('on', k === i); im.classList.toggle('past', k < i); });
+    const sp = $('#fspot'), s = FSPOTS[i];
+    sp.classList.toggle('on', !!s);
+    if (s) Object.assign(sp.style, { top:s.top+'%', left:s.left+'%', width:s.width+'%', height:s.height+'%' });
+    $('#notif').classList.toggle('on', i === 2);
+    $$('#fsteps li').forEach((li, k) => { li.classList.toggle('on', k === i); li.querySelector('button').setAttribute('aria-pressed', k === i); });
+    $('#fcap').innerHTML = `<b>${esc(L.flow[i].title)}</b>${esc(L.flow[i].desc)}`;
+  }
+  function buildFlow(){
+    $('#fsteps').innerHTML = L.flow.map((f, i) =>
+      `<li><button type="button" aria-pressed="false" aria-label="${i+1}. ${esc(f.title)}"><span class="n" aria-hidden="true">${i+1}</span><b>${esc(f.title)}</b><p>${esc(f.desc)}</p></button></li>`).join('');
+    $$('#fsteps button').forEach((b, i) => b.addEventListener('click', () => goFlow(i)));
+    const k = Math.max(curFlow, 0); curFlow = -1; setFlow(k);
+  }
+  function flowRange(){ return hero.offsetHeight - innerHeight; }
+  function goFlow(i){
+    if (scrollDriven.matches){
+      const y = hero.getBoundingClientRect().top + scrollY + flowRange() * (i / 4 + 0.06);
+      scrollTo({ top:y, behavior: reduce.matches ? 'auto' : 'smooth' });
+    } else {
+      flowPausedUntil = Date.now() + 12000; setFlow(i);
+    }
+  }
+  function onFlowScroll(){
+    if (!scrollDriven.matches) return;
+    const r = flowRange(); if (r <= 0) return;
+    const p = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / r));
+    setFlow(Math.min(3, Math.floor(p * 4)));
+  }
+  function runFlow(){
+    clearInterval(flowTimer); flowTimer = null;
+    if (scrollDriven.matches || reduce.matches || !flowVisible || document.hidden) return;
+    flowTimer = setInterval(() => { if (Date.now() > flowPausedUntil) setFlow((curFlow + 1) % 4); }, 3600);
+  }
+  addEventListener('scroll', onFlowScroll, {passive:true});
+  new IntersectionObserver(es => { flowVisible = es[0].isIntersecting; runFlow(); }, {threshold:.25}).observe($('#fscreen'));
+  scrollDriven.addEventListener?.('change', () => { runFlow(); onFlowScroll(); });
+  document.addEventListener('visibilitychange', runFlow);
+
   /* ── Static lists ── */
   function storesHTML(){
     return `<a class="store" href="${IOS}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-apple"/></svg><span><small>${esc(L.iosSmall)}</small><strong>${L.iosBig}</strong></span></a>`
@@ -759,7 +907,7 @@
     $('#privacyLink').href = L.privacy; $('#termsLink').href = L.terms;
     $('#btnEN').setAttribute('aria-pressed', code === 'en');
     $('#btnAR').setAttribute('aria-pressed', code === 'ar');
-    buildStatic(); buildLanes(); buildHow(); buildDoors();
+    buildStatic(); buildLanes(); buildHow(); buildDoors(); buildFlow(); onFlowScroll();
     try { localStorage.setItem('ezy-lang', code); } catch(e){}
   }
   $('#btnEN').addEventListener('click', () => setLang('en'));
