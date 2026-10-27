@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T17:09:10+00:00",
+  "title": "Design System: EZY",
+  "extensions": {
+    "colorMeta": {
+      "sky": {
+        "role": "primary",
+        "displayName": "EZY Sky",
+        "canonical": "oklch(74.0% 0.148 231)",
+        "tonalRamp": [
+          "oklch(15% 0.067 231)",
+          "oklch(25% 0.087 231)",
+          "oklch(35% 0.108 231)",
+          "oklch(45% 0.128 231)",
+          "oklch(58% 0.142 231)",
+          "oklch(72% 0.114 231)",
+          "oklch(85% 0.087 231)",
+          "oklch(95% 0.067 231)"
+        ]
+      },
+      "field-mid": {
+        "role": "primary",
+        "displayName": "Field Midpoint",
+        "canonical": "oklch(64.8% 0.168 247)",
+        "tonalRamp": [
+          "oklch(15% 0.076 247)",
+          "oklch(25% 0.099 247)",
+          "oklch(35% 0.122 247)",
+          "oklch(45% 0.145 247)",
+          "oklch(58% 0.161 247)",
+          "oklch(72% 0.129 247)",
+          "oklch(85% 0.099 247)",
+          "oklch(95% 0.076 247)"
+        ]
+      },
+      "ocean": {
+        "role": "primary",
+        "displayName": "EZY Ocean",
+        "canonical": "oklch(56.5% 0.200 257)",
+        "tonalRamp": [
+          "oklch(15% 0.091 257)",
+          "oklch(25% 0.118 257)",
+          "oklch(35% 0.145 257)",
+          "oklch(45% 0.173 257)",
+          "oklch(58% 0.192 257)",
+          "oklch(72% 0.154 257)",
+          "oklch(85% 0.118 257)",
+          "oklch(95% 0.091 257)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(23.6% 0.050 253)",
+        "tonalRamp": [
+          "oklch(15% 0.023 253)",
+          "oklch(25% 0.030 253)",
+          "oklch(35% 0.036 253)",
+          "oklch(45% 0.043 253)",
+          "oklch(58% 0.048 253)",
+          "oklch(72% 0.038 253)",
+          "oklch(85% 0.030 253)",
+          "oklch(95% 0.023 253)"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "oklch(43.3% 0.052 249)",
+        "tonalRamp": [
+          "oklch(15% 0.024 249)",
+          "oklch(25% 0.031 249)",
+          "oklch(35% 0.038 249)",
+          "oklch(45% 0.045 249)",
+          "oklch(58% 0.050 249)",
+          "oklch(72% 0.040 249)",
+          "oklch(85% 0.031 249)",
+          "oklch(95% 0.024 249)"
+        ]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "Mist",
+        "canonical": "oklch(97.3% 0.010 248)",
+        "tonalRamp": [
+          "oklch(15% 0.014 248)",
+          "oklch(25% 0.018 248)",
+          "oklch(35% 0.022 248)",
+          "oklch(45% 0.026 248)",
+          "oklch(58% 0.029 248)",
+          "oklch(72% 0.023 248)",
+          "oklch(85% 0.018 248)",
+          "oklch(95% 0.014 248)"
+        ]
+      },
+      "mist-deep": {
+        "role": "neutral",
+        "displayName": "Mist Deep",
+        "canonical": "oklch(94.7% 0.021 248)",
+        "tonalRamp": [
+          "oklch(15% 0.014 248)",
+          "oklch(25% 0.018 248)",
+          "oklch(35% 0.022 248)",
+          "oklch(45% 0.026 248)",
+          "oklch(58% 0.029 248)",
+          "oklch(72% 0.023 248)",
+          "oklch(85% 0.018 248)",
+          "oklch(95% 0.014 248)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#FFFFFF"
+      },
+      "settled-green": {
+        "role": "tertiary",
+        "displayName": "Settled Green",
+        "canonical": "oklch(62.2% 0.133 162)",
+        "tonalRamp": [
+          "oklch(15% 0.060 162)",
+          "oklch(25% 0.079 162)",
+          "oklch(35% 0.097 162)",
+          "oklch(45% 0.115 162)",
+          "oklch(58% 0.128 162)",
+          "oklch(72% 0.102 162)",
+          "oklch(85% 0.079 162)",
+          "oklch(95% 0.060 162)"
+        ]
+      },
+      "hairline-blue": {
+        "role": "neutral",
+        "displayName": "Hairline Blue",
+        "canonical": "rgba(4,112,232,.14)"
+      },
+      "hairline-ink": {
+        "role": "neutral",
+        "displayName": "Hairline Ink",
+        "canonical": "rgba(11,31,53,.08)"
+      },
+      "ink-tint": {
+        "role": "neutral",
+        "displayName": "Ink Tint",
+        "canonical": "rgba(11,31,53,.24)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero H1 only; one word may take ocean as emphasis."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Step headings in How it works."
+      },
+      "title-sm": {
+        "displayName": "Small Title",
+        "purpose": "Feature group heads over a 2px ink rule."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Section intros in ink soft, max 62ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text; 16px under 760px."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Lane headers, order cards, tracking labels, captions."
+      },
+      "arabic": {
+        "displayName": "Arabic",
+        "purpose": "Tajawal under RTL; headings at letter-spacing 0 and line height 1.25."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet-float",
+        "value": "0 30px 60px rgba(3,60,140,.22)",
+        "purpose": "White sheets on the gradient field."
+      },
+      {
+        "name": "device-float",
+        "value": "0 40px 80px rgba(3,40,100,.35)",
+        "purpose": "Phone frame."
+      },
+      {
+        "name": "active-card",
+        "value": "0 24px 50px rgba(3,40,100,.25)",
+        "purpose": "Selected door card on ocean."
+      },
+      {
+        "name": "order-card",
+        "value": "0 8px 20px rgba(3,60,140,.2)",
+        "purpose": "Order cards in board lanes."
+      },
+      {
+        "name": "store-button",
+        "value": "0 10px 24px rgba(11,31,53,.22)",
+        "purpose": "Store buttons at rest."
+      },
+      {
+        "name": "store-button-hover",
+        "value": "0 14px 30px rgba(11,31,53,.28)",
+        "purpose": "Store buttons on hover."
+      },
+      {
+        "name": "panel-soft",
+        "value": "0 18px 40px rgba(11,31,53,.08)",
+        "purpose": "Demo panels on mist."
+      },
+      {
+        "name": "tracking-bar",
+        "value": "0 12px 30px rgba(11,31,53,.08)",
+        "purpose": "Sticky tracking bar."
+      },
+      {
+        "name": "nav-solid",
+        "value": "0 6px 24px rgba(11,31,53,.08)",
+        "purpose": "Nav after scroll."
+      },
+      {
+        "name": "spotlight-dim",
+        "value": "0 0 0 9999px rgba(11,31,53,.22)",
+        "purpose": "Dims the phone screen around the spotlight."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Default ease-out for lifts, slides, fills and spotlight moves."
+      },
+      {
+        "name": "board-tick",
+        "value": "2400ms",
+        "purpose": "Interval between delivery board steps."
+      },
+      {
+        "name": "board-slide",
+        "value": "820ms",
+        "purpose": "FLIP slide of an order card to its next lane."
+      },
+      {
+        "name": "board-exit",
+        "value": "380ms ease-in",
+        "purpose": "Fade and scale to .92 for a card leaving the last lane."
+      },
+      {
+        "name": "board-enter",
+        "value": "520ms, 250ms delay",
+        "purpose": "New order drops in 10px and fades up."
+      },
+      {
+        "name": "tracking-fill",
+        "value": "600ms",
+        "purpose": "Tracking rail fill width."
+      },
+      {
+        "name": "spotlight-move",
+        "value": "550ms",
+        "purpose": "Spotlight position and size on the phone screen."
+      },
+      {
+        "name": "hover-lift",
+        "value": "200-250ms",
+        "purpose": "1-2px translateY on buttons."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0.01ms",
+        "purpose": "All transitions and animations collapse; the board stops."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "1080px"
+      },
+      {
+        "name": "mobile",
+        "value": "760px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Store Button",
+      "kind": "button",
+      "refersTo": "button-store",
+      "description": "Paired App Store / Google Play buttons; the page's only primary call to action.",
+      "html": "<div class=\"ds-stores\"><a class=\"ds-store\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.5 1.3 0 1.7-.8 3.3-.8 1.5 0 1.9.8 3.3.8 1.4 0 2.2-1.2 3-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.4-1-2.4-4zM13.9 5c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.1 1.1.1 2.3-.6 3.1-1.5z\"/></svg><span><small>Download on the</small><strong>App Store</strong></span></a><a class=\"ds-store\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" aria-hidden=\"true\"><path fill=\"#00D7FE\" d=\"M4.2 2.4c-.3.3-.4.7-.4 1.3v16.6c0 .6.1 1 .4 1.3l9.3-9.6z\"/><path fill=\"#FFCE00\" d=\"M16.6 15.2 13.5 12l3.1-3.2 3.7 2.1c1.1.6 1.1 1.6 0 2.2z\"/><path fill=\"#FF3A44\" d=\"M16.6 15.2 13.5 12l-9.3 9.6c.4.4.9.4 1.6.1z\"/><path fill=\"#00F076\" d=\"M16.6 8.8 5.8 2.3c-.7-.4-1.2-.3-1.6.1l9.3 9.6z\"/></svg><span><small>Get it on</small><strong>Google Play</strong></span></a></div>",
+      "css": ":host{--sky:#08BAF6;--ocean:#0470E8;--field:linear-gradient(168deg,#08BAF6 0%,#0594EE 48%,#0470E8 100%);--ink:#0B1F35;--ink2:#3A536C;--mist:#F1F7FD;--mist2:#E3EFFB;--line:rgba(4,112,232,.14);--line2:rgba(11,31,53,.08);--ease:cubic-bezier(.16,1,.3,1);font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--ink);} .ds-stores{display:flex;flex-wrap:wrap;gap:12px;} .ds-store{display:inline-flex;align-items:center;gap:11px;min-height:58px;padding:9px 20px 9px 16px;background:var(--ink);color:#fff;border-radius:16px;text-decoration:none;box-shadow:0 10px 24px rgba(11,31,53,.22);transition:transform .25s var(--ease),box-shadow .25s;} .ds-store:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(11,31,53,.28);} .ds-store:focus-visible{outline:3px solid var(--ink);outline-offset:3px;} .ds-store span{display:flex;flex-direction:column;line-height:1.15;} .ds-store small{font-size:12px;opacity:.8;font-weight:500;} .ds-store strong{font-size:18px;font-weight:700;letter-spacing:-.01em;}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-get",
+      "description": "Transparent nav over the field with links, language pill toggle and Get the app pill.",
+      "html": "<div class=\"ds-navfield\"><nav class=\"ds-nav\"><span class=\"ds-brand\">ezy</span><span class=\"ds-links\"><a href=\"#\">How it works</a><a href=\"#\">The app</a></span><span class=\"ds-lang\"><button aria-pressed=\"true\">EN</button><button aria-pressed=\"false\" lang=\"ar\">عربي</button></span><a class=\"ds-get\" href=\"#\">Get the app</a></nav></div>",
+      "css": ":host{--sky:#08BAF6;--ocean:#0470E8;--field:linear-gradient(168deg,#08BAF6 0%,#0594EE 48%,#0470E8 100%);--ink:#0B1F35;--ink2:#3A536C;--mist:#F1F7FD;--mist2:#E3EFFB;--line:rgba(4,112,232,.14);--line2:rgba(11,31,53,.08);--ease:cubic-bezier(.16,1,.3,1);font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--ink);} .ds-navfield{background:var(--field);padding:14px 20px;border-radius:16px;} .ds-nav{display:flex;align-items:center;gap:16px;color:#fff;} .ds-brand{font-size:20px;font-weight:800;letter-spacing:-.02em;} .ds-links{display:flex;gap:4px;margin-inline-start:auto;} .ds-links a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:8px 12px;border-radius:10px;transition:background .2s;} .ds-links a:hover{background:rgba(255,255,255,.18);} .ds-links a:focus-visible,.ds-get:focus-visible,.ds-lang button:focus-visible{outline:3px solid var(--ink);outline-offset:3px;} .ds-lang{display:flex;background:rgba(255,255,255,.2);border-radius:999px;padding:3px;} .ds-lang button{border:0;background:transparent;font:700 13px/1 inherit;color:#fff;padding:9px 12px;border-radius:999px;cursor:pointer;min-width:44px;} .ds-lang button[lang=ar]{font-family:Tajawal,sans-serif;font-size:15px;padding:7px 12px;} .ds-lang button[aria-pressed=true]{background:#fff;color:var(--ocean);box-shadow:0 2px 8px rgba(11,31,53,.12);} .ds-get{text-decoration:none;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;background:#fff;color:var(--ocean);box-shadow:0 4px 14px rgba(11,31,53,.14);transition:transform .2s var(--ease);} .ds-get:hover{transform:translateY(-1px);}"
+    },
+    {
+      "name": "Sheet",
+      "kind": "card",
+      "refersTo": "sheet",
+      "description": "White reading sheet floating on the gradient field.",
+      "html": "<div class=\"ds-field\"><div class=\"ds-sheet\"><h1>Delivery, <em>simplified.</em></h1><p>EZY connects merchants to delivery vendors and handles payment links, tracking and settlement.</p><a class=\"ds-more\" href=\"#\">See how it works &darr;</a></div></div>",
+      "css": ":host{--sky:#08BAF6;--ocean:#0470E8;--field:linear-gradient(168deg,#08BAF6 0%,#0594EE 48%,#0470E8 100%);--ink:#0B1F35;--ink2:#3A536C;--mist:#F1F7FD;--mist2:#E3EFFB;--line:rgba(4,112,232,.14);--line2:rgba(11,31,53,.08);--ease:cubic-bezier(.16,1,.3,1);font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--ink);} .ds-field{background:var(--field);padding:32px;border-radius:20px;} .ds-sheet{background:#fff;border-radius:36px;box-shadow:0 30px 60px rgba(3,60,140,.22);padding:44px 40px 40px;max-width:440px;} .ds-sheet h1{margin:0;font-size:52px;font-weight:800;line-height:1.08;letter-spacing:-.025em;} .ds-sheet em{font-style:normal;color:var(--ocean);} .ds-sheet p{color:var(--ink2);font-size:17px;line-height:1.6;margin:14px 0 0;} .ds-more{display:inline-block;margin-top:18px;font-weight:700;color:var(--ocean);text-decoration:none;transition:transform .25s var(--ease);} .ds-more:hover{transform:translateY(2px);} .ds-more:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:12px;}"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Mist chips naming sales channels, with ocean line icons.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-chip\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20.5 12a8 8 0 0 1-11.9 7L3.5 20.5 5 15.6A8 8 0 1 1 20.5 12z\"/></svg>WhatsApp</span><span class=\"ds-chip\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20.5 12a8 8 0 0 1-11.9 7L3.5 20.5 5 15.6A8 8 0 1 1 20.5 12z\"/></svg>Instagram</span><span class=\"ds-kind\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z\"/><circle cx=\"6.5\" cy=\"17.5\" r=\"1.8\"/><circle cx=\"17\" cy=\"17.5\" r=\"1.8\"/></svg>High volume</span></div>",
+      "css": ":host{--sky:#08BAF6;--ocean:#0470E8;--field:linear-gradient(168deg,#08BAF6 0%,#0594EE 48%,#0470E8 100%);--ink:#0B1F35;--ink2:#3A536C;--mist:#F1F7FD;--mist2:#E3EFFB;--line:rgba(4,112,232,.14);--line2:rgba(11,31,53,.08);--ease:cubic-bezier(.16,1,.3,1);font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--ink);} .ds-ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none;color:var(--ocean);} .ds-chips{display:flex;flex-wrap:wrap;gap:10px;align-items:center;} .ds-chip{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border-radius:14px;background:var(--mist);font-weight:700;font-size:15px;} .ds-kind{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:14px 22px;font-size:20px;font-weight:800;letter-spacing:-.01em;}"
+    },
+    {
+      "name": "Delivery Board",
+      "kind": "custom",
+      "refersTo": "board",
+      "description": "Signature hero board: translucent ink panel, five lanes, white order cards that step lane to lane. Always labelled as example orders.",
+      "html": "<div class=\"ds-field\"><div class=\"ds-board\"><div class=\"ds-bh\"><b>Your deliveries, moving on their own</b><small>Example orders</small></div><div class=\"ds-lanes\"><div class=\"ds-lane\"><div class=\"ds-lh\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20.5 3.5 10 14M20.5 3.5 14 20.5l-4-6.5-6.5-4z\"/></svg>Requested</div><div class=\"ds-order\"><div class=\"ds-ref\">EZ-2045</div><div class=\"ds-area\">Al Rawdah</div><div class=\"ds-state\">Cash on delivery</div></div></div><div class=\"ds-lane\"><div class=\"ds-lh\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z\"/><circle cx=\"6.5\" cy=\"17.5\" r=\"1.8\"/><circle cx=\"17\" cy=\"17.5\" r=\"1.8\"/></svg>Driver assigned</div><div class=\"ds-order\"><div class=\"ds-ref\">EZ-2044</div><div class=\"ds-area\">Obhur</div><div class=\"ds-state\">Driver on the way</div></div></div><div class=\"ds-lane\"><div class=\"ds-lh\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 7.5h15a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 19 19.5H5A1.5 1.5 0 0 1 3.5 18V6.5A2 2 0 0 1 5.5 4.5H17\"/><path d=\"M16 13.5h1.5\"/></svg>Paid to wallet</div><div class=\"ds-order ds-done\"><div class=\"ds-ref\">EZ-2041</div><div class=\"ds-area\">Al Zahra</div><div class=\"ds-state\">Credited <b>+240 SAR</b></div></div></div></div></div></div>",
+      "css": ":host{--sky:#08BAF6;--ocean:#0470E8;--field:linear-gradient(168deg,#08BAF6 0%,#0594EE 48%,#0470E8 100%);--ink:#0B1F35;--ink2:#3A536C;--mist:#F1F7FD;--mist2:#E3EFFB;--line:rgba(4,112,232,.14);--line2:rgba(11,31,53,.08);--ease:cubic-bezier(.16,1,.3,1);font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--ink);} .ds-ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none;color:var(--ocean);} .ds-field{background:var(--field);padding:24px;border-radius:20px;} .ds-board{padding:18px;color:#fff;background:rgba(11,31,53,.24);border-radius:30px;} .ds-bh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:0 4px 14px;} .ds-bh b{font-size:22px;font-weight:800;} .ds-bh small{font-size:13px;font-weight:700;background:#fff;color:var(--ocean);padding:5px 11px;border-radius:999px;white-space:nowrap;} .ds-lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;} .ds-lane{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:22px;padding:10px;display:flex;flex-direction:column;gap:10px;min-height:180px;} .ds-lh{display:flex;align-items:center;gap:6px;background:#fff;color:var(--ink);border-radius:12px;padding:8px 7px;font-size:12.5px;font-weight:700;line-height:1.2;} .ds-lh .ds-ic{width:16px;height:16px;} .ds-order{background:#fff;color:var(--ink);border-radius:14px;padding:11px 11px 12px;box-shadow:0 8px 20px rgba(3,60,140,.2);font-size:12.5px;line-height:1.35;transition:transform .82s var(--ease);} .ds-order:hover{transform:translateY(-2px);} .ds-ref{font-weight:800;font-size:13.5px;font-variant-numeric:tabular-nums;} .ds-area{color:var(--ink2);margin-top:4px;} .ds-state{margin-top:9px;font-weight:700;color:var(--ocean);} .ds-done .ds-state{color:#0E9F6E;} .ds-state b{display:block;color:var(--ink);font-size:15px;font-weight:800;}"
+    },
+    {
+      "name": "Tracking Bar",
+      "kind": "custom",
+      "refersTo": "tracking-bar",
+      "description": "Signature sticky five-step progress bar with sky-to-ocean fill; each dot is a button.",
+      "html": "<div class=\"ds-mist\"><div class=\"ds-track\"><div class=\"ds-rail\"><span class=\"ds-fill\"></span></div><ol><li class=\"on\"><button><span class=\"ds-dot\">1</span>Sale</button></li><li class=\"on\"><button><span class=\"ds-dot\">2</span>Request</button></li><li class=\"on cur\"><button><span class=\"ds-dot\">3</span>Submit</button></li><li><button><span class=\"ds-dot\">4</span>EZY runs it</button></li><li><button><span class=\"ds-dot\">5</span>Settlement</button></li></ol></div></div>",
+      "css": ":host{--sky:#08BAF6;--ocean:#0470E8;--field:linear-gradient(168deg,#08BAF6 0%,#0594EE 48%,#0470E8 100%);--ink:#0B1F35;--ink2:#3A536C;--mist:#F1F7FD;--mist2:#E3EFFB;--line:rgba(4,112,232,.14);--line2:rgba(11,31,53,.08);--ease:cubic-bezier(.16,1,.3,1);font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--ink);} .ds-mist{background:var(--mist);padding:24px;border-radius:20px;} .ds-track{position:relative;background:#fff;border-radius:22px;box-shadow:0 12px 30px rgba(11,31,53,.08);padding:16px 22px;} .ds-rail{position:absolute;top:31px;inset-inline:calc(22px + 10%);height:4px;border-radius:4px;background:var(--mist2);} .ds-fill{position:absolute;inset-block:0;inset-inline-start:0;width:50%;border-radius:4px;background:linear-gradient(90deg,var(--sky),var(--ocean));transition:width .6s var(--ease);} .ds-track ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);position:relative;} .ds-track button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;text-align:center;font-size:13.5px;font-weight:700;color:var(--ink2);} .ds-track button:hover .ds-dot{border-color:var(--ocean);} .ds-track button:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:10px;} .ds-dot{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--mist2);font-size:14px;font-weight:800;color:var(--ink2);transition:background .4s,border-color .4s,color .4s,transform .4s var(--ease);font-variant-numeric:tabular-nums;} .ds-track li.on .ds-dot{background:var(--ocean);border-color:var(--ocean);color:#fff;} .ds-track li.cur .ds-dot{transform:scale(1.18);} .ds-track li.on button{color:var(--ink);}"
+    },
+    {
+      "name": "Phone Stage Door",
+      "kind": "custom",
+      "refersTo": "door",
+      "description": "Signature phone stage: ink phone with a moving spotlight on the real app screen, beside door cards; the current door turns white.",
+      "html": "<div class=\"ds-ocean\"><div class=\"ds-phone\"><div class=\"ds-screen\"><span class=\"ds-spot\"></span></div></div><div class=\"ds-doors\"><button class=\"ds-door ds-cur\"><b>Merchant <span>· You</span></b><p>Send deliveries to your customers.</p></button><button class=\"ds-door\"><b>Driver <span>· Delivery partners</span></b><p>Drivers use the same app to pick up and deliver.</p></button></div></div>",
+      "css": ":host{--sky:#08BAF6;--ocean:#0470E8;--field:linear-gradient(168deg,#08BAF6 0%,#0594EE 48%,#0470E8 100%);--ink:#0B1F35;--ink2:#3A536C;--mist:#F1F7FD;--mist2:#E3EFFB;--line:rgba(4,112,232,.14);--line2:rgba(11,31,53,.08);--ease:cubic-bezier(.16,1,.3,1);font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--ink);} .ds-ocean{background:var(--ocean);color:#fff;padding:28px;border-radius:20px;display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;} .ds-phone{background:var(--ink);padding:6px;border-radius:28px;box-shadow:0 40px 80px rgba(3,40,100,.35);} .ds-screen{position:relative;aspect-ratio:1290/2796;border-radius:22px;overflow:hidden;background:var(--sky);} .ds-spot{position:absolute;top:25%;left:6%;width:88%;height:12%;border-radius:10px;border:3px solid var(--ink);box-shadow:0 0 0 9999px rgba(11,31,53,.22);transition:top .55s var(--ease);} .ds-doors{display:flex;flex-direction:column;gap:14px;} .ds-door{all:unset;cursor:pointer;display:block;background:rgba(11,31,53,.22);border:1px solid rgba(255,255,255,.22);border-radius:28px;padding:24px;transition:background .35s,color .35s,transform .35s var(--ease);} .ds-door:hover{background:rgba(11,31,53,.32);} .ds-door:focus-visible{outline:3px solid #fff;outline-offset:3px;} .ds-door b{font-size:26px;font-weight:800;letter-spacing:-.025em;} .ds-door b span{font-size:.62em;font-weight:600;opacity:.85;letter-spacing:0;} .ds-door p{margin:10px 0 0;font-size:17px;line-height:1.55;} .ds-door.ds-cur{background:#fff;color:var(--ink);transform:scale(1.02);box-shadow:0 24px 50px rgba(3,40,100,.25);} .ds-door.ds-cur b span{color:var(--ocean);opacity:1;} .ds-door.ds-cur p{color:var(--ink2);}"
+    },
+    {
+      "name": "Wallet Card",
+      "kind": "card",
+      "refersTo": "art-panel",
+      "description": "Demo panel holding the gradient wallet card; data is labelled as an example.",
+      "html": "<div class=\"ds-art\"><div class=\"ds-wallet\"><small>EZY wallet</small><strong>SAR 1,240</strong><span class=\"ds-pill\">Withdraw to bank</span></div><div class=\"ds-cap\">Example balance</div></div>",
+      "css": ":host{--sky:#08BAF6;--ocean:#0470E8;--field:linear-gradient(168deg,#08BAF6 0%,#0594EE 48%,#0470E8 100%);--ink:#0B1F35;--ink2:#3A536C;--mist:#F1F7FD;--mist2:#E3EFFB;--line:rgba(4,112,232,.14);--line2:rgba(11,31,53,.08);--ease:cubic-bezier(.16,1,.3,1);font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--ink);} .ds-art{background:#fff;border-radius:28px;padding:26px;box-shadow:0 18px 40px rgba(11,31,53,.08);border:1px solid var(--line2);max-width:420px;} .ds-wallet{background:var(--field);color:#fff;border-radius:22px;padding:22px;} .ds-wallet small{font-weight:600;opacity:.9;} .ds-wallet strong{display:block;font-size:36px;font-weight:800;letter-spacing:-.02em;margin:2px 0 16px;font-variant-numeric:tabular-nums;} .ds-pill{display:inline-block;background:#fff;color:var(--ocean);font-weight:800;font-size:14px;padding:10px 16px;border-radius:999px;transition:transform .2s var(--ease);} .ds-pill:hover{transform:translateY(-1px);} .ds-cap{font-size:12.5px;color:var(--ink2);margin-top:14px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "White Sheets on EZY Sky",
+    "overview": "The page speaks the EZY app's own grammar. A full-bleed field runs from light cyan to bright blue, the same gradient as the app icon, and everything a merchant has to read sits on large white sheets laid over it. Depth comes from those sheets floating on soft, blue-tinted shadows, never from borders or boxes drawn on the field. The result is bright, open and calm: one dominant brand colour, ink text, a lot of white.\n\nThe system is built to show one order moving from sale to money in the wallet. Its signature pieces are working models of that journey: a live delivery board where example orders slide lane to lane, a sticky tracking bar that fills as the reader scrolls through five steps, and a phone stage that spotlights each entry on the real app welcome screen. These are product demonstrations, so every one of them is labelled as an example.\n\nArabic and English are equal. Every component mirrors under RTL through logical properties, Arabic text switches to Tajawal with relaxed line height, and the brand mark, screenshots and legal links swap per language. The owner rejected a darker blue as \"not ezy color\", so the brand field never drops below the ocean end of the gradient.",
+    "keyCharacteristics": [
+      "Light cyan to blue gradient field as the only brand ground",
+      "Large white sheets with generous radii (28 to 36px) carrying all reading content",
+      "Ink (not black) for text and for the store buttons",
+      "Drawn single-stroke icons at 1.75px stroke, coloured ocean blue",
+      "Product demonstrations as signature components, each labelled as an example",
+      "Full RTL parity"
+    ],
+    "rules": [
+      {
+        "name": "The EZY Colour Rule",
+        "body": "The brand field is the gradient from #08BAF6 to #0470E8 at 168deg (270deg or 90deg when used as a horizontal stroke, mirrored for RTL). Nothing darker than ocean is used as a brand ground.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sheet or Tint Rule",
+        "body": "Text never sits bare on the gradient. It sits on a white sheet in ink, or in white on an ink tint dark enough to reach 4.5:1 against the lightest part of the field behind it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Arabic Line Rule",
+        "body": "Under RTL, headings drop negative letter spacing to 0 and open line height to 1.25. Tajawal replaces Plus Jakarta Sans everywhere except the store button labels, which stay Latin.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Numbers Rule",
+        "body": "Order references, amounts, wallet balances and step numbers use tabular figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The Blue Shadow Rule",
+        "body": "Shadows over the field or ocean are tinted blue (rgb 3,40-60,100-140). Shadows inside white or mist sections are ink at 8%.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use the gradient from #08BAF6 to #0470E8 for every brand field, and flip its direction for RTL when it runs horizontally.",
+      "Do put reading content on white sheets with 28 to 36px radii, or on an ink tint that holds 4.5:1 for white text when it stays on the field.",
+      "Do label every illustrative order, balance or form as an example (\"Example orders\", \"Example order\", \"Example balance\").",
+      "Do build with logical properties (inset-inline, margin-inline-start, padding-inline) so components mirror under RTL without extra rules.",
+      "Do switch Arabic headings to Tajawal with letter-spacing 0 and line height 1.25.",
+      "Do use the 1.75px single-stroke icon sprite for every icon.",
+      "Do stop the board and collapse transitions to .01ms under prefers-reduced-motion.",
+      "Do keep store buttons ink-dark, paired, and at least 58px tall."
+    ],
+    "donts": [
+      "Don't use a blue darker than #0470E8 as a brand ground; the owner rejected it as \"not ezy color\".",
+      "Don't replace Plus Jakarta Sans or Tajawal.",
+      "Don't set text directly on the gradient without a sheet or tint.",
+      "Don't use emoji or icon fonts.",
+      "Don't use flat grey or hard offset shadows; shadows are soft and tinted.",
+      "Don't use settled green for anything other than a completed order."
+    ]
+  }
+}
