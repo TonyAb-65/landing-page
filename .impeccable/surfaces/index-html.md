@@ -15,7 +15,7 @@ Roll ran degraded (no challengers). User chose all three dealt structures; combi
 
 THESIS: One order, handled end to end, is the page. Refuses the split hero with a flow card and a 3x3 grid of emoji icon cards.
 
-OWN-WORLD: The app's own grammar: full-bleed sky-to-ocean EZY gradient grounds (#0BB7F2 to #0A6FE6) carrying large white sheets with 28-40px radii; ink #0B1F35 text on white; white order cards on translucent white lanes; drawn single-stroke icons; Plus Jakarta Sans / Tajawal (brand faces).
+OWN-WORLD: The app's own grammar: full-bleed sky-to-ocean EZY gradient grounds (#08BAF6 to #0470E8) carrying large white sheets with 28-40px radii; ink #0B1F35 text on white; white order cards on translucent white lanes; drawn single-stroke icons; Plus Jakarta Sans / Tajawal (brand faces).
 
 STORY: The merchant sees orders moving by themselves from Requested to Paid to wallet, understands EZY runs delivery, payment and settlement, follows one order through five steps, sees the real app and that his customers stay his, and downloads the app.
 
