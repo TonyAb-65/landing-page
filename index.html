@@ -133,7 +133,7 @@
 
     /* desktop: the hero scrolls through the flow */
     @media (min-width:1081px) and (min-height:640px){
-      .hero{ height:calc(100svh + 3 * 62svh); }
+      .hero{ height:calc(100svh + 2 * 62svh); }
       .hero-stick{ position:sticky; top:0; min-height:100svh; display:flex; align-items:center; }
       .hero-stick > .wrap{ width:100%; }
     }
@@ -288,7 +288,7 @@
       .get{ padding:10px 14px; font-size:14px; }
       .hero-stick{ padding:calc(var(--navH) + 18px) 0 40px; }
       .flow{ display:flex; flex-direction:column; gap:12px; }
-      .fsteps{ order:-2; display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+      .fsteps{ order:-2; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
       .fsteps b,.fsteps p{ display:none; }
       .fsteps li button{ display:flex; justify-content:center; padding:8px; }
       .fsteps .n{ grid-row:auto; }
@@ -400,7 +400,7 @@
       <div class="wrap hero-grid">
         <div class="sheet hero-copy">
           <h1 id="heroTitle" data-th="h1">Delivery, <em>simplified.</em></h1>
-          <div class="tag"><i></i><span data-t="subtitle">Delivery requested. Execution handled.</span></div>
+          <div class="tag"><i></i><span data-t="subtitle">Request once. We coordinate the rest.</span></div>
           <p class="lede" data-t="lead"></p>
           <div class="stores" data-stores></div>
           <a class="more" href="#how"><span data-t="cta1">See how it works</span><svg class="ic"><use href="#i-down"/></svg></a>
@@ -413,7 +413,6 @@
                 <img class="shot" src="/assets/app/flow-1-create.webp" width="720" height="1561" alt="" decoding="async"/>
                 <img class="shot" src="/assets/app/flow-2-order.webp" width="720" height="1561" alt="" decoding="async" loading="lazy"/>
                 <img class="shot" src="/assets/app/flow-3-track.webp" width="720" height="1561" alt="" decoding="async" loading="lazy"/>
-                <img class="shot" src="/assets/app/flow-4-wallet.webp" width="720" height="1561" alt="" decoding="async" loading="lazy"/>
                 <div class="spot fspot" id="fspot"></div>
                 <div class="notif" id="notif" aria-hidden="true">
                   <img src="/assets/brand/ezy-en-200.png" alt="" width="40" height="40"/>
@@ -455,7 +454,7 @@
   <!-- HOW -->
   <section class="sec how" id="how" aria-labelledby="howTitle">
     <div class="wrap">
-      <h2 id="howTitle" data-t="howTitle">From sale to delivery execution to settlement</h2>
+      <h2 id="howTitle" data-t="howTitle">From sale to delivery to settlement</h2>
       <div class="track" id="track">
         <div class="trk"><span class="fill" id="fill"></span><ol></ol></div>
         <div class="track-name" id="trackName" aria-hidden="true"></div>
@@ -538,7 +537,7 @@
       brandName:'ezy', brandTagline:'Delivery Simplified',
       navHow:'How it works', navFeatures:'What you get', navModels:'Commerce models', navApp:'The app', getApp:'Get the app',
       h1:'Delivery, <em>simplified.</em>',
-      subtitle:'Delivery requested. Execution handled.',
+      subtitle:'Request once. We coordinate the rest.',
       lead:'EZY connects merchants to delivery vendors and handles payment links, tracking, and settlement automatically. You submit once. EZY does the rest.',
       cta1:'See how it works',
       iosSmall:'Download on the', iosBig:'App Store', playSmall:'Get it on', playBig:'Google Play',
@@ -547,13 +546,12 @@
         { title:'Add the order', desc:'Pick products from your catalogue. EZY fills in the weight and the total.' },
         { title:'See every fee before you confirm', desc:'Subtotal, delivery fee and COD charges on one screen, with a barcode for the parcel.' },
         { title:'A driver is assigned. Follow it live.', desc:'You get a notification the moment a driver takes the order, then watch it on the map.' },
-        { title:'Cash lands in your wallet', desc:'Collected COD is credited to your EZY wallet, with each fee shown line by line. Withdraw to your bank.' },
       ],
       boardTitle:'Your deliveries, moving on their own', boardTag:'Example orders',
-      boardNote:'Each order moves from request to money in your wallet. You only submit the first step.',
-      lanes:['Requested','Driver assigned','Picked up','Delivered','Paid to wallet'],
+      boardNote:'Each order moves from request to settlement. You only submit the first step.',
+      lanes:['Requested','Driver assigned','Picked up','Delivered','Settled'],
       stateCod:'Cash on delivery', statePaid:'Payment link sent',
-      states:[null,'Driver on the way','Pickup code confirmed','Delivery code confirmed','Credited'],
+      states:[null,'Driver on the way','Pickup code confirmed','Delivery code confirmed','Settled'],
       cod:'COD', online:'Paid', sar:'SAR',
       areas:['Al Rawdah','Al Salamah','Al Naeem','Al Zahra','Obhur','Al Shati','Al Marwah','Al Basateen'],
       aboutTitle:'A technology platform',
@@ -564,26 +562,26 @@
         { icon:'i-truck', b:'Delivery partners', s:'Do the physical delivery' },
         { icon:'i-user', b:'Your customer', s:'Pays and receives the order' },
       ],
-      howTitle:'From sale to delivery execution to settlement',
+      howTitle:'From sale to delivery to settlement',
       stepWord:'Step',
       steps:[
         { short:'Sale', title:'A sale occurs', desc:'Customers make purchases on your website, social channels, chat, or in your physical store.' },
-        { short:'Request', title:'A delivery request is sent to EZY', desc:'If you have an e-commerce website, requests are generated automatically with items and customer address. If you do not, use EZY\'s built-in product catalog to select items and quantities.' },
-        { short:'Submit', title:'Submit the request', desc:'Once your delivery details are submitted, EZY initiates the delivery execution process.' },
-        { short:'EZY runs it', title:'EZY manages execution', desc:'EZY assigns the most suitable delivery partner, sends a payment link and tracking link automatically, and monitors deliveries until completion.' },
-        { short:'Settlement', title:'Settlement', desc:'Your net earnings are credited to your EZY wallet. Request a withdrawal and EZY instructs deposit to your bank account.' },
+        { short:'Request', title:'A delivery request is sent to EZY', desc:'If you have an e-commerce website, it can connect directly to EZY and send requests automatically. We activate the connection after you contact us. If you don\'t, use EZY\'s built-in product catalog to select items and quantities.' },
+        { short:'Submit', title:'Submit the request', desc:'Once your delivery details are submitted, EZY sends the request to a delivery partner.' },
+        { short:'Coordination', title:'EZY coordinates the delivery', desc:'EZY assigns the most suitable delivery partner, sends a payment link and tracking link automatically, and monitors deliveries until completion.' },
+        { short:'Settlement', title:'Settlement', desc:'Your net amount for each order appears in your settlement balance. Request a payout to your bank account.' },
       ],
       a1:['Website','Instagram','WhatsApp','Your store'],
       a2:{ cap:'Example order', rows:[['Items','3'],['Customer','Al Rawdah, Jeddah'],['Payment','Cash on delivery']] },
       a3:{ btn:'Submit delivery request', cap:'One tap. Nothing else to arrange.' },
       a4:[['Delivery partner assigned','Best available vendor'],['Payment link sent','To your customer'],['Tracking link sent','To you and your customer']],
-      a5:{ label:'EZY wallet', amount:'SAR 1,240', btn:'Withdraw to bank', cap:'Example balance' },
+      a5:{ label:'Settlement balance', amount:'SAR 1,240', btn:'Request payout', cap:'Example balance' },
       featTitle:'Everything you need to fulfill confidently',
       groups:[
         { title:'Get paid', items:[
           { icon:'i-link', title:'Payment links', desc:'Auto-generated via 3rd party gateway, sent directly to your customer on submission.' },
           { icon:'i-cash', title:'COD + digital payments', desc:'Support both cash on delivery and electronic payments.' },
-          { icon:'i-wallet', title:'Settlement Wallet', desc:'Collections land here. Request a withdrawal to your bank account at any time.' },
+          { icon:'i-wallet', title:'Settlement balance', desc:'See what each order settles for, then request a payout to your bank account.' },
           { icon:'i-fee', title:'Automated fees', desc:'Applicable fees are deducted automatically.' },
         ]},
         { title:'Follow every order', items:[
@@ -593,7 +591,7 @@
         ]},
         { title:'Plug in your store', items:[
           { icon:'i-box', title:'Product catalogue', desc:'Build your catalogue, select items and quantities. EZY calculates weight and total automatically.' },
-          { icon:'i-code', title:'Website & API integration', desc:'Integrate with your website or submit via API.' },
+          { icon:'i-code', title:'Website integration', desc:'Connect your website directly to EZY. To activate it, contact us: customercare@ezydelivery.io' },
         ]},
       ],
       modelsTitle:'Online, social, retail, and high-volume',
@@ -618,8 +616,8 @@
       brandName:'إيزي', brandTagline:'التوصيل أصبح أبسط',
       navHow:'كيف تعمل', navFeatures:'ماذا تقدم', navModels:'نماذج التجارة', navApp:'التطبيق', getApp:'حمّل التطبيق',
       h1:'التوصيل، <em>ببساطة.</em>',
-      subtitle:'تم طلب التوصيل. تم تنفيذ المهمة.',
-      lead:'تُبسّط إيزي عملية التوصيل للشركات وتجعل إدارة الخدمات اللوجستية والمدفوعات سهلة بعد إتمام البيع. سواء كنت تبيع عبر قنواتك الخاصة أو عبر منصات إلكترونية، تتولى إيزي تنفيذ التوصيل لتتمكن من التركيز على المبيعات.',
+      subtitle:'اطلب مرة واحدة، ونحن ننسّق الباقي.',
+      lead:'تربط إيزي التجار بشركات التوصيل، وتتولى روابط الدفع والتتبع والتسوية تلقائياً. ترسل الطلب مرة واحدة، وإيزي تتابع الباقي.',
       cta1:'شاهد كيف تعمل',
       iosSmall:'حمّله من', iosBig:'App Store', playSmall:'احصل عليه من', playBig:'Google Play',
       notifTitle:'تم تعيين السائق', notifTime:'الآن', notifBody:'تم تعيين سائق للطلب #ORD-1793127663410-7852.',
@@ -627,13 +625,12 @@
         { title:'أضف الطلب', desc:'اختر المنتجات من الكتالوج، وإيزي تحسب الوزن والإجمالي.' },
         { title:'شاهد كل الرسوم قبل التأكيد', desc:'المجموع ورسوم التوصيل ورسوم الدفع عند الاستلام في شاشة واحدة، مع باركود للطرد.' },
         { title:'يتم تعيين سائق، وتابع الطلب مباشرة', desc:'يصلك إشعار لحظة تعيين السائق، ثم تتابع الطلب على الخريطة.' },
-        { title:'المبلغ يصل إلى محفظتك', desc:'يُضاف مبلغ الدفع عند الاستلام إلى محفظة إيزي مع توضيح كل رسوم، واسحبه إلى حسابك البنكي.' },
       ],
       boardTitle:'توصيلاتك تتحرك تلقائياً', boardTag:'طلبات توضيحية',
-      boardNote:'ينتقل كل طلب من الإرسال حتى وصول المبلغ إلى محفظتك. أنت ترسل الخطوة الأولى فقط.',
-      lanes:['طلب جديد','تم تعيين السائق','تم الاستلام','تم التسليم','في المحفظة'],
+      boardNote:'ينتقل كل طلب من الإرسال حتى التسوية. أنت ترسل الخطوة الأولى فقط.',
+      lanes:['طلب جديد','تم تعيين السائق','تم الاستلام','تم التسليم','تمت التسوية'],
       stateCod:'الدفع عند الاستلام', statePaid:'تم إرسال رابط الدفع',
-      states:[null,'السائق في الطريق','تم تأكيد رمز الاستلام','تم تأكيد رمز التسليم','أُضيف للمحفظة'],
+      states:[null,'السائق في الطريق','تم تأكيد رمز الاستلام','تم تأكيد رمز التسليم','تمت التسوية'],
       cod:'نقدي', online:'مدفوع', sar:'ر.س',
       areas:['الروضة','السلامة','النعيم','الزهراء','أبحر','الشاطئ','المروة','البساتين'],
       aboutTitle:'منصة تقنية',
@@ -644,26 +641,26 @@
         { icon:'i-truck', b:'شركاء التوصيل', s:'ينفذون التوصيل فعلياً' },
         { icon:'i-user', b:'عميلك', s:'يدفع ويستلم طلبه' },
       ],
-      howTitle:'من البيع ← تنفيذ التوصيل ← التسوية',
+      howTitle:'من البيع ← التوصيل ← التسوية',
       stepWord:'الخطوة',
       steps:[
         { short:'البيع', title:'تتم عملية البيع', desc:'يقوم العملاء بالشراء من موقعك، أو قنوات التواصل، أو المحادثات، أو داخل متجرك.' },
-        { short:'الطلب', title:'إرسال طلب توصيل إلى إيزي', desc:'إذا لديك متجر إلكتروني، يصل الطلب تلقائيًا متضمنًا المنتجات والعنوان. إذا لا يوجد متجر إلكتروني، استخدم كتالوج إيزي لاختيار المنتجات والكميات.' },
-        { short:'الإرسال', title:'إرسال الطلب', desc:'بعد إدخال التفاصيل، تبدأ إيزي مباشرة بتنفيذ عملية التوصيل.' },
-        { short:'التنفيذ', title:'تتولى إيزي التنفيذ', desc:'تعيين مزود التوصيل الأنسب، إرسال رابط الدفع ورابط التتبع تلقائياً، ومتابعة الطلب حتى اكتماله.' },
-        { short:'التسوية', title:'التسوية', desc:'يتم إضافة صافي الأرباح إلى محفظة إيزي الخاصة بك. اطلب سحباً وستتولى إيزي التعليمات لإيداع المبلغ في حسابك البنكي.' },
+        { short:'الطلب', title:'إرسال طلب توصيل إلى إيزي', desc:'إذا كان لديك متجر إلكتروني، يمكن ربطه بإيزي مباشرة لإرسال الطلبات تلقائياً، ويتم تفعيل الربط بعد التواصل معنا. إذا لم يكن لديك متجر إلكتروني، استخدم كتالوج إيزي لاختيار المنتجات والكميات.' },
+        { short:'الإرسال', title:'إرسال الطلب', desc:'بعد إدخال التفاصيل، ترسل إيزي الطلب إلى شريك التوصيل.' },
+        { short:'التنسيق', title:'إيزي تنسّق التوصيل', desc:'تعيين مزود التوصيل الأنسب، إرسال رابط الدفع ورابط التتبع تلقائياً، ومتابعة الطلب حتى اكتماله.' },
+        { short:'التسوية', title:'التسوية', desc:'يظهر صافي مبلغ كل طلب في رصيد التسوية. اطلب تحويله إلى حسابك البنكي.' },
       ],
       a1:['موقعك','إنستغرام','واتساب','متجرك'],
       a2:{ cap:'طلب توضيحي', rows:[['المنتجات','3'],['العميل','الروضة، جدة'],['الدفع','الدفع عند الاستلام']] },
       a3:{ btn:'إرسال طلب التوصيل', cap:'ضغطة واحدة، ولا شيء آخر لترتيبه.' },
       a4:[['تم تعيين شريك التوصيل','أنسب مزود متاح'],['تم إرسال رابط الدفع','إلى عميلك'],['تم إرسال رابط التتبع','لك ولعميلك']],
-      a5:{ label:'محفظة إيزي', amount:'1,240 ر.س', btn:'السحب إلى البنك', cap:'رصيد توضيحي' },
-      featTitle:'كل ما تحتاجه لتنفيذ التوصيل بثقة',
+      a5:{ label:'رصيد التسوية', amount:'1,240 ر.س', btn:'طلب تحويل', cap:'رصيد توضيحي' },
+      featTitle:'كل ما تحتاجه لإدارة توصيلاتك بثقة',
       groups:[
         { title:'استلم أموالك', items:[
           { icon:'i-link', title:'روابط الدفع', desc:'تُنشأ تلقائياً عبر بوابة خارجية وترسل للعميل فور إرسال الطلب.' },
           { icon:'i-cash', title:'خيارات دفع مرنة', desc:'الدفع عند الاستلام أو الدفع الإلكتروني.' },
-          { icon:'i-wallet', title:'محفظة تسوية المبالغ', desc:'المبالغ تصل هنا. اطلب السحب لحسابك البنكي في أي وقت.' },
+          { icon:'i-wallet', title:'رصيد التسوية', desc:'اطّلع على صافي كل طلب، واطلب تحويله إلى حسابك البنكي.' },
           { icon:'i-fee', title:'خصم آلي للرسوم', desc:'خصم الرسوم تلقائيًا عند تطبيقها.' },
         ]},
         { title:'تابع كل طلب', items:[
@@ -673,7 +670,7 @@
         ]},
         { title:'اربط متجرك', items:[
           { icon:'i-box', title:'كتالوج المنتجات', desc:'أنشئ كتالوجك، اختر المنتجات والكميات، وإيزي تحسب الوزن والإجمالي تلقائياً.' },
-          { icon:'i-code', title:'تكامل الموقع وواجهات API', desc:'تكامل سهل مع المواقع الإلكترونية وواجهات البرمجة.' },
+          { icon:'i-code', title:'ربط الموقع الإلكتروني', desc:'اربط موقعك بإيزي مباشرة. لتفعيل الربط تواصل معنا: customercare@ezydelivery.io' },
         ]},
       ],
       modelsTitle:'متاجر إلكترونية، تجارة اجتماعية، ومتاجر تقليدية',
@@ -822,7 +819,6 @@
     { top:40.6, left:3.6, width:92.8, height:6.3 },
     { top:54.4, left:2.4, width:95.2, height:20.0 },
     null,
-    { top:58.6, left:2.4, width:95.2, height:28.0 },
   ];
   const hero = $('#hero'), shots = $$('#fscreen .shot');
   const scrollDriven = matchMedia('(min-width:1081px) and (min-height:640px)');
@@ -847,7 +843,7 @@
   function flowRange(){ return hero.offsetHeight - innerHeight; }
   function goFlow(i){
     if (scrollDriven.matches){
-      const y = hero.getBoundingClientRect().top + scrollY + flowRange() * (i / 4 + 0.06);
+      const y = hero.getBoundingClientRect().top + scrollY + flowRange() * (i / shots.length + 0.06);
       scrollTo({ top:y, behavior: reduce.matches ? 'auto' : 'smooth' });
     } else {
       flowPausedUntil = Date.now() + 12000; setFlow(i);
@@ -857,12 +853,12 @@
     if (!scrollDriven.matches) return;
     const r = flowRange(); if (r <= 0) return;
     const p = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / r));
-    setFlow(Math.min(3, Math.floor(p * 4)));
+    setFlow(Math.min(shots.length - 1, Math.floor(p * shots.length)));
   }
   function runFlow(){
     clearInterval(flowTimer); flowTimer = null;
     if (scrollDriven.matches || reduce.matches || !flowVisible || document.hidden) return;
-    flowTimer = setInterval(() => { if (Date.now() > flowPausedUntil) setFlow((curFlow + 1) % 4); }, 3600);
+    flowTimer = setInterval(() => { if (Date.now() > flowPausedUntil) setFlow((curFlow + 1) % shots.length); }, 3600);
   }
   addEventListener('scroll', onFlowScroll, {passive:true});
   new IntersectionObserver(es => { flowVisible = es[0].isIntersecting; runFlow(); }, {threshold:.25}).observe($('#fscreen'));
