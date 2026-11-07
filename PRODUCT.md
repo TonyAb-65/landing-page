@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Static HTML/CSS/JS in a single `index.html` with assets under `/assets`, deployed on Vercel (`vercel.json` holds the `/join` rewrite and the `/:name/:code` store redirects). No build step. `.claude` and `.impeccable` are kept out of deploys via `.vercelignore`.
+Static HTML/CSS/JS with assets under `/assets`, deployed on Vercel (`vercel.json` holds the `/join` rewrite and the `/:name/:code` store redirects). `index.html` (English) and `ar/index.html` (Arabic) are generated from `src/`: edit `src/`, run `node src/build.mjs`, and commit the output, because Vercel has no build step. `.claude`, `.impeccable` and `src` are kept out of deploys via `.vercelignore`.
 
 ## Users
 
