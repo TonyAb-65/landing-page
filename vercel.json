@@ -16,6 +16,12 @@
       "source": "/:name((?!assets$)[^/]+)/:code([A-Z0-9]{6})",
       "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "query", "key": "lang", "value": "ar" }],
+      "destination": "/ar/",
+      "permanent": true
     }
   ],
   "rewrites": [
