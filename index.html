@@ -276,6 +276,7 @@
     footer a:hover{ text-decoration:underline; text-underline-offset:3px; }
     footer .f-brand{ display:flex; align-items:center; gap:10px; }
     footer img{ width:28px; height:28px; border-radius:8px; }
+    footer .f-id{ flex-basis:100%; }
 
     /* ── RESPONSIVE ── */
     @media (max-width:1080px){
@@ -346,6 +347,10 @@
       .board{ padding:12px; border-radius:24px; }
       .cta .sheet{ grid-template-columns:1fr; padding:36px 22px; gap:20px; text-align:center; justify-items:center; }
       .cta .stores{ justify-content:center; width:100%; }
+    }
+    @media (max-width:359px){
+      .nav-in{ gap:12px; }
+      .brand span{ display:none; }
     }
     @media (prefers-reduced-motion:reduce){
       html{ scroll-behavior:auto; }
@@ -529,6 +534,7 @@
       <a id="privacyLink" href="/privacy.html">Privacy Policy</a>
       <a id="termsLink" href="/terms.html">Terms &amp; Conditions</a>
     </nav>
+    <div class="f-id">CR 1010794663 · <a href="mailto:customercare@ezydelivery.io">customercare@ezydelivery.io</a></div>
   </div>
 </footer>
 
