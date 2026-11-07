@@ -276,7 +276,7 @@
     footer a:hover{ text-decoration:underline; text-underline-offset:3px; }
     footer .f-brand{ display:flex; align-items:center; gap:10px; }
     footer img{ width:28px; height:28px; border-radius:8px; }
-    footer .f-id{ flex-basis:100%; }
+    footer .f-id{ flex-basis:100%; display:flex; flex-direction:column; align-items:flex-start; gap:4px; }
 
     /* ── RESPONSIVE ── */
     @media (max-width:1080px){
@@ -534,7 +534,7 @@
       <a id="privacyLink" href="{{privacy}}">{{privacyLabel}}</a>
       <a id="termsLink" href="{{terms}}">{{termsLabel}}</a>
     </nav>
-    <div class="f-id">{{footerId}} · <a href="mailto:{{email}}">{{email}}</a></div>
+    <div class="f-id"><b>{{contactLabel}}</b><a href="mailto:{{email}}">{{email}}</a><span>{{footerId}}</span></div>
   </div>
 </footer>
 

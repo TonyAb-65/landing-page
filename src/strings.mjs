@@ -88,7 +88,7 @@ export const t = {
     ctaBody:'Download EZY, register your store and send your first delivery.',
     privacy:'/privacy.html', privacyLabel:'Privacy Policy',
     terms:'/terms.html', termsLabel:'Terms & Conditions',
-    footerId:'CR 1010794663', email:'customercare@ezydelivery.io',
+    contactLabel:'Contact us', footerId:'CR 1010794663', email:'customercare@ezydelivery.io',
   },
   ar: {
     lang:'ar', path:'/ar/', ogLocale:'ar_SA', ogImage:'/assets/brand/ezy-ar-200.png',
@@ -178,6 +178,6 @@ export const t = {
     ctaBody:'حمّل إيزي، سجّل متجرك، وأرسل أول طلب توصيل.',
     privacy:'/privacy-ar.html', privacyLabel:'سياسة الخصوصية',
     terms:'/terms-ar.html', termsLabel:'الشروط والأحكام',
-    footerId:'سجل تجاري 1010794663', email:'customercare@ezydelivery.io',
+    contactLabel:'تواصل معنا', footerId:'سجل تجاري 1010794663', email:'customercare@ezydelivery.io',
   }
 };
